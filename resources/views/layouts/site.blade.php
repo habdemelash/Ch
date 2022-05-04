@@ -111,7 +111,7 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
               
               <li><a class="nav-link scrollto" href="{{route('contact.form')}}">Contact us<i class="bi-send-fill"></i></a></li>
               <li><a href="#about">About<i class="bx bxs-info-square"></i></a></li>
-              <li><a href="{{route('profile')}}">Profile<i class="bx bxs-info-square"></i></a></li>
+              
               
             </ul>
           </li>
@@ -203,7 +203,7 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
 
     <div class="container footer-bottom clearfix">
       <div class="copyright">
-        &copy; Copyright <strong><span>eNno</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>Kind Hearts</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         

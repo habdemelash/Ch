@@ -244,7 +244,7 @@ $messageCount= $all->count();
     <script src="{{asset('admin/js/app.js') }}"></script>
     
          
-         <script type="text/javascript" src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+        {{--  <script type="text/javascript" src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"> --}}</script>
          <script type="text/javascript" src="{{ asset('admin/other/popper.min.js') }}"></script>
          <script type="text/javascript" src="{{ asset('admin/other/toastr.min.js') }}"></script>
          <script>

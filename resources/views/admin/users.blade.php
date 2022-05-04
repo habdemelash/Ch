@@ -92,8 +92,15 @@
 
 												</td>
 											<td class="">
+												<button value="{{$user->id}}" type="button" class="btn deleteUser" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="bx bxs-trash bx-md text-danger"></i>
+												  
+												</button>
 												
-												<a class="col" href="javascript:void(0)" onclick="deleteUser({{$user->id}})" class="mx-1"><i class="bx bxs-trash bx-md text-danger"></i></a>
+												
+
+
+
+
 			
 											
 											</td>
@@ -103,9 +110,31 @@
 										
 									</tbody>
 					</table>
+
                     	
                     </div>
-
+				   <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				  	<form action="{{url('/users/delete')}}" method="POST">
+				  		@csrf
+				  		  <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title text-danger" id="exampleModalLabel">Delete User</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body">
+				        <input type="hidden" name="user_id" id="user_id" >
+				        <p class="fw-bold">Do you really want to delete this user?</p>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+				        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes, delete</button>
+				      </div>
+				    </div>
+				  	</form>
+				  
+				  </div>
+				</div>
 
 
 
@@ -127,21 +156,17 @@
 <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
 <script >
-	function deleteUser(id){
-		if(confirm("Do you really want to delete this user?")){
-			$.ajax({
-				url: '/users/delete/'+id,
-				type: 'GET',
-				data: {
-					_token : $("input[name=_token]").val()
-				},
-				success:function(response)
-				{
-					$("#uid"+id).remove();
-				}
-			});
-		}
-	</script>
+	$(document).ready(function(){
+		$(document).on('click','.deleteUser',function(e) {
+			e.preventDefault();
+			var user_id = $(this).val();
+			$('#user_id').val(user_id);
+			$('#deleteModal').modal('show');
+		});
+	});
+	
+</script>
+
 	<script>
         document.addEventListener("DOMContentLoaded", function(event) { 
             var scrollpos = localStorage.getItem('scrollpos');
@@ -156,11 +181,23 @@
 
 	@if(Session::has('message'))
  <script >
- 	toastr.success("{!! Session::get('success') !!}");
+ 	toastr.success("{!! Session::get('message') !!}");
  	
  </script>
 	
 	@endif
+
+
+	@if(Session::has('error'))
+ <script >
+ 	toastr.error("{!! Session::get('info') !!}");
+ 	
+ </script>
+	
+	@endif
+
+
+
 
 	<script src="{{ asset('admin/other/toastr.min.js') }}"></script>
 	

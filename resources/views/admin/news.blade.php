@@ -21,12 +21,7 @@
 	</div>
 
 </div>
-					@if(session()->has('message'))
-					<div class="alert alert-success">
-						<i class="bx bx-check bx-md">{{session()->get('message')}}</i>
-					</div>
 
-					@endif
 
                     <div class="" style="overflow-x: auto;">
 
@@ -60,7 +55,9 @@
 											<td><img src="{{ asset('uploads/news-pictures') }}/{{ $article->picture}}" class="rounded-circle rounded me-1" alt="No picture" style="height: 60px;width: 60px;" /></td>
 												<td class="d-flex flex-row">
 												<a href="{{url('dash/news/updateform',$article->id)}}" class="mx-1"><i class="bx bxs-edit bx-md"></i></a>
-												<a href="{{url('dash/news/delete',$article->id)}}" class="mx-1"><i class="bx bxs-trash bx-md text-danger"></i></a>
+												<button value="{{$article->id}}" type="button" class="btn deleteNews" data-bs-toggle="modal" data-bs-target="#deleteNewsModal"><i class="bx bxs-trash bx-md text-danger"></i>
+												  
+												</button>
 			
 											
 											</td>
@@ -73,6 +70,35 @@
 										
 									</tbody>
 					</table>
+
+
+					{{-- modal --}}
+
+					<div class="modal fade" id="deleteNewsModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							  	<form action="{{url('dash/news/delete')}}" method="POST">
+							  		@csrf
+							  		  <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title text-danger" id="ModalLabel">Delete News</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        <input type="hidden" name="article_id" id="article_id" >
+							        <p class="fw-bold">Do you really want to delete this news?</p>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+							        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes, delete</button>
+							      </div>
+							    </div>
+							  	</form>
+							  
+							  </div>
+							</div>
+
+
+					{{-- modal --}}
 	
                     	
                     </div>
@@ -81,6 +107,23 @@
                     <strong>{{ $news->links('pagination::bootstrap-5')}}</strong>
                    	</div>
                     	
+
+</div>
+<script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('admin/other/toastr.min.js') }}"></script>
+
+
+<script >
+	$(document).ready(function(){
+		$(document).on('click','.deleteNews',function(e) {
+			e.preventDefault();
+			var article_id = $(this).val();
+			$('#article_id').val(article_id);
+			$('#deleteNewsModal').modal('show');
+		});
+	});
+	
+</script>
  @if(Session::has('message'))
  <script >
  	toastr.success("{!! Session::get('message') !!}");
@@ -88,9 +131,5 @@
  </script>
 	
 	@endif
-</div>
-<script >
-
-</script>
                     	     
  @endsection

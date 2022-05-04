@@ -121,7 +121,7 @@
                   <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputCompany5">Photo</label>
-                      <input type="file" name="profile_photo_path" class="form-control-lg" id="inputCompany5" accept="image/*" onchange="preview_image(event)">
+                      <input type="file" name="profile_photo_path" class="form-control-lg" id="inputCompany5" accept="image/*" onchange="preview_image(event)"> 
                     </div>
                     <div class="form-group col-md-4">
                       <label for="inputState5">New photo</label>

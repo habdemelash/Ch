@@ -129,12 +129,12 @@ class Dashboard extends Controller
     }
 
 
-    public function deleteEvent($id)
+    public function deleteEvent(Request $request)
     {
-        $event = Event::find($id);
+        $event = Event::find($request->event_id);
         $event->delete();
-        return response()->json(['success'=>'Record has been deleted.']);
-        // return redirect(route('admin.events'))->with('message','Event has been deleted!');
+       
+        return redirect()->back()->with('message','Event has been deleted!');
     }
     public function viewMembers($id)
     {
@@ -206,9 +206,9 @@ public function addNews(Request $request)
         return redirect()->back()->with('message','News updated successfully!');
 
     }
-    public function deleteNews($id)
+    public function deleteNews(Request $request)
     {
-       $news = News::find($id);
+       $news = News::find($request->article_id);
        $news->delete();
        return redirect()->back()->with('message','News deleted successfully!');
 
@@ -312,7 +312,7 @@ public function addNews(Request $request)
     }
     public function users()
     {
-        $users = User::orderBy('id','DESC')->paginate(10);
+        $users = User::where('id','!=',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
         return view('admin.users',['users'=>$users]);
     }
 
@@ -380,13 +380,22 @@ public function addNews(Request $request)
     {
         DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',3)->delete();
 
-         return redirect()->back()->with('success','You have taken the Admin role from the user.');
+         return redirect()->back()->with('message','You have taken the Admin role from the user.');
 
     }
-    public function deleteUser($id)
+    public function deleteUser(Request $request)
     {
-        User::find($id)->delete();
-         return redirect()->back()->with('success','You have deleted the user.');
+        if($request->user_id == Auth::user()->id)
+        {
+        return redirect()->back()->with('message','Sorry you are logged in!');
+        
+        }
+        else
+        {
+        User::find($request->user_id)->delete();
+         return redirect()->back()->with('error','You have deleted the user.');
+            
+        }
 
 
     }

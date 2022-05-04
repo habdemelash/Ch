@@ -76,7 +76,7 @@ Route::post('dash/helpmes/update/{id}', [Dashboard::class, 'updateHelpme'])->nam
 Route::get('dash/news/addform', [Dashboard::class, 'addNewsForm'])->name('admin.news.addform');
 Route::get('dash/news/updateform/{id}', [Dashboard::class, 'updateNewsForm'])->name('admin.news.updateform');
 Route::post('dash/news/update/{id}', [Dashboard::class, 'updateNews'])->name('admin.news.update');
-Route::get('dash/news/delete/{id}', [Dashboard::class, 'deleteNews'])->name('admin.news.delete');
+Route::post('dash/news/delete', [Dashboard::class, 'deleteNews'])->name('admin.news.delete');
 
 Route::post('dash/news/add', [Dashboard::class, 'addNews'])->name('admin.news.add');
 Route::get('dash/event/addform', [Dashboard::class, 'addEventView'])->name('admin.event.addform');
@@ -84,7 +84,7 @@ Route::post('dash/event/add', [Dashboard::class, 'addEvent'])->name('admin.event
 Route::get('dash/event/updateform/{id}', [Dashboard::class, 'updateEventView'])->name('admin.event.updateform');
 Route::post('dash/event/update/{id}', [Dashboard::class, 'updateEvent'])->name('admin.event.update');
 
-Route::get('/events/delete/{id}', [Dashboard::class, 'deleteEvent'])->name('admin.event.delete');
+Route::post('/events/delete', [Dashboard::class, 'deleteEvent'])->name('admin.event.delete');
 Route::get('dash/event/viewmembers/{id}', [Dashboard::class, 'viewMembers'])->name('admin.event.viewmembers');
 Route::get('dash/mails', [Dashboard::class, 'mails'])->name('user.mails');
 Route::get('dash/mails/view/{id}', [Dashboard::class, 'viewMail'])->name('user.mails.view');
@@ -96,7 +96,7 @@ Route::get('dash/users/staffup/{id}', [Dashboard::class, 'staffup'])->name('admi
 Route::get('dash/users/staffdown/{id}', [Dashboard::class, 'staffdown'])->name('admin.users.staffdown');
 Route::get('dash/users/adminup/{id}', [Dashboard::class, 'adminup'])->name('admin.users.adminup');
 Route::get('dash/users/admindown/{id}', [Dashboard::class, 'admindown'])->name('admin.users.admindown');
-Route::get('/users/delete/{id}', [Dashboard::class, 'deleteUser'])->name('admin.user.delete');
+Route::post('/users/delete', [Dashboard::class, 'deleteUser'])->name('admin.user.delete');
 
 
 

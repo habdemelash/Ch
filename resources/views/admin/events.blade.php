@@ -99,10 +99,12 @@
 											<td><img src="{{ asset('uploads/event-pictures') }}/{{ $event->picture}}" class="rounded-circle rounded me-1" alt="No picture" style="height: 60px;width: 60px;" /></td>
 											<td class="d-flex flex-row">
 												<a href="{{url('dash/event/updateform',$event->id)}}" class="mx-1"><i class="bx bxs-edit bx-md"></i></a>
-												<a href="javascript:void(0)" onclick="deleteEvent({{$event->id}})" class="mx-1"><i class="bx bxs-trash bx-md text-danger"></i></a>
+												<button value="{{$event->id}}" type="button" class="btn deleteEvent" data-bs-toggle="modal" data-bs-target="#deleteEventModal"><i class="bx bxs-trash bx-md text-danger"></i>
+												  
+												</button>
 			
 											
-											</td>
+											</td>ss
 										</tr>
 										@endforeach
 										
@@ -112,26 +114,62 @@
                     	
                     </div>
 
+			<div class="modal fade" id="deleteEventModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+							  <div class="modal-dialog">
+							  	<form action="{{url('/events/delete')}}" method="POST">
+							  		@csrf
+							  		  <div class="modal-content">
+							      <div class="modal-header">
+							        <h5 class="modal-title text-danger" id="ModalLabel">Delete Event</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							      </div>
+							      <div class="modal-body">
+							        <input type="hidden" name="event_id" id="event_id" >
+							        <p class="fw-bold">Do you really want to delete this event?</p>
+							      </div>
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+							        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes, delete</button>
+							      </div>
+							    </div>
+							  	</form>
+							  
+							  </div>
+							</div>
 
-
-
-                    <!-- Modal -->
-
-                    <div class="row">
+                  <div class="row">
                     	<div class="col-sm-6 mt-3 mb-lg-5">
                     <strong>{{ $events->links('pagination::bootstrap-5')}}</strong>
                     	</div>
                     	
- @if(Session::has('message'))
- <script >
- 	toastr.success("{!! Session::get('message') !!}");
- 	
- </script>
-	
-	@endif
+ 
+				</div>
+
 </div>
+</div>
+	
+</div>
+
+
+
 <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
+
+
+<script >
+	$(document).ready(function(){
+		$(document).on('click','.deleteEvent',function(e) {
+			e.preventDefault();
+			var event_id = $(this).val();
+			$('#event_id').val(event_id);
+			$('#deleteEventModal').modal('show');
+		});
+	});
+	
+</script>
+
+
+
 
 <script >
 	function deleteEvent(id){
@@ -151,6 +189,14 @@
 	}
 	
 </script>
+@if(Session::has('message'))
+ <script >
+ 	toastr.success("{!! Session::get('message') !!}");
+ 	
+ </script>
+	
+	@endif
+
 
 
                     	     
