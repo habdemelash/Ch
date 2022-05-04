@@ -110,8 +110,7 @@
               <li><a class="nav-link scrollto" href="{{route('contact.form')}}">Contact us<i class="bi-send-fill"></i></a></li>
               <li><a href="#about">About<i class="bx bxs-info-square"></i></a></li>
               <li><a href="{{route('profile')}}">Profile<i class="bx bxs-info-square"></i></a></li>
-              <li><a href="{{route('admin.events')}}">Administration<i class="bx bxs-info-square"></i></a></li>
-              <li><a href="/logout">Sign out<i class="bx bxs-info-square"></i></a></li>
+              
             </ul>
           </li>
 
@@ -128,14 +127,19 @@
          </a>
             <ul>
               <li><a href="{{route('profile')}}">Profile<i class="bx bxs-user"></i></a></li>
-              <li><a class="nav-link scrollto" href="{{route('logout')}}">Logout<i class="bx bxs-log-out"></i></a></li>
+              <li><a href="{{route('admin.events')}}">Administration<i class="bi-gear-fill"></i></a></li>
+              <li><a class="nav-link scrollto" href="{{route('logout')}}">Logout<i class="bx bx-lock"></i></a></li>
 
             </ul>
           </li>
           @endauth
           @guest
-         
-          <li><a class="getstarted scrollto fw-bold" href="/login"><i class="bx bxs-log-in mx-1" style="font-size:20px;"></i>Login</a></li>
+         @if(Request::is('login'))
+          <li><a class="getstarted scrollto fw-bold" href="/join-us"><i class="bx bxs-user-plus mx-1" style="font-size:20px;"></i>Join us</a></li>
+          @else
+          <li><a class="getstarted scrollto fw-bold" href="/login"><i class="bx bxs-lock-open mx-1" style="font-size:20px;"></i>Login</a></li>
+
+          @endif
           @endguest
          
         </ul>

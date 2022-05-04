@@ -19,6 +19,7 @@
     <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
      <link href="{{ asset('site/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+     <link href="{{ asset('site/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
      <link rel="stylesheet" href="{{asset('admin/other/toastr.min.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -76,8 +77,8 @@ $messageCount= $all->count();
 
                     
 
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="ui-buttons.html">
+                    <li class="sidebar-item {{ strpos($address,'dash/users') ? 'active' : '';}}">
+                        <a class="sidebar-link" href="{{route('admin.users')}}">
               <i class="bx bxs-group bx-md"></i> <span class="align-middle">Users</span>
             </a>
                     </li>
@@ -185,19 +186,23 @@ $messageCount= $all->count();
                 <i class="align-middle" data-feather="settings"></i>
               </a>
 
+            
+
                             <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="{{ asset('admin/img/avatars/avatar.jpg') }}" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">
-                    @auth{{Auth::user()->name}}@endauth</span>
+                @if(Auth::user()->profile_photo_path == null)
+                <img class="img-thumbnail rounded-circle" height="50" width="50" src="{{asset('site/assets/img/user.png')}}" >
+                @else
+          <img class="img-thumbnail rounded-circle" height="50" width="50" src="{{asset('uploads/profile-photos')}}/{{Auth::user()->profile_photo_path}}" alt="">
+           @endif <span class="text-dark">
+                    @auth
+                    {{Auth::user()->name}}@endauth</span>
               </a>
-                            <div class="dropdown-menu dropdown-menu-end">
+                            <div class="dropdown-menu dropdown-menu-">
                                 <a class="dropdown-item" href="{{route('profile')}}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
-                                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="pie-chart"></i> Analytics</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
-                                <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{route('logout')}}">Log out</a>
-                                <a class="dropdown-item" href="{{route('site.home')}}">Site</a>
+                               
+                                <a class="dropdown-item" href="{{route('site.home')}}"><i class="bx bxs-home-heart"></i> Site</a>
+                                <a class="dropdown-item" href="{{route('logout')}}"><i class="bx bx-lock"></i>Log out</a>
+                                
                             </div>
                         </li>
                     </ul>

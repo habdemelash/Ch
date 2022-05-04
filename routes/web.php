@@ -91,6 +91,8 @@ Route::get('dash/mails/view/{id}', [Dashboard::class, 'viewMail'])->name('user.m
 Route::get('dash/mails/reply/{id}', [Dashboard::class, 'reply'])->name('user.mails.reply');
 
 
+Route::get('dash/users', [Dashboard::class, 'users'])->name('admin.users');
+
 
 
 });

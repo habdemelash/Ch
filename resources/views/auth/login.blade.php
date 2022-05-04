@@ -67,7 +67,7 @@
             </div>
             
             
-            <div class="text-center"><button type="submit"><i class="bx bxs-log-in text-white mx-1"></i>Login</button> <a href="{{ route('password.request') }}" class="text-primary fw-bold mx-1">Forgot password?</a></div>
+            <div class="text-center"><button type="submit"><i class="bx bx-lock-open text-white mx-1"></i>Login</button> <a href="{{ route('password.request') }}" class="text-primary fw-bold mx-1">Forgot password?</a></div>
             <div><span class="text-info">If you haven't joined us yet, come </span><strong><a href="/join-us">here</a> </strong> <span class="text-info"> please.</span> </div>
           </form>
         </div>

@@ -310,6 +310,17 @@ public function addNews(Request $request)
     {
         return view('admin.mails');
     }
+    public function users()
+    {
+        $users = User::orderBy('id','DESC')->paginate(10);
+        return view('admin.users',['users'=>$users]);
+    }
+
+    public static function userRoles($id)
+    {
+        $user = User::find($id);
+        return $user->roles;
+    }
 
 
 }

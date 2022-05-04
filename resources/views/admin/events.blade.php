@@ -5,7 +5,7 @@
 <meta charset="utf-8" name="csrf-token" content="{{csrf_token()}}">
 
 <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <h1 class="h3 mb-3"><strong>Events</strong> Management</h1>
 <div class="row d-flex mt-3 justify-content-center">
 	
