@@ -56,7 +56,9 @@
 
       <h1 class="logo "><a class="text-success" href="/"><img src="{{ asset('site/assets/img/3dheart.png') }}" class="mx-3">Kind Hearts</a></h1>
      
-<?php $address = Request::url(); ?>
+<?php $address = Request::url(); 
+$myEventsList = App\Http\Controllers\Site\Home::myEventLister();
+$myevents = App\Http\Controllers\Site\Home::myevents(); ?>
       <nav id="navbar" class="navbar">
         <ul>
           <li ><a class="nav-link scrollto {{Request::is('/') ? 'active' : ''}}" href="/">Home<i class="bi-house-fill"></i></a></li>
@@ -158,13 +160,7 @@
 @yield('content')
 
   
-    
-    
-
-   
-   
-    
-    
+  
 
 
   
@@ -228,6 +224,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
+  <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
 @livewireScripts
 
 </body>

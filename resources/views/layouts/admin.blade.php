@@ -212,10 +212,7 @@ $messageCount= $all->count();
             <main class="content" >
                 <div class="container-fluid p-0" >
 
-
                    @yield('content')
-
-
 
                 </div>
             </main>
@@ -250,6 +247,16 @@ $messageCount= $all->count();
          <script type="text/javascript" src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
          <script type="text/javascript" src="{{ asset('admin/other/popper.min.js') }}"></script>
          <script type="text/javascript" src="{{ asset('admin/other/toastr.min.js') }}"></script>
+         <script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
 
          
    

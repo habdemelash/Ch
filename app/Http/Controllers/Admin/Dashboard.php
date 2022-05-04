@@ -319,8 +319,78 @@ public function addNews(Request $request)
     public static function userRoles($id)
     {
         $user = User::find($id);
-        return $user->roles;
+        $roles = [];
+        foreach($user->roles as $r)
+        {
+            $roles[] = $r->role;
+        }
+        return $roles;
     }
+    public function staffup($id)
+    {
+        DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',2)->delete();
+        DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',1)->delete();
+         DB::table('role_user')->insert([
+            'role_id' => 1,
+            'user_id' => $id
+        ]);
+        
+         DB::table('role_user')->insert([
+            'role_id' => 2,
+            'user_id' => $id
+        ]);
+
+         return redirect()->back()->with('success','You have given this user a Staff role.');
+
+    }
+    public function staffdown($id)
+    {
+        DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',2)->delete();
+         DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',3)->delete();
+
+         return redirect()->back()->with('success','You have taken the Staff role from the user.');
+
+    }
+
+    public function adminup($id)
+    {
+        DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',2)->delete();
+        DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',1)->delete();
+        DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',3)->delete();
+
+        DB::table('role_user')->insert([
+            'role_id' => 1,
+            'user_id' => $id
+        ]);
+
+        
+         DB::table('role_user')->insert([
+            'role_id' => 2,
+            'user_id' => $id
+        ]);
+         DB::table('role_user')->insert([
+            'role_id' => 3,
+            'user_id' => $id
+        ]);
+
+         return redirect()->back()->with('success','You have given this user a Admin role.');
+
+    }
+    public function admindown($id)
+    {
+        DB::table('role_user')->where('user_id','=',$id)->where('role_id','=',3)->delete();
+
+         return redirect()->back()->with('success','You have taken the Admin role from the user.');
+
+    }
+    public function deleteUser($id)
+    {
+        User::find($id)->delete();
+         return redirect()->back()->with('success','You have deleted the user.');
+
+
+    }
+
 
 
 }

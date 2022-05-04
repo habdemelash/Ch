@@ -24,7 +24,7 @@
   
 </style>
 <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
-<section id="services" class="services section-bg mt-5">
+<section  class="services section-bg mt-5">
       <div class="container">
 
         <div class="section-title">

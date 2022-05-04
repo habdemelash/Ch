@@ -71,7 +71,7 @@ class Home extends Controller
         
     }
     // Event counter method
-    public function myevents()
+    public static function myevents()
     {
         if(Auth::check()){
             $myevents = User::find(Auth::user()->id)->events->count();
@@ -83,7 +83,7 @@ class Home extends Controller
     }
                                        
 // Event lister method
-    public function myEventLister()
+    public static function myEventLister()
     {
         if(Auth::check()){
              $id = Auth::user()->id;
@@ -310,6 +310,7 @@ public static function calculateDays($id)
 public function staff()
 
 {
+    
     $role = Role::where('role','Staff')->first();
     $staff = $role->users;
     return view('site.staff',['staff'=>$staff,'myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister()]);

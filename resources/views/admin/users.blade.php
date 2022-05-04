@@ -1,23 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
+<link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
 
 <h1 class="h3 mb-3"><strong>Users'</strong> Management</h1>
 <div class="row d-flex mt-3 justify-content-center">
 	
 	<div class="container">
-		<div class="row align-items-start justify-content-center">
-	
-<a href="{{route('admin.event.addform')}}" class="btn btn-success col-2">
- Add new user
-</a>
-
-
-
-		
-	
-	
-</div>                		
+		        		
 
 	</div>
 
@@ -46,6 +36,7 @@
 									</thead>
 									<tbody>
 										@foreach($users as $user)
+										<tr id="uid{{$user->id}}">
 
 										<?php $roleList = App\Http\Controllers\Admin\Dashboard::userRoles($user->id); ?>
 							
@@ -60,18 +51,29 @@
 											</td>
 											<td>
 												<div class="col d-flex flex-column">
-													@foreach($roleList as $role)
-													@if($role->role == 'Volunteer')
+													@if(in_array('Volunteer',$roleList))
+													<a class="btn btn-sm btn-success my-1"  style="text-align: left;"><span><i class="bi bi-check-circle"></i> Volunteer</span></a>
+													@else
+													<a class="btn btn-sm btn-danger my-1" href="" style="text-align: left;"><span><i class="bi bi-circle"></i> Volunteer</span></a>
 
 													@endif
-													
+													@if(in_array('Staff',$roleList))
+													<a class="btn btn-sm btn-success my-1" href="{{url('dash/users/staffdown',$user->id)}}" style="text-align: left;"><span><i class="bi bi-check-circle"></i> Staff</span></a>
+													@else
+													<a class="btn btn-sm btn-danger my-1" href="{{url('dash/users/staffup',$user->id)}}" style="text-align: left;"><span><i class="bi bi-circle"></i> Staff</span></a>
+
+													@endif
+													@if(in_array('Admin',$roleList))
+													<a class="btn btn-sm btn-success my-1" href="{{url('dash/users/admindown',$user->id)}}" style="text-align: left;"><span><i class="bi bi-check-circle"></i> Admin</span></a>
+													@else
+													<a class="btn btn-sm btn-danger my-1" href="{{url('dash/users/adminup',$user->id)}}" style="text-align: left;"><span><i class="bi bi-circle"></i> Admin</span></a>
+
+													@endif
+
+
 
 													
-
-													@endforeach
-													<a class="btn btn-sm btn-success my-1" href="" style="text-align: left;"><span><i class="bi bi-check-circle"></i> Volunteer</span></a>
-													<a class="btn btn-sm btn-danger my-1" href="" style="text-align: left;"><span><i class="bi bi-circle"></i>Staff</span></a>
-													<a class="btn btn-sm btn-danger my-1" href="" style="text-align: left;"><span><i class="bi bi-circle"></i>Admin</span></a>
+												
 												</div>
 
 											</td>
@@ -91,7 +93,7 @@
 												</td>
 											<td class="">
 												
-												<a class="col" href="javascript:void(0)" onclick="deleteEvent({{$user->id}})" class="mx-1"><i class="bx bxs-trash bx-md text-danger"></i></a>
+												<a class="col" href="javascript:void(0)" onclick="deleteUser({{$user->id}})" class="mx-1"><i class="bx bxs-trash bx-md text-danger"></i></a>
 			
 											
 											</td>
@@ -124,23 +126,43 @@
 </div>
 <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
-
 <script >
-	function deleteEvent(id){
+	function deleteUser(id){
 		if(confirm("Do you really want to delete this user?")){
 			$.ajax({
-				url: '/events/delete/'+id,
+				url: '/users/delete/'+id,
 				type: 'GET',
 				data: {
 					_token : $("input[name=_token]").val()
 				},
 				success:function(response)
 				{
-					$("#eid"+id).remove();
+					$("#uid"+id).remove();
 				}
 			});
 		}
 	</script>
+	<script>
+        document.addEventListener("DOMContentLoaded", function(event) { 
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
+
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
+
+
+	@if(Session::has('message'))
+ <script >
+ 	toastr.success("{!! Session::get('success') !!}");
+ 	
+ </script>
+	
+	@endif
+
+	<script src="{{ asset('admin/other/toastr.min.js') }}"></script>
 	
 
 

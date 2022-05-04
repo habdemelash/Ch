@@ -92,6 +92,11 @@ Route::get('dash/mails/reply/{id}', [Dashboard::class, 'reply'])->name('user.mai
 
 
 Route::get('dash/users', [Dashboard::class, 'users'])->name('admin.users');
+Route::get('dash/users/staffup/{id}', [Dashboard::class, 'staffup'])->name('admin.users.staffup');
+Route::get('dash/users/staffdown/{id}', [Dashboard::class, 'staffdown'])->name('admin.users.staffdown');
+Route::get('dash/users/adminup/{id}', [Dashboard::class, 'adminup'])->name('admin.users.adminup');
+Route::get('dash/users/admindown/{id}', [Dashboard::class, 'admindown'])->name('admin.users.admindown');
+Route::get('/users/delete/{id}', [Dashboard::class, 'deleteUser'])->name('admin.user.delete');
 
 
 
