@@ -39,9 +39,7 @@ class Home extends Controller
                 return $fail(__('The current password is incorrect.'));
             }
         }]
-            // 'old_password'=>['required','min:6'],
-            // 'password' => 'nullable','min:6',
-            // 'password_confirmation' => 'required_with:password|same:password'
+            
             
         ]);
         

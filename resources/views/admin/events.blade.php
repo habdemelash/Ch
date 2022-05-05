@@ -65,7 +65,7 @@
 											<td class=" d-xl-table-cell text-info">{{ $formatted_date }}</td>
 											<td class=" d-xl-table-cell text-primary">{{ $st }}</td>
 											<td>{{ $en}}</td>
-											<td class=" d-md-table-cell text-warning">{{ $event->short_desc }}</td>
+											<td class=" d-md-table-cell text-dark">{{ $event->short_desc }}</td>
 											<td class="">
 
 												@if($event->status == 'Upcoming')

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Models\Event;
 use App\Models\News;
 use App\Models\User;
@@ -104,6 +105,12 @@ class Dashboard extends Controller
         $event = Event::find($id);
         if($request->hasFile('picture'))
         {
+            $path = 'uploads/event-pictures/'.$event->picture;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
@@ -132,6 +139,11 @@ class Dashboard extends Controller
     public function deleteEvent(Request $request)
     {
         $event = Event::find($request->event_id);
+        $path = 'uploads/event-pictures/'.$event->picture;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
         $event->delete();
        
         return redirect()->back()->with('message','Event has been deleted!');
@@ -192,6 +204,12 @@ public function addNews(Request $request)
         ]);
         if($request->hasFile('picture'))
         {
+            $path = 'uploads/news-pictures/'.$news->picture;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
@@ -199,16 +217,22 @@ public function addNews(Request $request)
             $news->picture = $filename;
 
         }
+
         $news->heading = $request->heading;
         $news->author_id = Auth::user()->id;
         $news->body = $request->body;
         $news->save();
-        return redirect()->back()->with('message','News updated successfully!');
+        return redirect(route('admin.news'))->with('message','News updated successfully!');
 
     }
     public function deleteNews(Request $request)
     {
        $news = News::find($request->article_id);
+       $path = 'uploads/news-pictures/'.$news->picture;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
        $news->delete();
        return redirect()->back()->with('message','News deleted successfully!');
 
@@ -392,7 +416,13 @@ public function addNews(Request $request)
         }
         else
         {
-        User::find($request->user_id)->delete();
+        $user = User::find($request->user_id);
+        $user->delete();
+        $path = 'uploads/profile-photos/'.$user->profile_photo_path;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
          return redirect()->back()->with('error','You have deleted the user.');
             
         }

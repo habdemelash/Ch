@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use App\Http\Livewire\LetsHelp;
@@ -31,8 +31,18 @@ Route::get('read-news/{id}', [Home::class, 'news'])->name('site.news');
 Route::get('lets-help', [Home::class, 'letsHelp'])->name('site.letshlep');
 Route::get('lets-help/view/{id}', [Home::class, 'viewLetsHelp'])->name('site.letshlep.view');
 Route::get('help-me-form', [Home::class, 'tipForm'])->name('site.helpmeform');
+Route::post('help-me-application',[App\Http\Controllers\Site\HelpmeController::class, 'sendHelpMe'])->name('site.helpme.send');
 
-Route::post('help-me-application', [App\Http\Controllers\Site\HelpmeController::class, 'sendHelpMe'])->name('site.helpme.send');
+// Route::post('help-me-application',  function (Request $request)
+// {
+    
+//     $files = [];
+//     foreach($request->document as $doc)
+//     {
+//         $files[]=$doc;
+//     }
+//     dd($files);
+// })->name('site.helpme.send');
 
 Route::get('dash', [Dashboard::class, 'index'])->name('admin.dashboard');
 Route::get('login',[Home::class,'loginView'])->name('login');

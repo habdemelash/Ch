@@ -1,10 +1,7 @@
 @extends('layouts.site',['myevents'=>$myevents])
 
 @section('content')
-
-<div class="container">
-<section id="hero" class="d-flex align-items-center">
-  <style >
+<style >
     @media  (max-width: 768px) {
 
       #author-date
@@ -19,6 +16,9 @@
     }
   
   </style>
+<div class="container">
+<section id="hero" class="d-flex align-items-center">
+  
 
     <div class="container">
       <div class="row">
