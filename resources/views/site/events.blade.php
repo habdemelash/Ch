@@ -1,5 +1,16 @@
 @extends('layouts.site',['myevents'=>$myevents,'myEventsList'=>$myEventsList])
 
+@section('search')
+<div class="container-fluid">
+                  <form class="d-flex">
+                    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                    <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
+                  </form>
+                </div>
+
+
+@endsection
+
 @section('content')
 <style>
   #yours-tag{

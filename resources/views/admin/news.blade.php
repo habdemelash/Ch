@@ -1,6 +1,32 @@
 @extends('layouts.admin')
 
 
+ @section('search')
+
+
+ 							<li class="d-flex flex-column flex-md-row">
+ 								<label class="text-primary fw-bold mx-1 text-center" style="white-space: nowrap;">Filter:</label>
+ 								<select class="form-select form-select mb-3" aria-label=".form-select-lg example">
+								  <option selected>Headline</option>
+								  <option value="1">Author</option>
+								  <option value="2">Date</option>
+								  
+								</select>
+
+                            <div class="container-fluid">
+							    <form class="d-flex">
+							      <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+							      <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i></button>
+							    </form>
+							  </div>
+                            
+                        </li>
+
+
+@endsection
+
+
+
 @section('content')
 
  

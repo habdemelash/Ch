@@ -48,19 +48,19 @@
 </head>
 
 <body>
-
-
-  
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo "><a class="text-success" href="/"><img src="{{ asset('site/assets/img/3dheart.png') }}" class="mx-3">Kind Hearts</a></h1>
+      <h1 class="logo "><a class="text-success" href="/"><img src="{{ asset('site/assets/img/3dheart.png') }}" class="mx-3 text-nowrap">CVSMS</a></h1>
      
 <?php $address = Request::url(); 
 $myEventsList = App\Http\Controllers\Site\Home::myEventLister();
 $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
       <nav id="navbar" class="navbar">
         <ul>
+          <li >
+            @yield('search')
+          </li>
           <li ><a class="nav-link scrollto {{Request::is('/') ? 'active' : ''}}" href="/">Home<i class="bi-house-fill"></i></a></li>
           
           <li><a class="nav-link scrollto {{Request::is('events') ? 'active' : ''}}" href="{{route('site.events')}}">Events</a></li>
@@ -178,7 +178,9 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
           <div class="col-lg-6">
             <img class="img-fluid " width="50" height="50" src="{{ asset('site/assets/img/3dheart_filled.png') }}">
             <h3>CVSMS</h3>
-            <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+            <p>
+
+            “Volunteering is at the very core of being a human.  No one has made it through life without someone else’s help.” – <strong>Heather French Henry</strong></p>
           </div>
         </div>
 

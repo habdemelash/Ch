@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="shortcut icon" href="{{ asset('site/assets/img/3dheart.png') }}" />
 
-    <link rel="canonical" href="https://demo-basic.adminkit.io/" />
+    <link rel="canonical" href="https://demo-basic.adminkit.io/" /> 
 
     <title>CVSMS - Administration</title>
 
@@ -96,7 +96,7 @@ $messageCount= $all->count();
 
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav navbar-align">
-                        <li></li>
+                        @yield('search')
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
                                 <div class="position-relative">
@@ -141,6 +141,7 @@ $messageCount= $all->count();
                                 </div>
                             </div>
                         </li>
+                       
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                                 <div class="position-relative">

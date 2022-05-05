@@ -12,8 +12,10 @@ use App\Models\User;
 use App\Models\News;
 use App\Models\Helpme;
 use App\Models\Role;
+use App\Models\Docs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+
 class Home extends Controller
 {
     public function profile()
@@ -182,7 +184,10 @@ public function viewEvent($id)
 public function viewLetsHelp($id)
 {
     $helpme = Helpme::find($id);
-    $docs = $helpme->documents;
+    $docs = Docs::whereHas('helpmes', function ($subQuery) use ($id) {
+        $subQuery->where('id', $id);
+    })->latest()->paginate(6);
+
     $others = Helpme::where('id','!=',$id)->orderBy('id','DESC')->paginate(5);
     return view('site.view-help-me',['helpme'=>$helpme,'docs'=>$docs,'others'=>$others,'myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister()]);
 }

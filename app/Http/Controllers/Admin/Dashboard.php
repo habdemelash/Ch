@@ -19,6 +19,7 @@ use App\Models\Docs;
 
 class Dashboard extends Controller
 {
+
     public function index()
     {
     	return view('admin.dashboard');
@@ -61,7 +62,6 @@ class Dashboard extends Controller
             $filename = time().'.'.$extension;
             $file->move('uploads/event-pictures',$filename);
             $event->picture = $filename;
-
         }
     $eventDate = new Carbon( new DateTime($request->due_date));
     $today = Carbon::now();
@@ -423,7 +423,7 @@ public function addNews(Request $request)
             {
                 File::delete($path);
             }
-         return redirect()->back()->with('error','You have deleted the user.');
+         return redirect()->back()->with('message','You have deleted the user.');
             
         }
 

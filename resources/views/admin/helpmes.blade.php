@@ -1,6 +1,41 @@
 @extends('layouts.admin')
 
 
+@section('search')
+
+
+ 							<li class="d-flex flex-column flex-md-row">
+ 								<label class="text-primary fw-bold mx-1 text-center" style="white-space: nowrap;">Search by:</label>
+ 								<select class="form-select mb-3 select" aria-label=".form-select-lg example" id="searchType" onchange="filterRole();">
+								  <option selected>Applicant</option>
+								  <option value="1">Subject</option>
+								  <option value="2">Date</option>
+								  <option value="3">Location</option>
+								</select>
+								<select class="select form-select mb-3" id="status" disabled style="display: none"  >
+								  <option data-searchType="Status" value="1">Pendeing</option>
+								  <option data-searchType="Status" value="2">Accepted</option>
+								  <option data-searchType="Status" value="3">Rejected</option>
+								</select>
+						<span id="option-container" style="visibility: hidden; position:absolute;"></span>
+
+                            <div class="container-fluid">
+							    <form class="d-flex">
+							      <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+							      <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
+							    </form>
+							  </div>
+
+
+							  
+						
+                            
+                        </li>
+
+
+@endsection
+
+
 @section('content')
 
  
@@ -99,17 +134,31 @@
                     	<div class="col-sm-6 mt-3 mb-lg-5">
                     <strong>{{ $helpmes->links('pagination::bootstrap-5')}}</strong>
                    	</div>
-                    	
+  <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+                  	
  @if(Session::has('message'))
  <script >
  	toastr.success("{!! Session::get('message') !!}");
  	
- </script>
-	
+ </script>	
 	@endif
 </div>
-<script >
+<script>
 
+    function filterRole(){
+      var searchType = $("#searchType").find('option:selected').text();
+      if (searchType == 'Status') { // stores searchType
+      $("#option-container").children().appendTo("#status"); // moves <option> contained in #option-container back to their <select>
+      var toMove = $("#status").children("[data-searchType!='"+searchType+"']"); // selects role elements to move out
+      toMove.appendTo("#option-container"); // moves role elements in #option-container
+      $("#status").removeAttr("disabled"); // enables select
+      document.getElementById("status").style.display = "block";
+      }
+      else{
+      	document.getElementById("status").style.display = "none";
+
+      }
+};
 </script>
                     	     
  @endsection

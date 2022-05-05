@@ -32,7 +32,7 @@
   <div class="row">
     <h1 class="text-center">Your Events</h1>
   </div>
-<section  class="d-flex align-items-center" >
+<section  class="d-flex flex-column align-items-center" >
   
   @for($i=0; $i<count($myEventsList);$i++)
     <?php $ev = App\Http\Controllers\Site\Home::fetchMyEvents($myEventsList[$i]); ?>

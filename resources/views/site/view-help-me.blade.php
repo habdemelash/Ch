@@ -48,11 +48,7 @@
 	.main{
 		;
 	}
-	.others{
-		border: solid;
-		border-color: green;
-		border-width: 0.5px;
-	}
+	
 </style>
 
     <div class="container">
@@ -143,9 +139,11 @@
                         <a href="{{asset('uploads/helpme-pictures')}}/{{$doc->document}}" class="img-gal"><div><img src="{{asset('uploads/helpme-pictures')}}/{{$doc->document}}" alt="" class="img-fluid"></div></a>
                     </div>
                    @endforeach
+
+
                     
                   
-                   
+                   {{$docs->links('pagination::bootstrap-5')}}
             
                 </div>
             </div>
@@ -166,7 +164,7 @@
 
  		<div class="col-lg-3 col-md-3 col-sm-12 text-center mt-sm-4 mt-md-2 others">
  			
- 			<div><strong class="text-danger">These people need you!</strong></div>
+ 			<div><strong class="text-danger">You may also help</strong></div>
  			@foreach($others as $other)
 
                     <div class="col my-2">

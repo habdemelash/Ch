@@ -1,20 +1,54 @@
 @extends('layouts.admin')
 
+@section('search')
+
+
+ 							<li class="d-flex flex-column flex-md-row">
+ 								<label class="text-primary fw-bold mx-1 text-center" style="white-space: nowrap;">Filter:</label>
+ 								<select class="form-select mb-3 select" aria-label=".form-select-lg example" id="searchType" onchange="filterRole();">
+								  <option selected>Name</option>
+								  <option value="1">Email</option>
+								  <option value="2">Phone</option>
+								  <option value="3">Address</option> 
+								  <option value="3">Role</option>
+								</select>
+								<select class="select form-select mb-3" id="role" disabled style="display: none"  >
+								  <option data-searchType="Role" value="1">Volunteer</option>
+								  <option data-searchType="Role" value="2">Staff</option>
+								  <option data-searchType="Role" value="3">Admin</option>
+								</select>
+						<span id="option-container" style="visibility: hidden; position:absolute;"></span>
+
+                            <div class="container-fluid">
+							    <form class="d-flex">
+							      <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+							      <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
+							    </form>
+							  </div>
+
+
+							  
+						
+                            
+                        </li>
+
+
+@endsection
+
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
 
 <h1 class="h3 mb-3"><strong>Users'</strong> Management</h1>
 <div class="row d-flex mt-3 justify-content-center">
 	
-	<div class="container">
-		        		
+	<div class="container">		        		
 
 	</div>
 
 </div>
 					@if(session()->has('message'))
 					<script>
-						toastr.success("{{'Done'}}");
+						toastr.success("{{'User deleted.'}}");
 					</script>
 
 					@endif
@@ -166,6 +200,23 @@
 	});
 	
 </script>
+<script>
+
+    function filterRole(){
+      var searchType = $("#searchType").find('option:selected').text();
+      if (searchType == 'Role') { // stores searchType
+      $("#option-container").children().appendTo("#role"); // moves <option> contained in #option-container back to their <select>
+      var toMove = $("#role").children("[data-searchType!='"+searchType+"']"); // selects role elements to move out
+      toMove.appendTo("#option-container"); // moves role elements in #option-container
+      $("#role").removeAttr("disabled"); // enables select
+      document.getElementById("role").style.display = "block";
+      }
+      else{
+      	document.getElementById("role").style.display = "none";
+
+      }
+};
+</script>
 
 	<script>
         document.addEventListener("DOMContentLoaded", function(event) { 
@@ -179,18 +230,12 @@
     </script>
 
 
+
+
+
 	@if(Session::has('message'))
  <script >
- 	toastr.success("{!! Session::get('message') !!}");
- 	
- </script>
-	
-	@endif
-
-
-	@if(Session::has('error'))
- <script >
- 	toastr.error("{!! Session::get('info') !!}");
+ 	toastr.message("{!! Session::get('message') !!}");
  	
  </script>
 	
