@@ -1,4 +1,5 @@
  @extends('layouts.site')
+ 
 
 
  @section('content')
@@ -8,16 +9,16 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>We strive for good cause...</h1>
+          <h1>@lang('home.we_strive')</h1>
            <h2>
 
-            “Volunteering is at the very core of being a human.  No one has made it through life without someone else’s help.” – <strong>Heather French Henry</strong></h2>
+            @lang('home.volunteering_is') – <strong>@lang('home.french')</strong></h2>
          <div class="d-flex">
             @guest
-            <a href="/join-us" class="btn-get-started scrollto">Joins us now</a>
+            <a href="/join-us" class="btn-get-started scrollto">@lang('home.join_us_now')</a>
             @endguest
             @auth
-             <a href="{{route('logout')}}" class="btn-get-started bg-danger "><i class="bx bxs-log-out"></i> Logout</a>
+             <a href="{{route('logout')}}" class="btn-get-started bg-danger "><i class="bx bxs-log-out"></i> @lang('home.logout')</a>
             @endauth
             
           </div>
@@ -30,7 +31,7 @@
 
   </section>
   <div class="row">
-    <h1 class="text-center">Your Events</h1>
+    <h1 class="text-center">@lang('home.your_events')</h1>
   </div>
 <section  class="d-flex flex-column align-items-center" >
   
@@ -44,11 +45,11 @@
           <h2>{{$ev->short_desc}}</h2>
           <p class="text-success">{{mb_substr($ev->details,0,50,'UTF-8')}}</p>
           <div class="justify-content-center" style="text-align: center;">
-          	<div><strong class="text-primary">Date:<span class="text-info">{{$ev->due_date}}</span></strong></div>
-          	<div><strong class="text-primary">Location:<span class="text-info">{{$ev->location}}</span></strong></div>
-          	<div><strong class="text-primary">Starting time:<span class="text-info">{{$ev->start_time}}</span></strong></div>
-          	<div><strong class="text-primary">Ending time:<span class="text-info">{{$ev->end_time}}</span></strong></div>
-            <a href="{{url('leave-event',$ev->id)}}" class="btn btn-danger btn-sm"><i class="bi-x-circle"></i>Leave it</a>
+          	<div><strong class="text-primary">@lang('home.date'):<span class="text-info">{{$ev->due_date}}</span><small class="text-muted"> -@lang('home.gregorian')</small></strong></div>
+          	<div><strong class="text-primary">@lang('home.location'):<span class="text-info">{{$ev->location}}</span></strong></div>
+          	<div><strong class="text-primary">@lang('home.start_time'):<span class="text-info">{{$ev->start_time}}</span></strong></div>
+          	<div><strong class="text-primary">@lang('home.end_time'):<span class="text-info">{{$ev->end_time}}</span></strong></div>
+            <a href="{{url('leave-event',$ev->id)}}" class="btn btn-danger btn-sm"><i class="bi-x-circle"></i>@lang('home.leave_it')</a>
            
           </div>
         </div>

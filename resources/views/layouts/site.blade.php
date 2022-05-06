@@ -51,7 +51,7 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center justify-content-between">
 
-      <h1 class="logo "><a class="text-success" href="/"><img src="{{ asset('site/assets/img/3dheart.png') }}" class="mx-3 text-nowrap">CVSMS</a></h1>
+      <h1 class="logo "><a class="text-success" href="/"><img src="{{ asset('site/assets/img/3dheart.png') }}" class="mx-3">CVSMS</a></h1>
      
 <?php $address = Request::url(); 
 $myEventsList = App\Http\Controllers\Site\Home::myEventLister();
@@ -61,11 +61,11 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
           <li >
             @yield('search')
           </li>
-          <li ><a class="nav-link scrollto {{Request::is('/') ? 'active' : ''}}" href="/">Home<i class="bi-house-fill"></i></a></li>
+          <li ><a class="nav-link scrollto {{Request::is('/') ? 'active' : ''}}" href="{{route('site.home')}}">@lang('home.home_nav')<i class="bi-house-fill"></i></a></li>
           
-          <li><a class="nav-link scrollto {{Request::is('events') ? 'active' : ''}}" href="{{route('site.events')}}">Events</a></li>
-          <li><a class="nav-link scrollto {{ strpos($address,'lets-help') ? 'active' : '';}} " href="{{route('site.letshlep')}}">Let's Help<i class="bi-calendar-event-fill"></i></a></li>
-          <li class="dropdown "><a class="nav nav-link {{Request::is('all-my-events') ? 'active' : ''}}" href="{{route('all.my.events')}}"><span>My Events
+          <li><a class="nav-link scrollto {{Request::is('events') ? 'active' : ''}}" href="{{route('site.events')}}">@lang('home.events_nav')</a></li>
+          <li><a class="nav-link scrollto {{ strpos($address,'lets-help') ? 'active' : '';}} " href="{{route('site.letshlep')}}">@lang('home.letshelp_nav')<i class="bi-calendar-event-fill"></i></a></li>
+          <li class="dropdown "><a class="nav nav-link {{Request::is('all-my-events') ? 'active' : ''}}" href="{{route('all.my.events')}}"><span>@lang('home.my_events_nav')
             @if(Auth::check())
             <span class="badge bg-primary">{{$myevents}}</span>
             @endif
@@ -102,17 +102,16 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
           </li>
           
            
-          <li class="dropdown"><a href="#"><span>More<i class="bi-plus-circle-fill font-weight-bold"></i></span> <i class="bi bi-chevron-down"></i></a>
+          <li class="dropdown"><a href="#"><span>@lang('home.more')<i class="bi-plus-circle-fill font-weight-bold"></i></span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="{{route('site.helpmeform')}}">Help me form<i class="bx bxs-send"></i></a></li>
-              <li><a class="nav-link scrollto" href="{{route('site.staff')}}">Our Staff<i class="bi-people-fill"></i></a></li>
+              <li><a href="{{route('site.helpmeform')}}">@lang('home.help_me_form_link')<i class="bx bxs-send"></i></a></li>
+              <li><a class="nav-link scrollto" href="{{route('site.staff')}}">@lang('home.our_staff')<i class="bi-people-fill"></i></a></li>
 
              
               
-              <li><a class="nav-link scrollto" href="{{route('contact.form')}}">Contact us<i class="bi-send-fill"></i></a></li>
-              <li><a href="#about">About<i class="bx bxs-info-square"></i></a></li>
-              
-              
+              <li><a class="nav-link scrollto" href="{{route('contact.form')}}">@lang('home.contact_us')<i class="bi-send-fill"></i></a></li>
+              <li><a href="#about">@lang('home.about')<i class="bx bxs-info-square"></i></a></li>
+
             </ul>
           </li>
 
@@ -128,21 +127,49 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
            @endif
          </a>
             <ul>
-              <li><a href="{{route('profile')}}">Profile<i class="bx bxs-user"></i></a></li>
-              <li><a href="{{route('admin.events')}}">Administration<i class="bi-gear-fill"></i></a></li>
-              <li><a class="nav-link scrollto" href="{{route('logout')}}">Logout<i class="bx bx-lock"></i></a></li>
+              <li><a href="{{route('profile')}}">@lang('home.profile')<i class="bx bxs-user"></i></a></li>
+              <li><a href="{{route('admin.events')}}">@lang('home.administration')<i class="bi-gear-fill"></i></a></li>
+              <li><a class="nav-link scrollto" href="{{route('logout')}}">@lang('home.logout')<i class="bx bx-lock"></i></a></li>
 
             </ul>
           </li>
           @endauth
           @guest
          @if(Request::is('login'))
-          <li><a class="getstarted scrollto fw-bold" href="/join-us"><i class="bx bxs-user-plus mx-1" style="font-size:20px;"></i>Join us</a></li>
+          <li><a class="getstarted scrollto fw-bold" href="{{route('joinus')}}"><i class="bx bxs-user-plus mx-1" style="font-size:20px;"></i>@lang('home.join_btn')</a></li>
           @else
-          <li><a class="getstarted scrollto fw-bold" href="/login"><i class="bx bxs-lock-open mx-1" style="font-size:20px;"></i>Login</a></li>
+          <li><a class="getstarted scrollto fw-bold" href="{{route('login')}}"><i class="bx bxs-lock-open mx-1" style="font-size:20px;"></i>@lang('home.login')</a></li>
 
           @endif
           @endguest
+          <?php function str_replace_first($thi,$tha,$s)
+         {
+         $w=strpos($s,$thi);
+         if($w===false)return $s;
+         return substr($s,0,$w).$tha.substr($s,$w+strlen($thi));
+         }?>
+         
+  <li class="dropdown mx-2"><a href="#"><span>{{ strtoupper(app()->getLocale()) }}</span> <i class="bi bi-chevron-down"></i></a>
+
+
+@if(count(config('app.languages')) > 1)
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    @foreach(config('app.languages') as $langLocale => $langName)
+    <li><a class="nav-link scrollto" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a></li>
+   
+    @endforeach
+  </ul>
+
+@endif
+
+          
+
+            
+                       
+
+              </li>      
+        
+           
          
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -180,14 +207,14 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
             <h3>CVSMS</h3>
             <p>
 
-            “Volunteering is at the very core of being a human.  No one has made it through life without someone else’s help.” – <strong>Heather French Henry</strong></p>
+            @lang('home.volunteering_is') – <strong>@lang('home.french')</strong></p>
           </div>
         </div>
 
         <div class="row footer-newsletter justify-content-center">
           <div class="col-lg-6">
             <form action="" method="post">
-              <input type="email" name="email" placeholder="Enter your Email"><input type="submit" value="Subscribe">
+              <input type="email" name="email" placeholder="@lang('home.email_place')"><input type="submit" value="@lang('home.subscribe')">
             </form>
           </div>
         </div>
@@ -205,15 +232,14 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
 
     <div class="container footer-bottom clearfix">
       <div class="copyright">
-        &copy; Copyright <strong><span>Kind Hearts</span></strong>. All Rights Reserved
+        &copy; @lang('home.copyright') <strong><span>@lang('home.kind_hearts')</span></strong>. @lang('home.all_rights_reserved')
       </div>
       <div class="credits">
         
-         Developed by <a href="">ASTU Systems</a>
+         @lang('home.developed_by')<a href="">ASTU Systems</a>
       </div>
     </div>
-  </footer><!-- End Footer -->
-
+  </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <script src="{{ asset('site/assets/vendor/purecounter/purecounter.js') }}"></script>

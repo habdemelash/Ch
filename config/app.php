@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
+
 return [
 
     /*
@@ -82,7 +83,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'lt',
 
     /*
     |--------------------------------------------------------------------------
@@ -199,5 +200,13 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
+
+    'languages' => [
+        'am' => 'አማርኛ',
+        'en' => 'English',
+        'or' => 'Afaan Oromoo',
+
+    ],
+
 
 ];

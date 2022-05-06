@@ -1,8 +1,9 @@
 @extends('layouts.site',['myevents'=>$myevents])
+
 @section('search')
 <div class="container-fluid">
                   <form class="d-flex">
-                    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                    <input class="form-control" type="search" placeholder="@lang('home.search_place')" aria-label="Search">
                     <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
                   </form>
                 </div>
@@ -44,16 +45,16 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>We strive for good cause...</h1>
+          <h1>@lang('home.we_strive')</h1>
            <h2>
 
-            “Volunteering is at the very core of being a human.  No one has made it through life without someone else’s help.” – <strong>Heather French Henry</strong></h2>
+            @lang('home.volunteering_is') – <strong>@lang('home.french')</strong></h2>
           <div class="d-flex">
             @guest
-            <a href="/join-us" class="btn-get-started scrollto">Joins us now</a>
+            <a href="/join-us" class="btn-get-started scrollto">@lang('home.join_btn')</a>
             @endguest
             @auth
-             <a href="{{route('logout')}}" class="btn-get-started bg-danger "><i class="bx bxs-log-out"></i> Logout</a>
+             <a href="{{route('logout')}}" class="btn-get-started bg-danger "><i class="bx bxs-log-out"></i> @lang('home.logout')</a>
             @endauth
             
           </div>
@@ -67,7 +68,7 @@
   </section>
 <section id="about" class="about" style="">
  <div class="section-top-border">
-                <h3 class="mb-30 title_color">Hands waiting for your help</h3>
+                <h3 class="mb-30 title_color">@lang('home.hands_waiting')</h3>
                 <hr>
                 <div class="row">
                 	
@@ -82,7 +83,7 @@
                             <span class="text-secondary">On: {{$formatted}}</span><br>
                             <strong class="badge bg-danger">{{$help->problem_title}}</strong><br>
                             <p>{{mb_substr($help->problem_details,0,100,'UTF-8')}} ...</p>
-                            <a href="">See full information</a>
+                            <a href="{{url('lets-help/view',$help->id)}}">@lang('home.see_full_info')</a>
                         </div>  
                        </a>
                     </div>

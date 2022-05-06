@@ -15,9 +15,10 @@ use App\Models\Role;
 use App\Models\Docs;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\App;
 class Home extends Controller
 {
+    
     public function profile()
     {
         $my = Auth::user();
@@ -28,7 +29,6 @@ class Home extends Controller
     {
         $me = Auth::user();
         
-
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255','min:1'],
@@ -119,8 +119,6 @@ class Home extends Controller
     	return view('site.home',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister(),'news'=>$news]);
     }
 
-
-
 // Events page renderer method
      public function events()
     {
@@ -148,8 +146,6 @@ public function viewEvent($id)
 // Contact form
  public function contactForm()
     {
-
-
        
         return view('site.contact-form',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister()]);
     }
@@ -166,7 +162,6 @@ public function viewEvent($id)
             $latest = $main;
 
         }
-
 
         
         return view('site.read-news',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister(),'main'=>$main,'rest'=>$rest,'latest'=>$latest]);
@@ -259,14 +254,6 @@ public static function howManyJoined($id)
 // List volunteers who have joined a specific event
 public static function listJoindeVolunteers($id)
 {
-    // $volunter_ids = DB::table('event_user')->where('event_id','=',$id)->pluck('user_id')->toArray();
-    // $users=[];
-    // $count = count($volunter_ids);
-    // for($i=0; $i<$count; $i++){
-    //     $user = User::find($volunter_ids[$i]);
-
-    //     $users[$i] = $user;
-    // }
     
     $event = Event::find($id);
     $users = $event->users()->paginate(20);
@@ -277,7 +264,6 @@ public function allMyEvents()
 {
     return view('site.all-my-events',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister()]);
 }
-
 // How many days left for the event
 public static function calculateDays($id)
 {
@@ -287,26 +273,24 @@ public static function calculateDays($id)
 
        $difference = $eventDate->diff($today)->format('%a');
        if($difference == 0 ){
-        return 'Today';
+        return lang('home.today');
        }
        else{
-       return 'passed '.$difference.' days ago';
+       return 'passed '.$difference.' '.__('home.days_ago');
    }
     }
     else{
         $difference = $eventDate->diff($today)->format('%a');
         if($difference == 0 ){
-        return 'Today';
+        return __('home.today');;
        }
        else{
 
-
     
-    return $difference.' days(s) left';
+    return $difference.' '.__('home.days_left');;
 }
 
     }
-
     
 }
 

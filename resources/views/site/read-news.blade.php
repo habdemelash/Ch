@@ -1,4 +1,5 @@
 @extends('layouts.site')
+
 @section('search')
 <div class="container-fluid">
                   <form class="d-flex">

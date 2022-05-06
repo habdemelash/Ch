@@ -6,9 +6,9 @@
       <div class="container">
 
         <div class="section-title">
-          <span>Help-me form</span>
-          <h2>Send us your condtions, we will try our best..</h2>
-          <p>We may find helpers as soon as possible</p>
+          <span>@lang('home.help_me_form_link')</span>
+          <h2>@lang('home.send_us')</h2>
+          <p>@lang('home.we_may_find')</p>
         </div>
  
         <div class="row">
@@ -17,23 +17,22 @@
             <div class="info">
               <div class="address">
                 <i class="bi bi-geo-alt"></i>
-                <h4>Location:</h4>
-                <p>Bole, Adama, Ethiopia</p>
+                <h4>@lang('home.location'):</h4>
+                <p>@lang('home.adama')</p>
               </div>
 
               <div class="email">
                 <i class="bi bi-envelope"></i>
-                <h4>Email:</h4>
+                <h4>@lang('home.email'):</h4>
                 <p>info@cvsms.com</p>
               </div>
 
               <div class="phone">
                 <i class="bi bi-phone"></i>
-                <h4>Call:</h4>
+                <h4>@lang('home.call'):</h4>
                 <p>+251920763031</p>
               </div>
-              <div class="container-fluid">
-               Fill in the form with your problem and helping mechanisms as well, and send it to us. We will try to help you and find helpers.
+              <div class="container-fluid">@lang('home.fill_in')
               </div>
 
              
@@ -54,56 +53,61 @@
 
               @endif
               <div class="form-group">
-                <label for="name"><i class="bx bxs-user mx-1 text-danger"></i>Full name</label>
-                <input type="text" name="name" class="form-control" id="name" required placeholder="Full name*">
+                <label for="name"><i class="bx bxs-user mx-1 text-danger"></i>@lang('home.full_name')</label>
+                <input type="text" name="name" class="form-control" id="name" required placeholder="@lang('home.full_name')*">
               </div>
              
               <div class="form-group col-md-6 mt-3 mt-md-0">
-                <label for="name"><i class="bx bxs-envelope mx-1 text-danger"></i>Your email</label>
-                <input type="email" class="form-control" name="email" id="email" required placeholder="Email*">
+                <label for="name"><i class="bx bxs-envelope mx-1 text-danger"></i>@lang('home.email')</label>
+                <input type="email" class="form-control" name="email" id="email" required placeholder="@lang('home.email')*">
               </div>
 
               <div class="form-group col-md-6">
-              <label for="phone"><i class="bx bxs-phone mx-1 text-danger"></i>Phone</label>
-              <input type="tel" class="form-control" name="phone" id="phone" required placeholder="Phone number*">
+              <label for="phone"><i class="bx bxs-phone mx-1 text-danger"></i>@lang('home.phone')</label>
+              <input type="tel" class="form-control" name="phone" id="phone" required placeholder="@lang('home.phone')*">
             </div>
             </div>
             <hr>
             
             <div class="form-group mt-3">
-              <label for="name"><i class="bx bx-question-mark mx-1 text-danger"></i>Your problem</label>
-              <p><small class="text-primary">Write here the problem as a title..</small></p>
-              <input type="text" class="form-control" name="problem_title" id="subject" required placeholder="Problem*">
+              <label for="name"><i class="bx bx-question-mark mx-1 text-danger"></i>@lang('home.your_problem')</label>
+              <p><small class="text-primary">@lang('home.problem_exp')</small></p>
+              <input type="text" class="form-control" name="problem_title" id="subject" required placeholder="@lang('home.your_problem')*">
             </div>
 
             <div class="form-group mt-3">
-              <label for="address"><i class="bx bxs-map mx-1 text-danger"></i>Your address</label>
-              <p><small class="text-primary">Write your town/city here..</small></p>
-              <input type="text" class="form-control" name="address" id="address" required placeholder="Address*">
+              <label for="address"><i class="bx bxs-map mx-1 text-danger"></i>@lang('home.location')</label>
+              <p><small class="text-primary">@lang('home.address_exp')</small></p>
+              <input type="text" class="form-control" name="address" id="address" required placeholder="@lang('home.location')*">
             </div>
-            <a class="btn btn-success col-2" type="button">Add</a>
+            <a class="btn btn-success col-2" type="button">@lang('home.add')</a>
+            {{-- <div>
+  <label for="files" class="btn border-dark">@lang('home.input_doc')</label>
+  <input id="files" style="visibility:hidden;" type="file">
+</div> --}}
               
             <div class="form-group mt-3 realprocode increment">
               
-              <label for="document"><i class="bx bxs-file-pdf mx-1 text-danger"></i><i class="bx bxs-image mx-1 text-danger"></i>Your legal document</label>
-              <p><small class="text-primary">Your document may be in pdf or image files...It is very mandatory.</small></p>
-              <input type="file" class="  form-control-lg" name="document[]" id="document"  placeholder="Document file*" >
+              <label for="document"><i class="bx bxs-file-pdf mx-1 text-danger"></i><i class="bx bxs-image mx-1 text-danger"></i>@lang('home.your_legal_docs')</label>
+              <p><small class="text-primary">@lang('home.document_exp')</small></p>
+              <input type="file" class="  form-control-lg" name="document[]" id="document"  placeholder="@lang('home.your_legal_docs')*" >
             </div>
 
             <div class="form-group mt-3 clone hide" style="display: none;">
-              <div class="realprocode">     
-              <div><input type="file" class="form-control-lg" name="document[]"  id="document" placeholder="Document file*">
-                <a class="btn btn-danger" type="button">Remove</a>
+              <div class="realprocode">
+
+              <div><input type="file" class="form-control-lg" name="document[]"  id="document" placeholder="@lang('home.your_legal_docs')*">
+                <a class="btn btn-danger" type="button">@lang('home.remove')</a>
               </div></div>
             </div>
             
             <div class="form-group mt-3">
-              <label for="name"><i class="bx bx-list-plus mx-1 text-danger"></i>Description</label>
-              <p><small class="text-primary">Write here in detail about your suffering.</small></p>
-              <textarea class="form-control" name="problem_details" rows="6" required placeholder="Details*"></textarea>
+              <label for="name"><i class="bx bx-list-plus mx-1 text-danger"></i>@lang('home.help_me_details')</label>
+              <p><small class="text-primary">@lang('home.help_me_details_exp')</small></p>
+              <textarea class="form-control" name="problem_details" rows="6" required placeholder="@lang('home.help_me_details')*"></textarea>
             </div>
           
-            <div class="text-center"><button type="submit">Send</button></div>
+            <div class="text-center"><button type="submit">@lang('home.send')</button></div>
 
           </form>
         </div>
