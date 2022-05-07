@@ -16,7 +16,7 @@
 
     
 
-    <title>Newsbox - Modern Magazine &amp; Newspaper HTML Template</title>
+    <title></title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{asset('site/read-news/img/core-img/favicon.ico')}}">
@@ -32,15 +32,16 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12 col-lg-8">
                 	<?php 
-                	$onlatest = new Carbon\Carbon(new DateTime($main->created_at));
-                	$fmla =$onlatest->toDayDateTimeString();
+                	$fmla = (new Carbon\Carbon(new DateTime($main->created_at)))->toDayDateTimeString();
+                    if(app()->getLocale() == 'am'){
+                    $fmla = Andegna\DateTimeFactory::fromDateTime($latest->created_at)->format('F j ቀን Y g:i:A');}
                       ?>
                     <!-- Post Content -->
                     <div class="post-content">
-                        <p class="tag"><span>Our Latest News</span></p>
+                        <p class="tag"><span>@lang('home.our_latest_news')</span></p>
                        <p class="fw-bold">{{$latest->heading}}</p>
                         <div class="row d-flex align-items-center">
-                            <div class="col-md-6"><span class="badge bg-primary">By:</span><span class="text-white">{{$latest->author->name}}</span></div>
+                            <div class="col-md-6"><span class="badge bg-primary">@lang('home.posted_by'):</span><span class="text-white">{{$latest->author->name}}</span></div>
                             <div class="col-md-6 my-2"><span class="post-date col-md-6 fw-bold">{{$fmla}}</span></div>
                         </div>
                     </div>
@@ -51,15 +52,17 @@
     
     <section class="post-news-area section-padding-100-0 mb-70">
 
-    	<?php $author = App\Http\Controllers\Admin\Dashboard::findAuthor($main->author_id);$on = new Carbon\Carbon(new DateTime($main->created_at));
-                      $formatted = $on->toDayDateTimeString(); ?>
+    	<?php $author = App\Http\Controllers\Admin\Dashboard::findAuthor($main->author_id);
+        $formatted = (new Carbon\Carbon(new DateTime($main->created_at)))->toDayDateTimeString();
+                      if(app()->getLocale() == 'am'){
+                    $formatted = Andegna\DateTimeFactory::fromDateTime($main->created_at)->format('F j ቀን Y g:i:A');}?>
         <div class="container">
             <div class="row justify-content-center">
               
                 <div class="col-12 col-lg-8">
                     <div class="post-details-content mb-100">
                     	<div class="row d-flex justify-content-md-between"><div class="col-md-6 text-info"> <h5>{{$main->heading}}</h5></div>
-                    	<div class="col-md-4"><span class="badge bg-success">By:</span><strong>{{$author->name}}</strong></div></div>
+                    	<div class="col-md-4"><span class="badge bg-success">@lang('home.posted_by'):</span><strong>{{$author->name}}</strong></div></div>
                        
                         <p class="text-success fw-bold">{{$formatted}}</p>
                         <img class="mb-30" src="{{ asset('uploads/news-pictures') }}/{{ $main->picture}}" alt="">
@@ -79,19 +82,19 @@
 
                         <!-- Newsletter Widget -->
                         <div class="single-widget-area newsletter-widget mb-30">
-                            <h4>Subscribe to our newsletter</h4>
+                            <h4>@lang('home.subscribe_to')</h4>
                             <form action="#" method="post">
-                                <input type="email" name="nl-email" id="nlemail" placeholder="Your E-mail">
-                                <button type="submit" class="btn btn-success">Subscribe</button>
+                                <input type="email" name="nl-email" id="nlemail" placeholder="@lang('home.email')">
+                                <button type="submit" class="btn btn-success">@lang('home.subscribe')</button>
                             </form>
-                            <p class="mt-30">Nullam lacinia ex eleifend orci porttitor, suscipit interdum augue condimentum. Etiam pretium turpis eget nibh . volutpat lobortis.</p>
+                            <p class="mt-30">@lang('home.if_u_sub')</p>
                         </div>
 
                         
 
                         <!-- Latest News Widget -->
                         <div class="single-widget-area news-widget mb-30">
-                            <h4>Trending News</h4>
+                            <h4>@lang('home.trending_news')</h4>
 
                             <!-- Single News Area -->
                             @foreach($rest as $article)
@@ -100,8 +103,12 @@
                                 <div class="blog-thumbnail">
                                     <a href="{{url('read-news',$article->id)}}"><img src="{{ asset('uploads/news-pictures') }}/{{ $article->picture}}" alt=""></a>
                                 </div>
-                                <?php $on = new Carbon\Carbon(new DateTime($article->created_at));
-											$formatted = $on->toDayDateTimeString(); ?>
+                                <?php 
+
+                    $formatted = (new Carbon\Carbon(new DateTime($article->created_at)))->toDayDateTimeString();
+                      if(app()->getLocale() == 'am'){
+                    $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i:A');}
+                                             ?>
 
                                 <!-- Blog Content -->
                                 <div class="blog-content">

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('search')
-
+ 
 
  							<li class="d-flex flex-column flex-md-row">
  								<label class="text-primary fw-bold mx-1 text-center" style="white-space: nowrap;">{{__('home.search_by')}}:</label>
@@ -75,18 +75,25 @@
 									<tbody>
 										@foreach($events as $event)
 								<?php $on = new Carbon\Carbon(new DateTime($event->due_date));
-							$start = new Carbon\Carbon(new DateTime($event->start_time));
-							$end = new Carbon\Carbon(new DateTime($event->end_time));
-							$st = $start->format('g:i A');
-							$en = $end->format('g:i A');
-								$formatted_date = $on->toFormattedDateString(); ?>
+							$start = (new Carbon\Carbon(new DateTime($event->start_time)))->format('g:i A');
+							$end = (new Carbon\Carbon(new DateTime($event->end_time)))->format('g:i A');
+
+								$formatted_date = $on->toFormattedDateString(); 
+								if(app()->getLocale() == 'am'){
+									$gregorian = new DateTime($event->due_date);
+	$formatted_date = Andegna\DateTimeFactory::fromDateTime($gregorian)->format('F j ቀን Y');
+	$start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A');
+     $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A');
+
+								}
+								?>
 										<tr id="eid{{$event->id}}">
 											<?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>
 											
 											<td class="text-dark" style="font-style: initial;">{{ $event->title }}</td>
 											<td class=" d-xl-table-cell text-info">{{ $formatted_date }}</td>
-											<td class=" d-xl-table-cell text-primary">{{ $st }}</td>
-											<td>{{ $en}}</td>
+											<td class=" d-xl-table-cell text-primary">{{ $start }}</td>
+											<td>{{ $end}}</td>
 											<td class=" d-md-table-cell text-dark">{{ $event->short_desc }}</td>
 											<td class="">
 
@@ -176,7 +183,8 @@
 
 <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
-
+<script src="{{ asset('site/assets/js/ec.js') }}"></script>
+<script type="text/javascript" src="https://unpkg.com/ethiopian-calendar-date-converter@%5E1" ></script>
 
 <script >
 	$(document).ready(function(){
@@ -185,8 +193,10 @@
 			var event_id = $(this).val();
 			$('#event_id').val(event_id);
 			$('#deleteEventModal').modal('show');
-
+			// Ethiopian calendar instance
 			
+
+	
 
 		});
 	});

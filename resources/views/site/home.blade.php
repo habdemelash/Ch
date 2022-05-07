@@ -72,7 +72,9 @@
        
         <div class="row my-2 d-flex justify-content-center">
           <?php $on = new Carbon\Carbon(new DateTime($article->created_at));
-                      $formatted = $on->toDayDateTimeString(); ?>
+                      $formatted = $on->toDayDateTimeString(); 
+       $formatted_date = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i:A');
+                      ?>
           <div class="col-lg-6 text-center">
             <a href="{{url('read-news',$article->id)}}"><img class="img-fluid" src="{{ asset('uploads/news-pictures') }}/{{ $article->picture}}" class="img-fluid" style="border-radius:30px;" width="500"></a>
             
@@ -83,8 +85,8 @@
             <p class="fst-italic">
               {{-- {{$article->body}} --}}
               <div id="author-date" class="row d-flex justify-content-md-between">
-                <p class="col-md-6 fw-bold text-primary"><span class="badge bg-danger">By:</span><a href="">{{$article->author->name}}</a></p>
-                <p class="col-md-6 text-info">{{$formatted}}</p>
+                <p class="col-md-6 fw-bold text-primary"><span class="badge bg-danger">@lang('home.posted_by'):</span><a href="">{{$article->author->name}}</a></p>
+                <p class="col-md-6 text-info">{{$formatted_date}}</p>
             
                 @if(mb_detect_encoding($article->body) == 'UTF-8')
                 {{$st = mb_substr($article->body,0,100,'UTF-8')}}

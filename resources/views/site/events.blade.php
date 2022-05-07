@@ -29,7 +29,7 @@
 
 
   }
-  .event-image{
+  .imager{
     height: 300px;
 
   }
@@ -65,7 +65,7 @@
             <span id="yours-tag" class="badge bg-danger my-3">@lang('home.your_event')</span>
              
             @endif
-            <a href="{{url('events/view',$event->id)}}"><img class="img-fluid event-image" src="{{asset('uploads/event-pictures')}}/{{$event->picture}}"  style=""></i></a>
+            <a href="{{url('events/view',$event->id)}}"><div class="imager"><img class="img-fluid" src="{{asset('uploads/event-pictures')}}/{{$event->picture}}"  style=""></div></i></a>
                  
           </div>
              <div class="row d-flex">
@@ -73,9 +73,9 @@
               <p class="text-dark">{{(mb_substr($event->details,0,50,'UTF-8'))}} ...</p>         
              </div>
               <?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>            
-              <hr>
-              <div class="">
-              	<p class="text-success">@lang('home.we_need')<strong class="text-danger"><?php echo($event->needed_vols);?></strong> @lang('home.volunteers')</p>
+              <hr style="">
+              <div class="container-fluid">
+              	<p class="text-success">@lang('home.we_need')<strong class="text-danger"><?php echo(' '.$event->needed_vols);?></strong> @lang('home.volunteers')</p>
 
 
                 
@@ -95,16 +95,32 @@
                   @endif
                 </strong>
               	<div class="row d-flex flex-column justify-content-start">
-                 <div class="col"><strong class="text-success"> <i class="bx bxs-calendar-event text-success">@lang('home.date'):</i><?php $c = new Carbon\Carbon( new DateTime($event->due_date));
-                 $c2 = $c->toFormattedDateString();
-                 echo($c2);?></strong><small class="text-danger fw-bold">- @lang('home.gregorian')</small></div>
-                 <?php $on = new Carbon\Carbon(new DateTime($event->due_date));
-              $start = new Carbon\Carbon(new DateTime($event->start_time));
-              $end = new Carbon\Carbon(new DateTime($event->end_time));
-              $st = $start->format('g:i A');
-              $en = $end->format('g:i A');?>
-                <div class="col"><strong><i class="bx bx-time text-danger" style="font-family: sans-serif;">@lang('home.time'):</i> <?php echo($st);?> - <?php echo($en);?></strong><br></div>
-                <div class="col"><strong><i class="bx bx-current-location text-danger">@lang('home.location')</i><?php echo($event->location);?></strong> </div>
+                 <div class="col"><strong class="text-success"> <i class="bx bxs-calendar-event text-success">@lang('home.date'):</i><?php
+
+
+      $formatted = (new Carbon\Carbon( new DateTime($event->due_date)))->toFormattedDateString();
+
+      $start = (new Carbon\Carbon(new DateTime($event->start_time)))->format('g:i A');
+      $end = (new Carbon\Carbon(new DateTime($event->end_time)))->format('g:i A');
+      
+                 if(app()->getLocale() == 'am'){
+      $formatted = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->due_date))->format('F j ቀን Y');
+      $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A');
+      $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A');
+                }
+                elseif(app()->getLocale() == 'or'){
+      $formatted = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->due_date))->toGregorian()->format('F j ቀን Y');
+      $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->toGregorian()->format('g:i A');
+      $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->toGregorian()->format('g:i A');
+
+                }
+                echo($formatted);
+                ?>
+
+                 </strong><small class="text-danger fw-bold"></small></div>
+                 <?php ?>
+                <div class="col"><strong><i class="bx bx-time text-danger" style="font-family: sans-serif;">@lang('home.time'):</i> <?php echo($start);?> - <?php echo($end);?></strong><br></div>
+                <div class="col"><strong><i class="bx bx-current-location text-danger">@lang('home.location')</i><?php echo(' '.$event->location);?></strong> </div>
                 </div>
               </div>
           

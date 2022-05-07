@@ -77,6 +77,7 @@ return array(
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
+    'Geezify\\' => array($vendorDir . '/geezify/geezify-php/src'),
     'Fruitcake\\Cors\\' => array($vendorDir . '/fruitcake/php-cors/src'),
     'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
     'Facade\\IgnitionContracts\\' => array($vendorDir . '/facade/ignition-contracts/src'),
@@ -97,4 +98,6 @@ return array(
     'BaconQrCode\\' => array($vendorDir . '/bacon/bacon-qr-code/src'),
     'Astrotomic\\Translatable\\' => array($vendorDir . '/astrotomic/laravel-translatable/src/Translatable'),
     'App\\' => array($baseDir . '/app'),
+    'Andegna\\PHPUnit\\' => array($vendorDir . '/andegna/calender/tests'),
+    'Andegna\\' => array($vendorDir . '/andegna/calender/src'),
 );

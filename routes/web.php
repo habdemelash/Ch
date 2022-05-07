@@ -15,6 +15,25 @@ use App\Http\Controllers\Admin\Dashboard;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Site\HelpmeController;
 
+Route::get('try', function ()
+{
+
+
+
+if(app()->getLocale() == 'am'){
+	echo 'True';
+}
+
+$gregorian = new DateTime();
+$ethiopic = Andegna\DateTimeFactory::fromDateTime($gregorian);
+echo $ethiopic->format('F j ቀን Y');     
+
+
+dd($ethiopic);
+});
+
+
+
 
 
 

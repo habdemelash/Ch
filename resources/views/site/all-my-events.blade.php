@@ -43,12 +43,23 @@
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center" style="text-align: center;">
           <h3>{{$ev->title}}<span class="badge" style="background-color: blue;">{{$i+1}}</span></h3>
           <h2>{{$ev->short_desc}}</h2>
+          <?php $formatted = (new Carbon\Carbon( new DateTime($ev->due_date)))->toFormattedDateString();
+          $start = (new Carbon\Carbon(new DateTime($ev->start_time)))->format('g:i A');
+              $end = (new Carbon\Carbon(new DateTime($ev->end_time)))->format('g:i A');
+              if(app()->getLocale() == 'am'){
+                  $gregorian = new DateTime($ev->due_date);
+  $formatted_date = Andegna\DateTimeFactory::fromDateTime($gregorian)->format('F j ቀን Y');
+  $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->start_time))->format('g:i A');
+     $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->end_time))->format('g:i A');
+
+                }
+          ?>
           <p class="text-success">{{mb_substr($ev->details,0,50,'UTF-8')}}</p>
           <div class="justify-content-center" style="text-align: center;">
-          	<div><strong class="text-primary">@lang('home.date'):<span class="text-info">{{$ev->due_date}}</span><small class="text-muted"> -@lang('home.gregorian')</small></strong></div>
+          	<div><strong class="text-primary">@lang('home.date'):<span class="text-info">{{$formatted}}</span><small class="text-muted"> </small></strong></div>
           	<div><strong class="text-primary">@lang('home.location'):<span class="text-info">{{$ev->location}}</span></strong></div>
-          	<div><strong class="text-primary">@lang('home.start_time'):<span class="text-info">{{$ev->start_time}}</span></strong></div>
-          	<div><strong class="text-primary">@lang('home.end_time'):<span class="text-info">{{$ev->end_time}}</span></strong></div>
+          	<div><strong class="text-primary">@lang('home.start_time'):<span class="text-info">{{$start}}</span></strong></div>
+          	<div><strong class="text-primary">@lang('home.end_time'):<span class="text-info">{{$end}}</span></strong></div>
             <a href="{{url('leave-event',$ev->id)}}" class="btn btn-danger btn-sm"><i class="bi-x-circle"></i>@lang('home.leave_it')</a>
            
           </div>
