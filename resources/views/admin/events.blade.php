@@ -3,23 +3,23 @@
 
 
  							<li class="d-flex flex-column flex-md-row">
- 								<label class="text-primary fw-bold mx-1 text-center" style="white-space: nowrap;">Search by:</label>
+ 								<label class="text-primary fw-bold mx-1 text-center" style="white-space: nowrap;">{{__('home.search_by')}}:</label>
  								<select class="form-select mb-3 select" aria-label=".form-select-lg example" id="searchType" onchange="filterRole();">
-								  <option selected>Title</option>
-								  <option value="1">Location</option>
-								  <option value="2">Date</option>
-								  <option value="3">Status</option>
+								  <option selected>{{__('home.title')}}</option>
+								  <option value="1">{{__('home.location')}}</option>
+								  <option value="2">{{__('home.date')}}</option>
+								  <option value="3">{{__('home.status')}}</option>
 								</select>
 								<select class="select form-select mb-3" id="status" disabled style="display: none"  >
-								  <option data-searchType="Status" value="1">Upcoming</option>
-								  <option data-searchType="Status" value="2">Cancelled</option>
-								  <option data-searchType="Status" value="3">Past</option>
+								  <option data-searchType="{{__('home.status')}}" value="1">{{__('home.upcoming')}}</option>
+								  <option data-searchType="{{__('home.status')}}" value="2">{{__('home.cancelled')}}</option>
+								  <option data-searchType="{{__('home.status')}}" value="3">{{__('home.past')}}</option>
 								</select>
 						<span id="option-container" style="visibility: hidden; position:absolute;"></span>
 
                             <div class="container-fluid">
 							    <form class="d-flex">
-							      <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+							      <input class="form-control" type="search" placeholder="{{__('home.search_place')}}" aria-label="Search">
 							      <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
 							    </form>
 							  </div>
@@ -38,14 +38,14 @@
 
 <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
 
-<h1 class="h3 mb-3"><strong>Events</strong> Management</h1>
+<h1 class="h3 mb-3"><strong>{{__('home.events_nav')}}</strong> {{__('home.administration')}}</h1>
 <div class="row d-flex mt-3 justify-content-center">
 	
 	<div class="container">
 		<div class="row align-items-start justify-content-center">
 	
 <a href="{{route('admin.event.addform')}}" class="btn btn-success col-2">
- Add new
+ {{__('home.add_new')}}
 </a>
 
 </div>                		
@@ -59,17 +59,17 @@
                     	<table class="table table-hover my-0 table-responsive" id="eventsTable">
 									<thead>
 										<tr >
-											<th>Title</th>
+											<th>{{__('home.title')}}</th>
 										
-											<th class=" d-xl-table-cell"> Date</th>
-											<th class=" d-xl-table-cell"> Starting time</th>
-											<th class=" d-xl-table-cell"> Ending time</th>
-											<th class=" d-xl-table-cell"> Short Description</th>
-											<th>Status</th>
-											<th class=" d-md-table-cell">Needed Volunteers</th>
-											<th class=" d-md-table-cell">Joined by</th>
-											<th>Picture</th>
-											<th>Actions</th>
+											<th class=" d-xl-table-cell"> {{__('home.date')}}</th>
+											<th class=" d-xl-table-cell"> {{__('home.start_time')}}</th>
+											<th class=" d-xl-table-cell">{{__('home.end_time')}}</th>
+											<th class=" d-xl-table-cell"> {{__('home.short_desc')}}</th>
+											<th>{{__('home.status')}}</th>
+											<th class=" d-md-table-cell">{{__('home.needed_vols')}}</th>
+											<th class=" d-md-table-cell">{{__('home.joined_by')}}</th>
+											<th>{{__('home.picture')}}</th>
+											<th>{{__('home.actions')}}</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -91,34 +91,34 @@
 											<td class="">
 
 												@if($event->status == 'Upcoming')
-												<span class="badge bg-primary">{{$event->status}}</span>
+												<span class="badge bg-primary">{{__('home.upcoming')}}</span>
 												@elseif($event->status == 'Cancelled')
 												
-												<span class="badge bg-danger">{{$event->status}}</span>
+												<span class="badge bg-danger">{{__('home.cancelled')}}</span>
 												@else
-												<span class="badge bg-dark">{{$event->status}}</span>
+												<span class="badge bg-dark">{{__('home.past')}}</span>
 												@endif
 												</td>
 											<td>{{$event->needed_vols}}</td>
 											<td>@if($members>= $event->needed_vols)
-												<span class="badge bg-danger">Full</span><br>
+												<span class="badge bg-danger">{{__('home.full')}}</span><br>
 												@endif
 												
 											@if($members<1)
-											<span class="text-danger">No one joined yet</span>
+											<span class="text-danger">{{__('home.no_one_yet')}}</span>
 
 											@elseif($members == 1)
 											<a href="{{url('dash/event/viewmembers',$event->id)}}" style="white-space: nowrap; font-weight: 700">
-												{{$members}} volunteer </a>
+												{{$members}} {{__('home.vol')}} </a>
 											@else
 											<a href="{{url('dash/event/viewmembers',$event->id)}}" style="white-space: nowrap; font-weight: 700">
-												{{$members}} volunteers </a>
+												{{$members}} {{__('home.vols')}} </a>
 
 
 											@endif
 
 											</td>
-											<td><img src="{{ asset('uploads/event-pictures') }}/{{ $event->picture}}" class="rounded-circle rounded me-1" alt="No picture" style="height: 60px;width: 60px;" /></td>
+											<td><img src="{{ asset('uploads/event-pictures') }}/{{ $event->picture}}" class="rounded-circle rounded me-1" alt="{{__('home.no_pic')}}" style="height: 60px;width: 60px;" /></td>
 											<td class="d-flex flex-row">
 												<a href="{{url('dash/event/updateform',$event->id)}}" class="mx-1"><i class="bx bxs-edit bx-md"></i></a>
 												<button value="{{$event->id}}" type="button" class="btn deleteEvent" data-bs-toggle="modal" data-bs-target="#deleteEventModal"><i class="bx bxs-trash bx-md text-danger"></i>
@@ -142,16 +142,16 @@
 							  		@csrf
 							  		  <div class="modal-content">
 							      <div class="modal-header">
-							        <h5 class="modal-title text-danger" id="ModalLabel">Delete Event</h5>
+							        <h5 class="modal-title text-danger" id="ModalLabel">{{__('home.delete_event')}}</h5>
 							        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							      </div>
 							      <div class="modal-body">
 							        <input type="hidden" name="event_id" id="event_id" >
-							        <p class="fw-bold">Do you really want to delete this event?</p>
+							        <p class="fw-bold">{{__('home.do_u_delete_event')}}</p>
 							      </div>
 							      <div class="modal-footer">
-							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-							        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes, delete</button>
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{__('home.no')}}</button>
+							        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">{{__('home.yes_delete')}}</button>
 							      </div>
 							    </div>
 							  	</form>
@@ -185,16 +185,21 @@
 			var event_id = $(this).val();
 			$('#event_id').val(event_id);
 			$('#deleteEventModal').modal('show');
+
+			
+
 		});
 	});
+
 	
 </script>
+<script type="text/javascript">
+	
 
-<script>
 
     function filterRole(){
       var searchType = $("#searchType").find('option:selected').text();
-      if (searchType == 'Status') { // stores searchType
+      if (searchType == '{{__('home.status')}}') { // stores searchType
       $("#option-container").children().appendTo("#status"); // moves <option> contained in #option-container back to their <select>
       var toMove = $("#status").children("[data-searchType!='"+searchType+"']"); // selects role elements to move out
       toMove.appendTo("#option-container"); // moves role elements in #option-container
@@ -206,6 +211,7 @@
 
       }
 };
+
 </script>
 
 

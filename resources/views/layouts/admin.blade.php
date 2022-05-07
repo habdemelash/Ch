@@ -14,7 +14,7 @@
 
     <link rel="canonical" href="https://demo-basic.adminkit.io/" /> 
 
-    <title>CVSMS - Administration</title>
+    <title>CVSMS - @lang('home.administration')</title>
 
     <link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -45,25 +45,25 @@ $messageCount= $all->count();
 
                     <li class="sidebar-item {{ Request::is('dash') ? 'active' : '';}}">
                         <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
-              <i class="bx bx-stats bx-md" ></i> <span class="align-middle">Dashboard</span>
+              <i class="bx bx-stats bx-md" ></i> <span class="align-middle">{{__('home.dashboard')}}</span>
             </a>
                     </li>
 
                     <li class="sidebar-item {{ strpos($address,'dash/event') ? 'active' : '';}}">
                         <a class="sidebar-link" href="{{ route('admin.events')}}">
-              <i class="bx bxs-calendar-check bx-md" ></i> <span class="align-middle">Events</span>
+              <i class="bx bxs-calendar-check bx-md" ></i> <span class="align-middle">{{__('home.events_nav')}}</span>
             </a>
                     </li>
 
                     <li class="sidebar-item {{ strpos($address,'dash/news') ? 'active' : '';}}">
                         <a class="sidebar-link" href="{{route('admin.news')}}">
-              <i class="bx bxs-news bx-md" ></i> <span class="align-middle">News</span>
+              <i class="bx bxs-news bx-md" ></i> <span class="align-middle">{{__('home.news')}}</span>
             </a>
                     </li>
 
                     <li class="sidebar-item {{ strpos($address,'dash/helpmes') ? 'active' : '';}}">
                         <a class="sidebar-link" href="{{route('admin.helpmes')}}">
-              <i class="bx bxs-hand bx-md" ></i> <span class="align-middle">Help me</span>
+              <i class="bx bxs-hand bx-md" ></i> <span class="align-middle">{{__('home.help_me')}}</span>
 
             @if($countUnseen>0) <span class="badge bg-primary">{{$countUnseen}}</span> @endif
         </a>
@@ -71,7 +71,7 @@ $messageCount= $all->count();
 
                     <li class="sidebar-item {{ strpos($address,'dash/mails') ? 'active' : '';}}">
                         <a class="sidebar-link" href="{{route('user.mails')}}">
-              <i class="bx bxs-message bx-md" ></i> <span class="align-middle">Mails<span class="badge bg-info ml-1">{{$messageCount}}</span> </span>
+              <i class="bx bxs-message bx-md" ></i> <span class="align-middle">{{__('home.mails')}}<span class="badge bg-info ml-1">{{$messageCount}}</span> </span>
             </a>
                     </li>
 
@@ -79,7 +79,7 @@ $messageCount= $all->count();
 
                     <li class="sidebar-item {{ strpos($address,'dash/users') ? 'active' : '';}}">
                         <a class="sidebar-link" href="{{route('admin.users')}}">
-              <i class="bx bxs-group bx-md"></i> <span class="align-middle">Users</span>
+              <i class="bx bxs-group bx-md"></i> <span class="align-middle">{{__('home.users')}}</span>
             </a>
                     </li>
                     
@@ -109,9 +109,9 @@ $messageCount= $all->count();
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0" aria-labelledby="alertsDropdown" style="width: 300px;">
                                 <div class="dropdown-menu-header">
                                     @if($countUnseen>0)
-                                    <span class="badge bg-danger">{{$countUnseen}}</span> New Help-me application(s)
+                                    <span class="badge bg-danger">{{$countUnseen}}</span> {{__('home.new_helpme')}}
                                     @else
-                                    No new Help-me applications
+                                    {{__('home.no_new_helpme')}}
                                     @endif
 
                                 </div>
@@ -151,7 +151,7 @@ $messageCount= $all->count();
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0 " aria-labelledby="messagesDropdown" style="width: 300px;">
                                 <div class="dropdown-menu-header">
                                     <div class="position-relative">
-                                        <span class="badge bg-primary">{{$messageCount}}</span> New contact mail(s) for you
+                                        <span class="badge bg-primary">{{$messageCount}}</span> {{__('home.new_mails')}}
                                     </div>
                                 </div>
                                 <div class="list-group">
@@ -199,10 +199,10 @@ $messageCount= $all->count();
                     {{Auth::user()->name}}@endauth</span>
               </a>
                             <div class="dropdown-menu dropdown-menu-">
-                                <a class="dropdown-item" href="{{route('profile')}}"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
+                                <a class="dropdown-item" href="{{route('profile')}}"><i class="align-middle me-1" data-feather="user"></i> {{__('home.profile')}}</a>
                                
-                                <a class="dropdown-item" href="{{route('site.home')}}"><i class="bx bxs-home-heart"></i> Site</a>
-                                <a class="dropdown-item" href="{{route('logout')}}"><i class="bx bx-lock"></i>Log out</a>
+                                <a class="dropdown-item" href="{{route('site.home')}}"><i class="bx bxs-home-heart"></i> {{__('home.site')}}</a>
+                                <a class="dropdown-item" href="{{route('logout')}}"><i class="bx bx-lock"></i>{{__('home.logout')}}</a>
                                 
                             </div>
                         </li>
@@ -225,13 +225,13 @@ $messageCount= $all->count();
                         <div class="col-6 text-end">
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <a class="text-muted" href="{{route('site.home')}}" >Site</a>
+                                    <a class="text-muted" href="{{route('site.home')}}" >{{__('home.site')}}</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="text-muted" href="{{route('profile')}}" >Profile</a>
+                                    <a class="text-muted" href="{{route('profile')}}" >{{__('home.profile')}}</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="text-muted" href="{{route('logout')}}" target="_blank">Logout</a>
+                                    <a class="text-muted" href="{{route('logout')}}" target="_blank">{{__('home.logout')}}</a>
                                 </li>
                                 
                             </ul>

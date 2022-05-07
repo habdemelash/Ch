@@ -98,7 +98,7 @@ class Home extends Controller
         
     }
 
-
+ 
 
 // Fetch my events with their data
 
@@ -276,7 +276,7 @@ public static function calculateDays($id)
         return lang('home.today');
        }
        else{
-       return 'passed '.$difference.' '.__('home.days_ago');
+       return __('home.from').$difference.' '.__('home.days_ago');
    }
     }
     else{

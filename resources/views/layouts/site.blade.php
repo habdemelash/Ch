@@ -12,6 +12,7 @@
   <!-- Favicons -->
   <link href="{{ asset('site/assets/img/3dheart.png') }}" rel="icon">
   <link href="{{ asset('site/assets/img/3dheart.png') }}" rel="apple-touch-icon">
+                
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -27,10 +28,11 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('site/assets/css/style.css') }}" rel="stylesheet">
+  <link href="{{ asset('site/assets/css/abyssinica-sil.css') }}" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
   @toastr_css
 
-
+ 
   <style>
  .more {
   display: none;
@@ -43,6 +45,11 @@
 .service-item.open .dots {
   display: none;
 }
+@if(app()->getLocale() == 'am')
+body, header, main, section {
+  font-family: 'Abyssinica SIL', sans-serif;
+}
+@endif
 </style>
 @livewireStyles
 </head>
@@ -79,13 +86,13 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
               <li class="dropdown"><a href="#" style="pointer-events: none">
               <div>
                 <span class="badge bg-primary">{{$i+1}}</span><strong>{{$ev->title}}</strong><br>
-                <small>Date:<span class="text-primary">{{' '.$ev->due_date}}</span></small><br>
+                <small>Date:<span class="text-primary">{{' '.$ev->due_date}}</span>: @lang('home.gregorian')</small><br>
                 <small>Location:<span class="text-primary">{{' '.$ev->location}}</span></small>
                 
               </div>
                
                 
-                <a id="leave-span" href="{{url('leave-event',$ev->id)}}"><span class="badge" style="background: rgb(255, 0, 0);">Leave<i class="bi-x-circle"></i></span></a>
+                <a id="leave-span" href="{{url('leave-event',$ev->id)}}"><span class="badge" style="background: rgb(255, 0, 0);">@lang('home.leave_it')<i class="bi-x-circle"></i></span></a>
 
               
                 
@@ -104,7 +111,7 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
            
           <li class="dropdown"><a href="#"><span>@lang('home.more')<i class="bi-plus-circle-fill font-weight-bold"></i></span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="{{route('site.helpmeform')}}">@lang('home.help_me_form_link')<i class="bx bxs-send"></i></a></li>
+              <li><a href="{{route('site.helpmeform')}}">@lang('home.help_me_form_link')<i class="bx bxs-hand"></i></a></li>
               <li><a class="nav-link scrollto" href="{{route('site.staff')}}">@lang('home.our_staff')<i class="bi-people-fill"></i></a></li>
 
              

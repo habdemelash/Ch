@@ -1,21 +1,22 @@
 <?php
 
 return [
+
     /*
     |--------------------------------------------------------------------------
-    | Slaptažodžio priminimo kalbos eilutės
+    | Password Reset Language Lines
     |--------------------------------------------------------------------------
     |
-    | Sekančios kalbos eilutės yra numatytos elutės, atitinkančios priežastims,
-    | pateikiamoms slatažodžių tarpininko, kai nepavyksta slaptažodžio atnaujinimo
-    | bandymas, tokioms kaip negaliojanti žymė ar neteisingas naujas slaptažodis..
+    | The following language lines are the default lines which match reasons
+    | that are given by the password broker for a password update attempt
+    | has failed, such as for an invalid token or invalid new password.
     |
     */
 
-    'password'  => 'Slaptažodis turi būti bent aštuonių simbolių ir sutapti su patvirtinimu.',
-    'reset'     => 'Nustatytas naujas slaptažodis!',
-    'sent'      => 'Naujo slaptažodžio nustatymo nuoroda išsiųsta',
-    'throttled' => 'Palaukite prieš tęsdami.',
-    'token'     => 'Šis slaptažodžio raktas yra neteisingas.',
-    'user'      => 'Vartotojas su tokiu el. paštu nerastas.',
+    'reset' => 'የይለፍ ቃልዎ እንደ አዲስ ተሰርቷል!',
+    'sent' => 'የይለፍ ቃል ማደሻ አገናኝ በኢ-ሜይልዎ ልከንልዎታል!',
+    'throttled' => 'እባክዎ እንደገና ከመሞከርዎ በፊት ትንሽ ይጠብቁ!',
+    'token' => 'ይህ የይለፍ ቃል መደሻ ቶከን ልክ አይደለም!',
+    'user' => "በዚህ የኢ-ሜይል አድራሻ የተመዘገበ ተጠቃሚ የለንም!",
+
 ];

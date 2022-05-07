@@ -79,7 +79,7 @@ class Dashboard extends Controller
         $event->location = $request->location;
         $event->save();
          
-         return redirect()->back()->with('message','Event added successfully!');
+         return redirect()->back()->with('message',__('home.event_added'));
     }
     public function updateEventView($id)
     {

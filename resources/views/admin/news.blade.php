@@ -30,14 +30,14 @@
 @section('content')
 
  
-<h1 class="h3 mb-3"><strong>News</strong> Management</h1>
+<h1 class="h3 mb-3"><strong>{{__('home.news')}}</strong> {{__('home.administration')}}</h1>
 <div class="row d-flex mt-3 justify-content-center">
 	
 	<div class="container">
 		<div class="row align-items-start justify-content-center">
 	{{-- <div class="col"> --}}
 		<a class="btn btn-success col-2 text-nowrap" href="{{route('admin.news.addform')}}">
-  		<i class="bx bxs-plus-circle"></i>Add new
+  		<i class="bx bxs-plus-circle"></i>{{__('home.add_new')}}
 		</a>
 		
 	{{-- </div> --}}
@@ -55,12 +55,12 @@
 									<thead>
 										<tr>
 										
-											<th class=" d-xl-table-cell text-primary" > Heading</th>
-											<th class=" d-xl-table-cell text-center">Body</th>
-											<th class=" d-xl-table-cell text-danger"> Posted by</th>
-											<th class=" d-xl-table-cell"> Posted at</th>
-											<th class=" d-md-table-cell">Picture</th>
-											<th class=" d-md-table-cell">Actions</th>
+											<th class=" d-xl-table-cell text-primary" > {{__('home.heading')}}</th>
+											<th class=" d-xl-table-cell text-center">{{__('home.body')}}</th>
+											<th class=" d-xl-table-cell text-danger">{{__('home.posted_by')}}</th>
+											<th class=" d-xl-table-cell">{{__('home.date')}}</th>
+											<th class=" d-md-table-cell">{{__('home.picture')}}</th>
+											<th class=" d-md-table-cell">{{__('home.actions')}}</th>
 											
 										</tr>
 									</thead>

@@ -17,7 +17,7 @@
   #yours-tag{
     position: absolute; top: -95px; left: 40px; transform: rotate(-45deg);
      animation: left-right 2s ease-in-out infinite alternate-reverse both;
-
+ 
 
 
   }
@@ -60,7 +60,7 @@
               
               	<div class="icon" style="position: relative;">
                   <?php $days = App\Http\Controllers\Site\Home::calculateDays($event->id); ?>
-              <span id="days-left" class="badge bg-success">@lang('home.from') {{$days}}</span>
+              <span id="days-left" class="badge bg-success">{{$days}}</span>
                   @if(in_array($event->id, $myEventsList))
             <span id="yours-tag" class="badge bg-danger my-3">@lang('home.your_event')</span>
              
@@ -113,7 +113,7 @@
                 @if($event->status == 'Upcoming' and $members<$event->needed_vols)
                 <a href="{{url('join-event',$event->id)}}" class="fancy fw-bold" style="margin-top: 15px;" ><i class="bi-person-plus mx-1" style="font-size:20px;"></i> @lang('home.join_this')</a>
                 @else
-                <a class="fancy fw-bold fw-bold" href="" style="margin-top: 15px;pointer-events: none; background-color: red;">@lang('home.you_cant_join')</a>
+                <a class="fancy fw-bold fw-bold" href="" style="margin-top: 15px;pointer-events: none; background-color: #BD0A02;">@lang('home.you_cant_join')</a>
                  <br>
                 @endif
               </div>
@@ -136,7 +136,7 @@
         endforeach;
 
            @endphp
-<div class="text-center">
+<div class="text-center col-md-4">
   {{$events->links('pagination::bootstrap-5')}}
 </div>
  

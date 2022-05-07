@@ -11,6 +11,8 @@ return [
     |
     */
 
-    'failed'   => 'Prisijungimo duomenys neatitinka.',
-    'throttle' => 'Per daug bandymų prisijungti. Bandykite po :seconds sec.',
+    'failed' => 'ያስገቡት መለያ በመዘገባችን ውስጥ የለም።',
+    'password' => 'ያስገቡት የይለፍ ቃል ትክክለኛው አይደለም።',
+    'throttle' => 'እጂግ ብዙ ተደጋጋሚ የመግባት ሙከራዎች! እባክዎ ከ :ሰከንዶች በኋላ እንደገና ይሞክሩ።',
+   
 ];

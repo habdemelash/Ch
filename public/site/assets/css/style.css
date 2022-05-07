@@ -9,7 +9,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
+  /*font-family: "Open Sans", sans-serif;*/
   color: #444444;
 }
 
@@ -24,7 +24,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Raleway", sans-serif;
+  /*font-family: "Raleway", sans-serif;*/
 }
 
 /*--------------------------------------------------------------
@@ -114,7 +114,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: space-between;
   padding: 10px 0 10px 30px;
-  font-family: "Raleway", sans-serif;
+  /*font-family: "Raleway", sans-serif;*/
   font-size: 16px;
   font-weight: 700;
   color: #6a7489;
@@ -353,7 +353,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 24px;
 }
 #hero .btn-get-started {
-  font-family: "Raleway", sans-serif;
+  /*font-family: "Raleway", sans-serif;*/
   font-weight: 500;
   font-size: 16px;
   letter-spacing: 1px;
@@ -594,7 +594,7 @@ section {
 .counts .counters p {
   padding: 0;
   margin: 0 0 20px 0;
-  font-family: "Raleway", sans-serif;
+  /*font-family: "Raleway", sans-serif;*/
   font-size: 14px;
   font-weight: 600;
 }
@@ -854,7 +854,7 @@ section {
   color: #fff;
 }
 .cta .cta-btn {
-  font-family: "Raleway", sans-serif;
+  /*font-family: "Raleway", sans-serif;*/
   text-transform: uppercase;
   font-weight: 500;
   font-size: 16px;
@@ -1131,7 +1131,7 @@ section {
   font-weight: 700;
   color: #5f687b;
   position: relative;
-  font-family: "Poppins", sans-serif;
+  /*font-family: "Poppins", sans-serif;*/
   padding-bottom: 0;
   margin-bottom: 0;
 }

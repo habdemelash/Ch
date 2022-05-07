@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Abyssinica SIL';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Abyssinica SIL'), url('sil/AbyssinicaSIL-Regular.woff') format('woff');
+}
+
+

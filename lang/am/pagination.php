@@ -12,6 +12,6 @@ return [
     |
     */
 
-    'previous' => '&laquo; Ankstesnis',
-    'next'     => 'Kitas &raquo;',
+   'previous' => '&laquo; የቀደመው',
+    'next' => 'ቀጣይ &raquo;',
 ];
