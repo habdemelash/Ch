@@ -40,6 +40,7 @@
   <label for="start_time">{{__('home.start_time')}}</label>
 </div>
 <div class="form-floating col-md-2 my-1">
+
   <input type="time" class="form-control" name="end_time" placeholder="">
   <label for="end_time">{{__('home.end_time')}}</label>
 </div>
@@ -48,12 +49,13 @@
   <label for="short_desc">{{__('home.short_desc')}}</label>
 </div>
 
-
-
 <div class="form-floating col-md-4 my-1">
-  <input type="date" class="form-control" name="due_date" placeholder="" min="05/01/2022">
+  <input class="form-control" type="text" name="due_date" id="defaultPopup" autocomplete="off">
   <label for="due_date">{{__('home.date')}}</label>
 </div>
+<h1> Amharic jQuery Calendars Datepicker</h1>
+
+<p>A popup datepicker <input class="form-control" type="text" name="due_date" id="popupDatepicker" autocomplete="off"></p>
 
 <div class="form-floating col-md-4 my-1">
   <input type="text" class="form-control" name="location" placeholder="">
@@ -83,6 +85,7 @@
      </div>
      <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
+  @include('admin.scripts')
   <script >
     @if(Session::has('message'))
     toastr.success("{{Session::get('message')}}");

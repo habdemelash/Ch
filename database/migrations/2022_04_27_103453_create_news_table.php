@@ -15,8 +15,12 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
-            $table->string('heading');
-            $table->text('body');
+            $table->string('heading_en')->default('empty-EN-H');
+            $table->string('heading_am');
+            $table->string('heading_or')->default('empty-OR-H');
+            $table->text('body_en')->default('empty-EN-B');
+            $table->text('body_am');
+            $table->text('body_or')->default('empty-OR-B');
             $table->string('picture');
             $table->bigInteger('author_id')->unsigned();
             $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');

@@ -40,7 +40,7 @@
 
 .service-item.open .more {
   display: inline;
-}
+} 
 
 .service-item.open .dots {
   display: none;

@@ -160,10 +160,11 @@ public function addNewsForm()
 }
 public function addNews(Request $request)
     {
+        $locale = app()->getLocale();
         $validated = $request->validate([
-            'heading' => ['required', 'string', 'min:3','max:400'],
-            'body' => ['required', 'string', 'max:10000','min:10'],
-            'picture' => ['required','image'],
+            'heading_'.$locale => ['required', 'string', 'min:3','max:400'],
+            'body_'.$locale => ['required', 'string', 'max:10000','min:10'],
+            // 'picture' => ['required','image'],
             
             
         ]);
@@ -177,11 +178,17 @@ public function addNews(Request $request)
             $news->picture = $filename;
 
         }
-        $news->heading = $request->heading;
+        if ($locale == 'am') {
+        $news->heading_am = $request->heading_am;
+        $news->body_am = $request->body_am;
+        }
+
+        
         $news->author_id = Auth::user()->id;
-        $news->body = $request->body;
         $news->save();
+        // dd($locale);
         return redirect()->back()->with('message','News added successfully!');
+
     }
 
     // Render news update form for a desired news article

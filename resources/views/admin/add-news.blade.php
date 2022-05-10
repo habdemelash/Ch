@@ -43,26 +43,55 @@
       			@endforeach
       			</div>
       			@endif
-      			
-   <div class="form-floating mb-3 col-md-4 my-1">
-  <input type="text" class="form-control" name="heading" value="{{old('heading')}}">
-  <label for="title">Heading</label>
-</div>
 
-<div class="form-floating my-1 col-md-8">
-  <textarea class="form-control"  name="body" style="height: 200px;"></textarea>
-  <label for="details">Body</label>
-</div>
-
-<div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">
-	<label class="col-md-2" for="">Picture</label>
-  <input type="file" name="picture" class="form-control-lg col-md-10" accept="image/*" onchange="preview(event)">
-
-  <span class="text-primary">Add a good picture of your article to grab readers' attention...</span>
-  <img src="{{asset('site/assets/img/3dheart.png')}}" alt="" class="img-thumbnail rounded-circle" width="150" height="150" id="output">
+  @foreach(config('app.languages') as $locale=>$value) 		
+   <div class="form-group mb-3 col-md-4 my-1">
+    <label for="heading-{{$locale}}" class="text-primary">Heading-{{strtoupper($value)}}</label>
+  <input type="text" id="heading-{{$locale}}" class="form-control" name="heading_{{$locale}}" value="{{old('heading')}}">
   
 </div>
 
+<div class="form-group my-1 col-md-8">
+  <label for="body-{{$locale}}" class="text-primary">Body-{{strtoupper($value)}}</label>
+  <textarea class="form-control" id="body-{{$locale}}" name="body_{{$locale}}" style="height: 200px;"></textarea>
+  
+</div>
+@endforeach
+
+
+
+
+
+
+
+
+<div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">
+	<label class="col-md-2" for="pic" style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">Click Here</label>
+  <input type="file" id="pic" name="picture" class="form-control-lg col-md-10" accept="image/*" onchange="preview(event)" style="display: none;">
+
+  <span class="text-primary">Add a good picture of your article to grab readers' attention...</span>
+  
+  
+</div>
+
+<div style="text-align: center;">
+  <img src="{{asset('site/assets/img/digital_22.jpg')}}" alt="" class="img-fluid" style="max-height: 150px" id="output">
+</div>
+<input type="button" class="btn btn-primary" id="click-input" value="Click here" onclick="document.getElementById('file').click();" />
+<label for="click-input" id="file-name">Bla bla</label>
+<input type="file" style="display:none;" id="file">
+<script>
+    inputElement = document.getElementById('file')
+    labelElement = document.getElementById('file-name')
+    inputElement.onchange = function(event) {
+        var path = inputElement.value;
+        if (path) {
+            labelElement.innerHTML = path.split(/(\\|\/)/g).pop()
+        } else {
+            labelElement.innerHTML = 'Bla bla'
+        } 
+    }
+</script>
 
       			
       		</div>
@@ -80,6 +109,7 @@
 
   <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
 <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
+@include('admin.scripts')
  @if(Session::has('message'))
  <script >
   toastr.success("{!! Session::get('message') !!}");

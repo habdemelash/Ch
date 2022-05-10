@@ -68,7 +68,7 @@
             <a href="{{url('events/view',$event->id)}}"><div class="imager"><img class="img-fluid" src="{{asset('uploads/event-pictures')}}/{{$event->picture}}"  style=""></div></i></a>
                  
           </div>
-             <div class="row d-flex">
+             <div class="row d-flex justify-content-center">
               <p class="text-primary"><?php echo($event->short_desc) ?></p>
               <p class="text-dark">{{(mb_substr($event->details,0,50,'UTF-8'))}} ...</p>         
              </div>

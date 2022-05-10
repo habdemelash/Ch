@@ -273,7 +273,7 @@ public static function calculateDays($id)
 
        $difference = $eventDate->diff($today)->format('%a');
        if($difference == 0 ){
-        return lang('home.today');
+        return __('home.today');
        }
        else{
        return __('home.from').$difference.' '.__('home.days_ago');

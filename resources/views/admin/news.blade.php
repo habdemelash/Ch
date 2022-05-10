@@ -50,6 +50,7 @@
 
 
                     <div class="" style="overflow-x: auto;">
+                    	{{$locale = app()->getLocale()}}
 
                     	<table class="table table-hover my-0 table-responsive" id="eventsTable">
 									<thead>
@@ -68,9 +69,9 @@
 										@foreach($news as $article)
 										<tr>
 											
-											<td class="text-info fw-bold" style="font-family: Times New Roman;">{{substr($article->heading,0,60)}} ...</td>
+											<td class="text-info fw-bold" style="font-family: Times New Roman;">{{substr($article->heading_.$locale,0,60)}} ...</td>
 											<td class="text-gray-dark">
-								                {{mb_substr($article->body,0,100,'UTF-8')}} ...
+								                {{mb_substr($article->body_.$locale,0,100,'UTF-8')}} ...
 								                
 								                </td style="font-family: Times New Roman;">
 											<?php ?>

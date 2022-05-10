@@ -18,22 +18,11 @@ use App\Http\Controllers\Site\HelpmeController;
 Route::get('try', function ()
 {
 
-
-
-if(app()->getLocale() == 'am'){
-	echo 'True';
-}
-
-$gregorian = new DateTime();
-$ethiopic = Andegna\DateTimeFactory::fromDateTime($gregorian);
-echo $ethiopic->format('F j ቀን Y');     
-
-
-dd($ethiopic);
+// foreach(config('app.available_locales') as $locale){
+// 	echo $locale;
+	dd(config('app.languages'));
+	
 });
-
-
-
 
 
 
@@ -53,6 +42,11 @@ Route::get('join-us',[Home::class,'registrationView'])->name('joinus');
 Route::get('all-my-evnts',[Home::class,'allMyEvents'])->name('all.my.events');
 Route::get('donate-materials',[Home::class,'donateMaterialsForm'])->name('donate.materials.form');
 Route::get('contact-us',[Home::class,'contactForm'])->name('contact.form');
+
+
+
+
+
 Route::group(['middleware'=>['auth']],  function ()
 {
     Route::get('/logout',[Signout::class,'signout'])->name('logout');
