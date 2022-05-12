@@ -18,9 +18,12 @@ use App\Http\Controllers\Site\HelpmeController;
 Route::get('try', function ()
 {
 
-// foreach(config('app.available_locales') as $locale){
-// 	echo $locale;
-	dd(config('app.languages'));
+$phrase  = "Qaammee dhgd";
+$healthy = ["fruits", "vegetables", "fiber"];
+$yummy   = ["Qaammee", "beer", "ice cream"];
+
+$newPhrase = str_replace($healthy, $yummy, $phrase);
+	dd(app()->getLocale());
 	
 });
 
@@ -43,7 +46,7 @@ Route::get('all-my-evnts',[Home::class,'allMyEvents'])->name('all.my.events');
 Route::get('donate-materials',[Home::class,'donateMaterialsForm'])->name('donate.materials.form');
 Route::get('contact-us',[Home::class,'contactForm'])->name('contact.form');
 
-
+// Auth::routes();
 
 
 

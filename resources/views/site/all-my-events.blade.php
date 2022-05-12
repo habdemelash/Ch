@@ -34,7 +34,7 @@
     <h1 class="text-center">@lang('home.your_events')</h1>
   </div>
 <section  class="d-flex flex-column align-items-center" >
-  
+  <?php $locale = app()->getLocale(); ?>
   @for($i=0; $i<count($myEventsList);$i++)
     <?php $ev = App\Http\Controllers\Site\Home::fetchMyEvents($myEventsList[$i]); ?>
 
@@ -48,16 +48,23 @@
               $end = (new Carbon\Carbon(new DateTime($ev->end_time)))->format('g:i A');
               if(app()->getLocale() == 'am'){
                   $gregorian = new DateTime($ev->due_date);
-  $formatted_date = Andegna\DateTimeFactory::fromDateTime($gregorian)->format('F j ቀን Y');
+  $formatted = Andegna\DateTimeFactory::fromDateTime($gregorian)->format('F j ቀን Y');
   $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->start_time))->format('g:i A');
      $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->end_time))->format('g:i A');
 
                 }
+
+                elseif(app()->getLocale() == 'or'){
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($ev->due_date)))->format('F j , Y'));
+      $start = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->start_time))->format('g:i A'));
+      $end = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->end_time))->format('g:i A'));
+
+                }
           ?>
-          <p class="text-success">{{mb_substr($ev->details,0,50,'UTF-8')}}</p>
+          <p class="text-success"><?php echo mb_substr($ev->{'details_'.$locale},0,50,'UTF-8');?></p>
           <div class="justify-content-center" style="text-align: center;">
           	<div><strong class="text-primary">@lang('home.date'):<span class="text-info">{{$formatted}}</span><small class="text-muted"> </small></strong></div>
-          	<div><strong class="text-primary">@lang('home.location'):<span class="text-info">{{$ev->location}}</span></strong></div>
+          	<div><strong class="text-primary">@lang('home.location'):<span class="text-info"><?php echo $ev->{'location_'.$locale};?></span></strong></div>
           	<div><strong class="text-primary">@lang('home.start_time'):<span class="text-info">{{$start}}</span></strong></div>
           	<div><strong class="text-primary">@lang('home.end_time'):<span class="text-info">{{$end}}</span></strong></div>
             <a href="{{url('leave-event',$ev->id)}}" class="btn btn-danger btn-sm"><i class="bi-x-circle"></i>@lang('home.leave_it')</a>

@@ -62,7 +62,8 @@ body, header, main, section {
      
 <?php $address = Request::url(); 
 $myEventsList = App\Http\Controllers\Site\Home::myEventLister();
-$myevents = App\Http\Controllers\Site\Home::myevents(); ?>
+$myevents = App\Http\Controllers\Site\Home::myevents(); 
+$locale = app()->getLocale();?>
       <nav id="navbar" class="navbar">
         <ul>
           <li >
@@ -85,13 +86,26 @@ $myevents = App\Http\Controllers\Site\Home::myevents(); ?>
               <?php $ev = App\Http\Controllers\Site\Home::fetchMyEvents($arr[$i]); ?>
               <li class="dropdown"><a href="#" style="pointer-events: none">
               <div>
+                <?php
+
+
+      $formatted = (new Carbon\Carbon( new DateTime($ev->due_date)))->toFormattedDateString();
+
+              if(app()->getLocale() == 'am'){
+      $formatted = (new Andegna\DateTime(new DateTime($ev->due_date)))->format('F j ፥ Y');
+                }
+                elseif(app()->getLocale() == 'or'){
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($ev->due_date)))->format('F j , Y'));
+    
+                }
+               
+                ?>
                 <span class="badge bg-primary">{{$i+1}}</span><strong>{{$ev->title}}</strong><br>
-                <small>Date:<span class="text-primary">{{' '.$ev->due_date}}</span>: @lang('home.gregorian')</small><br>
-                <small>Location:<span class="text-primary">{{' '.$ev->location}}</span></small>
+                <small>@lang('home.date'): <span class="text-primary">{{' '.$formatted}}</span></small><br>
+                <small>@lang('home.location'): <span class="text-primary"><?php echo ' '.$ev->{'location_'.$locale} ?></span></small>
                 
               </div>
-               
-                
+                          
                 <a id="leave-span" href="{{url('leave-event',$ev->id)}}"><span class="badge" style="background: rgb(255, 0, 0);">@lang('home.leave_it')<i class="bi-x-circle"></i></span></a>
 
               

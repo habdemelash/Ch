@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('search')
+@section('search') 
  
 
  							<li class="d-flex flex-column flex-md-row">
@@ -85,7 +85,15 @@
 	$start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A');
      $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A');
 
+
 								}
+
+                elseif(app()->getLocale() == 'or'){
+      $formatted_date = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($event->due_date)))->format('F j , Y'));
+      $start = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A'));
+      $end = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A'));
+
+                }
 								?>
 										<tr id="eid{{$event->id}}">
 											<?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>

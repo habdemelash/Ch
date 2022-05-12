@@ -14,6 +14,7 @@ return [
     */
     'email'=>"Email",
     'password'=>"Password",
+    'password_confirm'=>"Confirm password",
     'email_place'=>"Email...",
     'password_place'=>"Password...",
     'search_place'=>"Search...",
@@ -134,8 +135,14 @@ return [
     'to_the_list'=>'to the list or you can add more events here...',
     'details'=>'Details',
     'save'=>'Save',
+    'new_photo'=>'New photo',
     'heading'=>'Heading',
+    'old_password'=>'Old password',
     'body'=>'Body',
+    'photo'=>'Photo',
+    'save_change'=>'Save change',
+    'password_reqs'=>'Password requirements',
+    'min_six'=>'Minimum 6 characters long.',
     'yes_delete'=>'Yes, delete',
     'no'=>'No',
     'posted_by'=>'Posted by',
@@ -147,9 +154,16 @@ return [
     'no_pic'=>'No picture',
     'no_one_yet'=>'No one joined yet',
     'event_added'=>'Event added successfully!',
-    'a_good_pic'=>'Add a good picture to motivate volunteers...',
-    'do_u_delete_event'=>'Do you really want to delete this event?'
-
+    'a_good_event_pic'=>'Add a good picture to motivate volunteers...',
+    'a_good_news_pic'=>'Add a good picture to motivate readers...',
+    'do_u_delete_event'=>'Do you really want to delete this event?',
+    'no_file_choosen'=>'No file choosen',
+    'click_here'=>'Click here',
+    'profile_dashboard'=>'Profile Dashboard',
+    'you_joined'=>'You joined the event.',
+    'you_left'=>'You have left the event.',
+    'info_updated'=>'Your information has been updated successfully.',
+    
 
     
 

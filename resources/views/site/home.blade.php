@@ -65,35 +65,42 @@
   </div>
   <hr class="text-success">
   
-      
+     
     
        @foreach($news as $article)
       <div class="container">
-       
+    
         <div class="row my-2 d-flex justify-content-center">
           <?php $on = new Carbon\Carbon(new DateTime($article->created_at));
                       $formatted = $on->toDayDateTimeString(); 
-       $formatted_date = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i:A');
+                      if(app()->getLocale() == 'am'){
+                               $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i:A');
+
+
+                      }
+                       elseif(app()->getLocale() == 'or'){
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($article->created_at)))->format('F j , Y g:i a'));
+      ;
+
+                }
                       ?>
           <div class="col-lg-6 text-center">
             <a href="{{url('read-news',$article->id)}}"><img class="img-fluid" src="{{ asset('uploads/news-pictures') }}/{{ $article->picture}}" class="img-fluid" style="border-radius:30px;" width="500"></a>
             
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content">
-            <a  href="{{url('read-news',$article->id)}}"><h3 >{{$article->heading}}</h3></a>
+            <a  href="{{url('read-news',$article->id)}}"><h3 ><?php echo $article->{'heading_'.app()->getLocale()};?></h3></a>
             
             <p class="fst-italic">
               {{-- {{$article->body}} --}}
               <div id="author-date" class="row d-flex justify-content-md-between">
                 <p class="col-md-6 fw-bold text-primary"><span class="badge bg-danger">@lang('home.posted_by'):</span><a href="">{{$article->author->name}}</a></p>
-                <p class="col-md-6 text-info">{{$formatted_date}}</p>
+                <p class="col-md-6 text-info">{{$formatted}}</p>
             
-                @if(mb_detect_encoding($article->body) == 'UTF-8')
-                {{$st = mb_substr($article->body,0,100,'UTF-8')}}
-                <p>{{$st}} ...</p>
-                @else
-                <p>{{substr($article->body,0,100)}} ...</p>
-                @endif
+                
+               
+                <p><?php echo mb_substr($article->{'body_'.app()->getLocale()},0,100,'UTF-8'); ?> ...</p>
+              
 
               </div>
               <div class="text-center col"><a href="{{url('read-news',$article->id)}}" class="btn btn-primary col-sm-6 read-more d-inline"><i class="bx bxs-book-reader mx-1"></i>@lang('home.read_more')</a></div>

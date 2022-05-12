@@ -48,14 +48,15 @@
         <div class="row d-flex justify-content-center">
           
 
-
+      <?php $locale = app()->getLocale(); ?>
            @php foreach($events as $event): @endphp
+           
          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-2" style="margin-right: 10px; margin-left: 10px; border-width: 5px;">
             <div class="icon-box row d-flex justify-content-center">
             	
         
            
-              	<h4><?php echo($event->title); ?></h4>
+              	<h4><?php echo($event->{'title_'.$locale}); ?></h4>
 
               
               	<div class="icon" style="position: relative;">
@@ -69,8 +70,8 @@
                  
           </div>
              <div class="row d-flex justify-content-center">
-              <p class="text-primary"><?php echo($event->short_desc) ?></p>
-              <p class="text-dark">{{(mb_substr($event->details,0,50,'UTF-8'))}} ...</p>         
+              <p class="text-primary"><?php echo($event->{'short_desc_'.$locale}) ?></p>
+              <p class="text-dark">{{(mb_substr($event->{'details_'.$locale},0,50,'UTF-8'))}} ...</p>         
              </div>
               <?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>            
               <hr style="">
@@ -99,22 +100,20 @@
 
 
       $formatted = (new Carbon\Carbon( new DateTime($event->due_date)))->toFormattedDateString();
-
       $start = (new Carbon\Carbon(new DateTime($event->start_time)))->format('g:i A');
       $end = (new Carbon\Carbon(new DateTime($event->end_time)))->format('g:i A');
-      
-                 if(app()->getLocale() == 'am'){
-      $formatted = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->due_date))->format('F j ቀን Y');
+              if(app()->getLocale() == 'am'){
+      $formatted = (new Andegna\DateTime(new DateTime($event->due_date)))->format('F j ፥ Y');
       $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A');
       $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A');
                 }
                 elseif(app()->getLocale() == 'or'){
-      $formatted = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->due_date))->toGregorian()->format('F j ቀን Y');
-      $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->toGregorian()->format('g:i A');
-      $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->toGregorian()->format('g:i A');
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($event->due_date)))->format('F j , Y'));
+      $start = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A'));
+      $end = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A'));
 
                 }
-                echo($formatted);
+                echo ($formatted);
                 ?>
 
                  </strong><small class="text-danger fw-bold"></small></div>
@@ -152,6 +151,7 @@
         endforeach;
 
            @endphp
+           
 <div class="text-center col-md-4">
   {{$events->links('pagination::bootstrap-5')}}
 </div>

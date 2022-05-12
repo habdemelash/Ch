@@ -142,6 +142,7 @@ $messageCount= $all->count();
                             </div>
                         </li>
                        
+                       
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                                 <div class="position-relative">
@@ -182,23 +183,19 @@ $messageCount= $all->count();
                                 </div>
                             </div>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
-                <i class="align-middle" data-feather="settings"></i>
-              </a>
-
-            
-
-                            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                        {{-- User icon dropdown begins here --}}
+                <li class="nav-item dropdown">
+                
+                <a class="nav-icon dropdown-toggle text-decoration-none" href="#"  data-bs-toggle="dropdown">
                 @if(Auth::user()->profile_photo_path == null)
                 <img class="img-thumbnail rounded-circle" height="50" width="50" src="{{asset('site/assets/img/user.png')}}" >
                 @else
           <img class="img-thumbnail rounded-circle" height="50" width="50" src="{{asset('uploads/profile-photos')}}/{{Auth::user()->profile_photo_path}}" alt="">
-           @endif <span class="text-dark">
+           @endif <span class="text-dark ">
                     @auth
                     {{Auth::user()->name}}@endauth</span>
               </a>
-                            <div class="dropdown-menu dropdown-menu-">
+                            <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{route('profile')}}"><i class="align-middle me-1" data-feather="user"></i> {{__('home.profile')}}</a>
                                
                                 <a class="dropdown-item" href="{{route('site.home')}}"><i class="bx bxs-home-heart"></i> {{__('home.site')}}</a>
@@ -206,6 +203,38 @@ $messageCount= $all->count();
                                 
                             </div>
                         </li>
+                        {{-- User icon dropdown ends here --}}
+
+                        {{-- Language Toggler dropdown --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle" href="#" id="lang" data-bs-toggle="dropdown">
+                                
+                                    <span class="text-success fw-bold">{{ strtoupper(app()->getLocale()) }}</span>
+                                
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end py-0 " aria-labelledby="lang" style="width: 150px;">
+                                
+                                <div class="list-group">
+                                    @if(count(config('app.languages')) > 1)
+                                    @foreach(config('app.languages') as $langLocale => $langName)
+                                   
+                                        <div class="row g-0 align-items-center">
+                                           
+                                            <div class="col-10">
+                                                
+                                                <div class="text-dark"><a class="nav-link dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a></div>
+                                                
+                                            </div>
+                                        </div>
+                                 
+                                    @endforeach
+                                    @endif
+                                    
+                                </div>
+                               
+                            </div>
+                        </li>
+                        {{--  --}}
                     </ul>
                 </div>
             </nav>

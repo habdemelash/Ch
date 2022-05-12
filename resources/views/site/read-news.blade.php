@@ -24,7 +24,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{asset('site/read-news/style.css')}}">
 
-   
+   <?php $locale = app()->getLocale();?>
 
      <a href="{{url('read-news',$latest->id)}}">
     <div class="post-details-title-area bg-overlay clearfix img-fluid" style="background-image: url({{ asset('uploads/news-pictures') }}/{{ $latest->picture}});top: 100px;">
@@ -33,13 +33,19 @@
                 <div class="col-12 col-lg-8">
                 	<?php 
                 	$fmla = (new Carbon\Carbon(new DateTime($main->created_at)))->toDayDateTimeString();
-                    if(app()->getLocale() == 'am'){
-                    $fmla = Andegna\DateTimeFactory::fromDateTime($latest->created_at)->format('F j ቀን Y g:i:A');}
+                    if($locale == 'am'){
+                    $fmla = Andegna\DateTimeFactory::fromDateTime($latest->created_at)->format('F j ቀን Y g:i A');}
+
+                    elseif(app()->getLocale() == 'or'){
+      $fmla = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($latest->created_at)))->format('F j , Y g:i a'));
+      ;
+
+                }
                       ?>
                     <!-- Post Content -->
                     <div class="post-content">
                         <p class="tag"><span>@lang('home.our_latest_news')</span></p>
-                       <p class="fw-bold">{{$latest->heading}}</p>
+                       <p class="fw-bold"><?php echo $latest->{'heading_'.$locale};?></p>
                         <div class="row d-flex align-items-center">
                             <div class="col-md-6"><span class="badge bg-primary">@lang('home.posted_by'):</span><span class="text-white">{{$latest->author->name}}</span></div>
                             <div class="col-md-6 my-2"><span class="post-date col-md-6 fw-bold">{{$fmla}}</span></div>
@@ -55,18 +61,23 @@
     	<?php $author = App\Http\Controllers\Admin\Dashboard::findAuthor($main->author_id);
         $formatted = (new Carbon\Carbon(new DateTime($main->created_at)))->toDayDateTimeString();
                       if(app()->getLocale() == 'am'){
-                    $formatted = Andegna\DateTimeFactory::fromDateTime($main->created_at)->format('F j ቀን Y g:i:A');}?>
+                    $formatted = Andegna\DateTimeFactory::fromDateTime($main->created_at)->format('F j ቀን Y g:i A');}
+                elseif($locale == 'or'){
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($main->created_at)))->format('F j , Y g:i a'));
+      ;
+
+                }?>
         <div class="container">
             <div class="row justify-content-center">
               
                 <div class="col-12 col-lg-8">
                     <div class="post-details-content mb-100">
-                    	<div class="row d-flex justify-content-md-between"><div class="col-md-6 text-info"> <h5>{{$main->heading}}</h5></div>
+                    	<div class="row d-flex justify-content-md-between"><div class="col-md-6 text-info"> <h5><?php echo $main->{'heading_'.$locale};?></h5></div>
                     	<div class="col-md-4"><span class="badge bg-success">@lang('home.posted_by'):</span><strong>{{$author->name}}</strong></div></div>
                        
                         <p class="text-success fw-bold">{{$formatted}}</p>
                         <img class="mb-30" src="{{ asset('uploads/news-pictures') }}/{{ $main->picture}}" alt="">
-                        <p class="fw-bold">{{$main->body}}</p>
+                        <p class="fw-bold"><?php echo $main->{'body_'.$locale};?></p>
                         <p></p>
                         <h5 class="mb-30"></h5>
                         <p></p>
@@ -107,13 +118,18 @@
 
                     $formatted = (new Carbon\Carbon(new DateTime($article->created_at)))->toDayDateTimeString();
                       if(app()->getLocale() == 'am'){
-                    $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i:A');}
+                    $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i A');}
+                    elseif($locale == 'or'){
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($article->created_at)))->format('F j , Y g:i a'));
+      ;
+
+                }
                                              ?>
 
                                 <!-- Blog Content -->
                                 <div class="blog-content">
                                     <span class="post-date text-primary">{{$formatted}}</span>
-                                    <a href="{{url('read-news',$article->id)}}" class="post-title">{{$article->heading}}</a>
+                                    <a href="{{url('read-news',$article->id)}}" class="post-title"><?php echo $article->{'heading_'.$locale};?></a>
                                 </div>
                             </div>
                             @endforeach

@@ -32,8 +32,8 @@
               </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{route('site.home')}}">Site</a>
-              <a class="dropdown-item" href="{{route('logout')}}">Logout</a>
+                <a class="dropdown-item" href="{{route('site.home')}}">@lang('home.site')</a>
+              <a class="dropdown-item" href="{{route('logout')}}">@lang('home.logout')</a>
             
               
             </div>
@@ -47,7 +47,7 @@
         <div class="container-fluid">
           <div class="row justify-content-center">
             <div class="col">
-              <h2 class="h3 mb-4 page-title">Profile Dashboard</h2>
+              <h2 class="h3 mb-4 page-title">@lang('home.profile_dashboard')</h2>
               <div class="my-4">
               
                 <form action="{{route('update.profile')}}" method="POST" enctype="multipart/form-data">
@@ -98,21 +98,21 @@
                     <div class="form-group col-md-6">
 
 
-                      <label for="name">Full name</label>
+                      <label for="name">@lang('home.full_name')</label>
                       <input type="text" id="name" class="form-control" placeholder="Habte" name="name" value="{{$my->name}}">
                     </div>
                     <div class="form-group col-md-6">
-                      <label for="phone">Phone</label>
+                      <label for="phone">@lang('home.phone')</label>
                       <input type="tel" id="lastname" class="form-control" placeholder="" name="phone"  value="{{$my->phone}}">
                     </div>
                   </div>
                   <div class="form-row">
                   	<div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
+                    <label for="inputEmail4">@lang('home.email')</label>
                     <input type="email" name="email" class="form-control" id="inputEmail4"  value="{{$my->email}}">
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="inputAddress5">Address</label>
+                    <label for="inputAddress5">@lang('home.location')</label>
                     <input type="text" name="address" class="form-control" id="inputAddress5"   value="{{$my->address}}">
                   </div>
                   	
@@ -120,11 +120,14 @@
                   
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputCompany5">Photo</label>
-                      <input type="file" name="profile_photo_path" class="form-control-lg" id="inputCompany5" accept="image/*" onchange="preview_image(event)"> 
+                       <label for="inputCompany5">@lang('home.photo')</label>
+                      <label class="col-md-2 btn" for="pic" style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">{{__('home.click_here')}}</label>
+                      <label for="pic" id="file-name" onchange="preview_image(event)">{{__('home.no_file_choosen')}}</label>
+                       <input type="file" id="pic" name="profile_photo_path" class="form-control-lg col-md-10" accept="image/*" onchange="preview_image(event)" style="display: none;">
+
                     </div>
                     <div class="form-group col-md-4">
-                      <label for="inputState5">New photo</label>
+                      <label for="inputState5">@lang('home.new_photo')</label>
                        <img src="{{asset('uploads/profile-photos')}}/{{$my->profile_photo_path}}" alt="{{$my->name}}" class="img-thumbnail rounded-circle" width="150" height="150" id="output_image">
                       
                     </div>
@@ -134,32 +137,32 @@
                   <div class="row mb-4">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <span class="text-info">Credential Information</span><br>
-                        <label for="inputPassword4">Old Password</label>
+                        <span class="text-info">@lang('home.credential_info')</span><br>
+                        <label for="inputPassword4">@lang('home.old_password')</label>
                         <input type="password" class="form-control" id="inputPassword5" name="old_password" readonly
      onfocus="this.removeAttribute('readonly');" value="">
                       </div>
                       <div class="form-group">
-                        <label for="inputPassword5">New Password</label>
+                        <label for="inputPassword5">@lang('home.new_password')</label>
                         <input type="password" class="form-control" id="inputPassword5" name="password" readonly
      onfocus="this.removeAttribute('readonly');">
                       </div>
                       <div class="form-group">
-                        <label for="inputPassword6">Confirm Password</label>
+                        <label for="inputPassword6">@lang('home.password_confirm')</label>
                         <input type="password" class="form-control" id="inputPassword6" name="password_confirmation" readonly
      onfocus="this.removeAttribute('readonly');">
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <p class="mb-2">Password requirements</p>
-                      <p class="small text-muted mb-2"> To create a new password, you have to meet all of the following requirements: </p>
+                      <p class="mb-2">@lang('home.password_reqs')</p>
+                      
                       <ul class="small text-info pl-4 mb-0">
-                        <li> Minimum 6 character </li>
+                        <li> @lang('home.min_six') </li>
                         
                       </ul>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary">Save Change</button>
+                  <button type="submit" class="btn btn-primary">@lang('home.save_change')</button>
                 </form>
               </div> <!-- /.card-body -->
             </div> <!-- /.col-12 -->
@@ -205,5 +208,18 @@ function preview_image(event)
       gtag('js', new Date());
       gtag('config', 'UA-56159088-1');
     </script>
+    <script>
+    inputElement = document.getElementById('pic')
+    labelElement = document.getElementById('file-name')
+    inputElement.onchange = function(event) {
+      preview_image(event);
+        var path = inputElement.value;
+        if (path) {
+            labelElement.innerHTML = path.split(/(\\|\/)/g).pop()
+        } else {
+            labelElement.innerHTML = 'Bla bla'
+        } 
+    }
+</script>
   </body>
 </html>

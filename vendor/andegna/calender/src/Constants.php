@@ -21,7 +21,7 @@ class Constants
 
     const ORTHODOX_YEAR_NAME = ['ዮሐንስ', 'ማቴዎስ', 'ማርቆስ', 'ሉቃስ'];
 
-    const ORTHODOX_DAY_NAME = [
+    const ORTHODOX_DAY_NAME = [ 
         1 => 'ልደታ', 'አባ፡ጉባ', 'በእታ', 'ዮሐንስ', 'አቦ',
         'ኢያሱስ', 'ሥላሴ', 'አባ፡ኪሮስ', 'ቶማስ', 'መስቀል',
         'ሐና፡ማርያም', 'ሚካኤል', 'እግዚሐር፡አብ', 'አቡነ፡አረጋዊ',

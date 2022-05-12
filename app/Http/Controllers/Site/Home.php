@@ -67,7 +67,7 @@ class Home extends Controller
         $me->email = $request->email;
         $me->address = $request->address;
        $me->update();
-       return redirect()->back()->with('message','Information updated successfully!');
+       return redirect()->back()->with('message',__('home.info_updated'));
         
     }
     // Event counter method
@@ -102,6 +102,14 @@ class Home extends Controller
 
 // Fetch my events with their data
 
+        // $locale = app()->getLocale();
+        // $posts = Post::select(['id', 'title_' . $locale, 'full_text_' . $locale])
+        //     ->latest()
+        //     ->whereNotNull('title_' . $locale)
+        //     ->where('title_' . $locale, '!=', '')
+        //     ->take(10)
+        //     ->get();
+
     public static function fetchMyEvents($id)
     {
         return Event::find($id);  
@@ -109,12 +117,14 @@ class Home extends Controller
 // home renderer method
      public function home()
     {
+        $locale = app()->getLocale();
         if(Auth::check()){
             
           $myevents =  $this->myevents();
           
         }
-        $news = News::orderBy('created_at','DESC')->paginate(5);
+        $news = News::select(['id','heading_'.$locale,'body_'.$locale,'created_at','author_id','picture'])->latest()->whereNotNull('heading_'.$locale)->where('heading_'.$locale,'!=','')->paginate(5);
+       
 
     	return view('site.home',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister(),'news'=>$news]);
     }
@@ -206,7 +216,7 @@ public function viewLetsHelp($id)
             'event_id' => $id,
             'user_id' => $user_id
         ]);
-        return redirect()->back()->with('message','You joined the event!');
+        return redirect()->back()->with('message',__('home.you_joined'));
        
 
         }
@@ -226,7 +236,7 @@ public function viewLetsHelp($id)
             DB::table('event_user')->where('event_id', '=', $id,)->where('user_id','=',$user_id)->delete();
     
         }
-        return redirect()->back()->with('message','You have left the event.');
+        return redirect()->back()->with('message',__('home.you_left'));
         
     }
 

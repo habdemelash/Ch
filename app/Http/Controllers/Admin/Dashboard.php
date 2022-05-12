@@ -14,11 +14,49 @@ use App\Models\User;
 use App\Models\Helpme;
 use App\Models\Docs;
 
+
+
 //and even more
 
 
 class Dashboard extends Controller
 {
+    public static function oromicDate($month)
+    {
+
+    $amh = ["ጠዋት","ቀን","ሌሊት","መስከረም", "ጥቅምት", "ኅዳር","ታኅሣሥ","ጥር","የካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰኔ","ሐምሌ","ነሐሴ","ጳጉሜን"];
+    $or   = ["Ganama","Guyyaa", "Galgala","Fuulbana", "Onkololeessa", "Sadaasa","Muddee","Amajjii","Guraandhala","Bitooteessa","Elba","Caamsa","Waxabajji","Adooleessa","Hagayya","Qaammee"];
+
+    return str_replace($amh, $or, $month);
+    }
+    public static function oromicTime($month)
+    {
+
+    $amh = ["ጠዋት","ቀን","ሌሊት"];
+    $or   = ["Ganama","Guyyaa", "Galgala"];
+
+    return str_replace($amh, $or, $month);
+    }
+    public static  function backToLocalTime($time)
+    {  
+        $am = ["ቀን","ማታ"];
+        $or   = ["Guyyaa", "Galgala"];
+        $en  = ["AM", "PM"];
+
+         if(app()->getLocale() == 'am')
+         {
+            return str_replace($en, $am, $time);
+         }
+         elseif(app()->getLocale() == 'or')
+         {
+            return str_replace($en, $or, $time);
+         }
+         else
+         {
+            return $time;
+         }   
+    }
+   
 
     public function index()
     {
@@ -33,7 +71,7 @@ class Dashboard extends Controller
 
     public function events()
     {
-         // $this->dateUpdater();
+         
     	$events = Event::orderBy('created_at','DESC')->paginate(8);
 
     	return view('admin.events',['events'=>$events]);
@@ -46,14 +84,26 @@ class Dashboard extends Controller
     }
     public function addEvent(Request $request)
     {
+        $locale = app()->getLocale();
         $validated = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'short_desc' => ['required', 'string', 'max:500','min:1'],
-            'details' => ['required', 'string', 'max:1024','min:3'],
+            'title_am' => ['required', 'string', 'max:255'],
+            'title_or' => ['required', 'string', 'max:255'],
+            'title_en' => ['required', 'string', 'max:255'],
+            'location_am' => ['required', 'string', 'max:255'],
+            'location_or' => ['required', 'string', 'max:255'],
+            'location_en' => ['required', 'string', 'max:255'],
+            'short_desc_am' => ['required', 'string', 'max:500','min:1'],
+            'short_desc_or' => ['required', 'string', 'max:500','min:1'],
+            'short_desc_en' => ['required', 'string', 'max:500','min:1'],
+            'details_am' => ['required', 'string', 'max:1024','min:3'],
+            'details_or' => ['required', 'string', 'max:1024','min:3'],
+            'details_en' => ['required', 'string', 'max:1024','min:3'],
             'due_date' => ['required', 'date', 'max:20'],
             'needed_vols' => ['required', 'integer', 'min:1'],
+            'picture' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
             
         ]);
+        
         $event = new Event();
         if($request->hasFile('picture'))
         {
@@ -63,20 +113,36 @@ class Dashboard extends Controller
             $file->move('uploads/event-pictures',$filename);
             $event->picture = $filename;
         }
-    $eventDate = new Carbon( new DateTime($request->due_date));
-    $today = Carbon::now();
-    if($today->greaterThan($eventDate)){
-       $difference = $eventDate->diff($today)->format('%a');
-       $event->status = 'Past';
-    }
-        $event->title = $request->title;
-        $event->short_desc = $request->short_desc;
-        $event->details = $request->details;
-        $event->due_date = $request->due_date;
+    // $eventDate = new Carbon( new DateTime($request->due_date));
+    // $today = Carbon::now();
+    // if($today->greaterThan($eventDate)){
+    //    $difference = $eventDate->diff($today)->format('%a');
+      
+    // }
         $event->needed_vols = $request->needed_vols;
-        $event->start_time = $request->start_time;
-        $event->end_time = $request->end_time;
-        $event->location = $request->location;
+        $event->due_date = $request->due_date;
+         if ($locale == 'am' || $locale == 'or') 
+        {
+        $arr = explode('-',$request->due_date);
+        $event->due_date = (\Andegna\DateTimeFactory::of($arr[0],$arr[1],$arr[2]))->toGregorian()->format('Y-m-d');              
+        }
+         
+
+
+        $amor   = ["ቀን","ማታ","Guyyaa","Galgala"];
+        $en   = ["AM","PM","AM","PM"];
+        $event->start_time = str_replace($amor,$en,$request->start_time);
+        $event->end_time = str_replace($amor,$en,$request->end_time);
+        foreach (config('app.available_locales') as $locale) 
+        {
+        
+        $event->{'title_'.$locale} = $request->{'title_'.$locale};
+        $event->{'short_desc_'.$locale} = $request->{'short_desc_'.$locale};
+        $event->{'details_'.$locale} = $request->{'details_'.$locale};
+            
+        $event->{'location_'.$locale} = $request->{'location_'.$locale};
+        }
+   
         $event->save();
          
          return redirect()->back()->with('message',__('home.event_added'));
@@ -160,12 +226,22 @@ public function addNewsForm()
 }
 public function addNews(Request $request)
     {
-        $locale = app()->getLocale();
+       
         $validated = $request->validate([
-            'heading_'.$locale => ['required', 'string', 'min:3','max:400'],
-            'body_'.$locale => ['required', 'string', 'max:10000','min:10'],
-            // 'picture' => ['required','image'],
+           
+            'heading_am' => ['required_without:heading_or,heading_en', 'string', 'min:3','max:400'],
+            'body_am'=> ['required_without:body_or,body_en', 'string', 'max:10000','min:10'],
+            'heading_or' => ['required_without:heading_am,heading_en', 'string', 'min:3','max:400'],
+            'body_or'=> ['required_without:body_am,body_en', 'string', 'max:10000','min:10'],
+            'heading_en' => ['required_without:heading_am,heading_or', 'string', 'min:3','max:400'],
+            'body_en'=> ['required_without:body_am,body_or', 'string', 'max:10000','min:10'],
             
+
+            
+    
+
+        
+            'picture' => ['required','image'],    
             
         ]);
         $news = new News();
@@ -178,15 +254,15 @@ public function addNews(Request $request)
             $news->picture = $filename;
 
         }
-        if ($locale == 'am') {
-        $news->heading_am = $request->heading_am;
-        $news->body_am = $request->body_am;
-        }
-
-        
+        foreach (config('app.available_locales') as $locale) {
+        $news->{'heading_'.$locale} = $request->{'heading_'.$locale};
+        $news->{'body_'.$locale }= $request->{'body_'.$locale};
         $news->author_id = Auth::user()->id;
-        $news->save();
-        // dd($locale);
+       
+        }
+         $news->save();
+        
+        
         return redirect()->back()->with('message','News added successfully!');
 
     }

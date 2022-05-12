@@ -66,10 +66,11 @@
 
 
 <div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">
-	<label class="col-md-2" for="pic" style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">Click Here</label>
+	<label class="col-md-2 btn" for="pic" style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">{{__('home.click_here')}}</label>
+  <label for="pic" id="file-name" onchange="preview(event)">{{__('home.no_file_choosen')}}</label>
   <input type="file" id="pic" name="picture" class="form-control-lg col-md-10" accept="image/*" onchange="preview(event)" style="display: none;">
 
-  <span class="text-primary">Add a good picture of your article to grab readers' attention...</span>
+  <span class="text-primary mx-1">{{__('home.a_good_news_pic')}}</span>
   
   
 </div>
@@ -77,11 +78,8 @@
 <div style="text-align: center;">
   <img src="{{asset('site/assets/img/digital_22.jpg')}}" alt="" class="img-fluid" style="max-height: 150px" id="output">
 </div>
-<input type="button" class="btn btn-primary" id="click-input" value="Click here" onclick="document.getElementById('file').click();" />
-<label for="click-input" id="file-name">Bla bla</label>
-<input type="file" style="display:none;" id="file">
 <script>
-    inputElement = document.getElementById('file')
+    inputElement = document.getElementById('pic')
     labelElement = document.getElementById('file-name')
     inputElement.onchange = function(event) {
         var path = inputElement.value;

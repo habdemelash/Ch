@@ -50,7 +50,7 @@
 
 
                     <div class="" style="overflow-x: auto;">
-                    	{{$locale = app()->getLocale()}}
+                    	<?php $locale = app()->getLocale();?>
 
                     	<table class="table table-hover my-0 table-responsive" id="eventsTable">
 									<thead>
@@ -69,15 +69,22 @@
 										@foreach($news as $article)
 										<tr>
 											
-											<td class="text-info fw-bold" style="font-family: Times New Roman;">{{substr($article->heading_.$locale,0,60)}} ...</td>
+											<td class="text-info fw-bold" style="font-family: Times New Roman;">{{substr($article->{'heading_'.$locale},0,60)}} ...</td>
 											<td class="text-gray-dark">
-								                {{mb_substr($article->body_.$locale,0,100,'UTF-8')}} ...
+								                {{mb_substr($article->{'body_'.$locale},0,100,'UTF-8')}} ...
 								                
 								                </td style="font-family: Times New Roman;">
 											<?php ?>
 											<td class="text-danger fw-bold" style="font-family: Times New Roman;">{{$article->author->name}}</td>
 											<?php $on = new Carbon\Carbon(new DateTime($article->created_at));
-											$formatted = $on->toDayDateTimeString(); ?>
+											$formatted = $on->toDayDateTimeString(); 
+											if(app()->getLocale() == 'am'){
+                    $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i A');}
+                    elseif($locale == 'or'){
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($article->created_at)))->format('F j , Y g:i a'));
+      ;
+
+                }?>
 											<td class="text-dark" style="font-family: Times New Roman;" >{{$formatted}}</td>
 											<td><img src="{{ asset('uploads/news-pictures') }}/{{ $article->picture}}" class="rounded-circle rounded me-1" alt="No picture" style="height: 60px;width: 60px;" /></td>
 												<td class="d-flex flex-row">

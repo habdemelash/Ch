@@ -1,6 +1,7 @@
  @extends('layouts.admin')
 
  @section('content')
+ @include('admin.styles')
  <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
 
      <div class="row d-flex justify-content-center">
@@ -25,53 +26,76 @@
 					</div>
 
 					@endif
-
-   <div class="form-floating mb-3 col-md-4 my-1">
-  <input type="text" class="form-control" name="title" value="{{old('title')}}">
-  <label for="title">{{__('home.title')}}</label>
+@foreach(config('app.languages') as $locale=>$value)  
+<div class=" mb-3 col-md-4 my-1">
+   <label for="title">{{__('home.title').'-'.$value}}</label>
+  <input type="text" class="form-control" name="{{'title_'.$locale}}" value="{{old('title')}}">
+ 
 </div>
-
-<div class="form-floating mb-3 col-md-4 my-1">
-  <input type="number" class="form-control" name="needed_vols"  value="{{old('needed_vols')}}">
+<div class=" col-md-8 my-1">
+  <label for="short_desc">{{__('home.short_desc').'-'.$value}}</label>
+  <input type="text" class="form-control" name="{{'short_desc_'.$locale}}" >
+  
+</div>
+<div class=" col-md-4 my-1">
+  <label for="location">{{__('home.location').'-'.$value}}</label>
+  <input type="text" class="form-control" name="{{'location_'.$locale}}" placeholder="">
+  
+</div>
+<div class=" my-1 col-md-8">
+  <label for="details">{{__('home.details').'-'.$value}}</label>
+  <textarea class="form-control"  name="{{'details_'.$locale}}" style="height: 100px;"></textarea>
+  
+</div>
+<hr>
+@endforeach
+<div class=" mb-3 col-md-4 my-1">
   <label for="needed_vols">{{__('home.needed_vols')}}</label>
+  <input type="number" class="form-control" name="needed_vols"  value="{{old('needed_vols')}}" min="1">
+  
 </div>
-<div class="form-floating col-md-2 my-1">
-  <input type="time" class="form-control" name="start_time" placeholder="">
+<div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
+  <input type="text" class="form-control" name="start_time" id="start-time" autocomplete="off">
+  
 </div>
-<div class="form-floating col-md-2 my-1">
-
-  <input type="time" class="form-control" name="end_time" placeholder="">
+<div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-</div>
-<div class="form-floating col-md-8 my-1">
-  <input type="text" class="form-control" name="short_desc" >
-  <label for="short_desc">{{__('home.short_desc')}}</label>
+  <input type="tex"t class="form-control" name="end_time" id="end-time"  autocomplete="off">
+  
 </div>
 
-<div class="form-floating col-md-4 my-1">
-  <input class="form-control" type="text" name="due_date" id="defaultPopup" autocomplete="off">
+@if(app()->getLocale() == 'am')
+<div class=" col-md-4 my-1">
   <label for="due_date">{{__('home.date')}}</label>
+  <input class="form-control" type="text" name="due_date" id="amharic" autocomplete="off">
+  
 </div>
-<h1> Amharic jQuery Calendars Datepicker</h1>
-
-<p>A popup datepicker <input class="form-control" type="text" name="due_date" id="popupDatepicker" autocomplete="off"></p>
-
-<div class="form-floating col-md-4 my-1">
-  <input type="text" class="form-control" name="location" placeholder="">
-  <label for="location">{{__('home.location')}}</label>
+@elseif(app()->getLocale() == 'or')
+<div class=" col-md-4 my-1">
+    <label for="due_date">{{__('home.date')}}</label>
+  <input class="form-control" type="text" name="due_date" id="oromic" autocomplete="off">
 </div>
-<div class="form-floating my-1 col-md-8">
-  <textarea class="form-control"  name="details" style="height: 100px;"></textarea>
-  <label for="details">{{__('home.details')}}</label>
+@else
+<div class=" col-md-4 my-1">
+  <label for="due_date">{{__('home.date')}}</label>
+  <input class="form-control" type="text" name="due_date" id="gregorian" autocomplete="off">
 </div>
+@endif
+  
 
 
 <div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">
-	<label class="col-md-2" for="">{{__('home.picture')}}</label>
-  <input class="col-md-10" type="file" class="form-control-lg"  name="picture"><span class="text-primary">{{__('home.a_good_pic')}}</span>
+	<label for="inputCompany5">@lang('home.photo')</label>
+                      <label class="col-md-2 btn" for="pic" style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">{{__('home.click_here')}}</label>
+                      <label for="pic" id="file-name" onchange="preview_image(event)">{{__('home.no_file_choosen')}}</label>
+                       <input type="file" id="pic" name="picture" class="form-control-lg col-md-10" accept="image/*" onchange="preview_image(event)" style="display: none;">
+  <span class="text-primary">{{__('home.a_good_news_pic')}}</span>
+  <img src="{{asset('site/assets/img/digital_22.jpg')}}" alt="" class="img-thumbnail rounded-circle" width="200" height="200" id="output_image">
   
 </div>
+
+
 
 
       			
@@ -92,4 +116,43 @@
 
     @endif
   </script>
+  {{--  --}}
+  <script type='text/javascript'>
+function preview_image(event) 
+{
+ var reader = new FileReader();
+ reader.onload = function()
+ {
+  var output = document.getElementById('output_image');
+  output.src = reader.result;
+ }
+ reader.readAsDataURL(event.target.files[0]);
+}
+</script>
+
+
+   
+    <script>
+      window.dataLayer = window.dataLayer || [];
+
+      function gtag()
+      {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-56159088-1');
+    </script>
+    <script>
+    inputElement = document.getElementById('pic')
+    labelElement = document.getElementById('file-name')
+    inputElement.onchange = function(event) {
+      preview_image(event);
+        var path = inputElement.value;
+        if (path) {
+            labelElement.innerHTML = path.split(/(\\|\/)/g).pop()
+        } else {
+            labelElement.innerHTML = 'Bla bla'
+        } 
+    }
+</script>
  @endsection
