@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-
+use Illuminate\Support\Facades\Auth;
 
 return [
 
@@ -82,8 +82,9 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
-
-    'locale' => 'am',
+     'locale'=>'am',
+    
+   
     'available_locales' => ['am', 'or', 'en'],
 
     /*

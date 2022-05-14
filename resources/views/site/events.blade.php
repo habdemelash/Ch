@@ -119,7 +119,7 @@
                  </strong><small class="text-danger fw-bold"></small></div>
                  <?php ?>
                 <div class="col"><strong><i class="bx bx-time text-danger" style="font-family: sans-serif;">@lang('home.time'):</i> <?php echo($start);?> - <?php echo($end);?></strong><br></div>
-                <div class="col"><strong><i class="bx bx-current-location text-danger">@lang('home.location')</i><?php echo(' '.$event->location);?></strong> </div>
+                <div class="col"><strong><i class="bx bx-current-location text-danger">@lang('home.location')</i><?php echo(' '.$event->{'location_'.$locale});?></strong> </div>
                 </div>
               </div>
           

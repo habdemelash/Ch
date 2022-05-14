@@ -14,17 +14,25 @@ use App\Http\Controllers\Signout;
 use App\Http\Controllers\Admin\Dashboard;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Site\HelpmeController;
+use Twilio\Rest\Client;
 
 Route::get('try', function ()
 {
 
-$phrase  = "Qaammee dhgd";
-$healthy = ["fruits", "vegetables", "fiber"];
-$yummy   = ["Qaammee", "beer", "ice cream"];
+$receiver = '+251920763031';
+$message = 'Hi Habte';
+try{
+    $account_sid = getenv('TWILIO_SID');
+    $auth_token = getenv('TWILIO_TOKEN');
+    $tw_no = getenv('TWILIO_FROM');
+    $client = new Client($account_sid, $auth_token);
+    $client->messages->create($receiver,['from'=>$tw_no,
+'body'=>$message]);
+    dd('Sent!');
 
-$newPhrase = str_replace($healthy, $yummy, $phrase);
-	dd(app()->getLocale());
-	
+} catch (Exception $e){
+    dd('Error: ', $e->getMessage());
+}	
 });
 
 

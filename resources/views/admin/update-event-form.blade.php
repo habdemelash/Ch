@@ -4,8 +4,9 @@
  @include('admin.styles')
  <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
 
+
      <div class="row d-flex justify-content-center">
-      <form action="{{ route('admin.event.add') }}" method="POST" enctype="multipart/form-data">
+      <form action="{{ url('dash/event/update',$event->id) }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="row d-flex justify-content-start">
             @if($errors->any())
@@ -22,7 +23,7 @@
             @endif
             @if(session()->has('message'))
           <div class="alert alert-success">
-            <i class="bx bx-check bx-md mt-1">{{session()->get('message')}} </i><br><strong><a href="{{route('admin.events')}}" style="text-decoration: none;">{{__('home.go_back')}}</a> </strong> {{__('home.to_the_list')}}
+            <i class="bx bx-check bx-md mt-1">{{session()->get('message')}} </i><br> 
           </div>
 
           @endif
@@ -52,73 +53,83 @@
 <div class=" mb-3 col-md-4 my-1">
   <label for="needed_vols">{{__('home.needed_vols')}}</label>
   <input type="number" class="form-control" name="needed_vols"  value="{{$event->needed_vols}}" min="1">
-  
+ 
 </div>
-@if(app()->getLocale() == 'am' || app()->getLocale() == 'or')
+ {{-- Amharic datetime begins --}}
+@if(app()->getLocale() == 'am')
 <div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
-  <input type="text" class="form-control" name="start_time" id="start-time" autocomplete="off" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->start_time)}}">
+  <input id="" class="form-control amharic-start-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->start_time)}}"/>
   
 </div>
 <div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-  <input type="text"t class="form-control" name="end_time" id="end-time"  autocomplete="off" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->end_time)}}">
+  <input id="" class="form-control amharic-end-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->end_time)}}" />
   
 </div>
-@else
-<div class=" col-md-2 my-1">
-  <label for="start_time">{{__('home.start_time')}}</label>
-  <input type="time" class="form-control" name="start_time"  autocomplete="off" value="{{$event->start_time}}">
-</div>
-<div class=" col-md-2 my-1">
-  <label for="end_time">{{__('home.end_time')}}</label>
-  <input type="time" class="form-control" name="end_time"  autocomplete="off" value="{{$event->end_time}}">
-</div>
-
-@endif
-
-
-@if(app()->getLocale() == 'am' || app()->getLocale() == 'or')
 <?php  $formatted = (new Andegna\DateTime(new DateTime($event->due_date)))->format('Y-m-d'); ?>
 <div class=" col-md-4 my-1">
   <label for="due_date">{{__('home.date')}}</label>
   <input class="form-control" type="text" name="due_date" id="amharic" autocomplete="off" value="{{$formatted}}">
   
 </div>
+ {{-- Amharic datetime ends --}}
+
+ {{-- Oromic date time input begins here --}}
 @elseif(app()->getLocale() == 'or')
-<div class=" col-md-4 my-1">
-    <label for="due_date">{{__('home.date')}}</label>
-  <input class="form-control" type="text" name="due_date" id="oromic" autocomplete="off">
+<div class=" col-md-2 my-1">
+  <label for="start_time">{{__('home.start_time')}}</label>
+  <input id="" class="form-control oromic-start-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->start_time)}}"/>
+  
 </div>
-@else
+<div class=" col-md-2 my-1">
+  <label for="end_time">{{__('home.end_time')}}</label>
+  <input id="" class="form-control oromic-end-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->end_time)}}" />
+  
+</div>
+<?php  $formatted = (new Andegna\DateTime(new DateTime($event->due_date)))->format('Y-m-d'); ?>
 <div class=" col-md-4 my-1">
   <label for="due_date">{{__('home.date')}}</label>
-  <input class="form-control" type="text" name="due_date" id="gregorian" autocomplete="off">
+  <input class="form-control" type="text" name="due_date" id="oromic" autocomplete="off" value="{{$formatted}}">
+  
+</div>
+ {{-- Oromic date time input ends here --}}
+
+@elseif(app()->getLocale() == 'en')
+<div class=" col-md-2 my-1">
+  <label for="start_time">{{__('home.start_time')}}</label>
+  <input id="" class="form-control english-start-time" value="{{$event->start_time}}"/>
+  
+</div>
+<div class=" col-md-2 my-1">
+  <label for="end_time">{{__('home.end_time')}}</label>
+  <input id="" class="form-control english-end-time" value="{{$event->end_time}}" />
+  
+</div>
+
+<div class=" col-md-4 my-1">
+
+  <label for="due_date">{{__('home.date')}}</label>
+  <input class="form-control" type="text" name="due_date" id="gregorian" autocomplete="off" value="{{$event->due_date}}">
 </div>
 @endif
   
-
-
 <div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">
   <label for="inputCompany5">@lang('home.photo')</label>
-                      <label class="col-md-2 btn" for="pic" style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">{{__('home.click_here')}}</label>
+                      <label class="col-md-2 btn click-me-label" for="pic">{{__('home.click_here')}}</label>
                       <label for="pic" id="file-name" onchange="preview_image(event)">{{__('home.no_file_choosen')}}</label>
                        <input type="file" id="pic" name="picture" class="form-control-lg col-md-10" accept="image/*" onchange="preview_image(event)" style="display: none;">
-  <span class="text-primary">{{__('home.a_good_news_pic')}}</span>
-  <img src="{{asset('site/assets/img/digital_22.jpg')}}" alt="" class="img-thumbnail rounded-circle" width="200" height="200" id="output_image">
+  <span class="text-primary mx-2">{{__('home.a_good_event_pic')}}</span>
+  <img src="{{asset('uploads/event-pictures')}}/{{$event->picture}}" alt="" class="img-thumbnail" width="200" height="200" id="output_image">
   
 </div>
-
-
-
-
             
           </div>  
    
       </div>
       <div class="text-center mt-2 mb-5">
       
-        <button type="submit" class="btn btn-success"><i class="bx bxs-plus-circle bx-md">{{__('home.save')}}</i></button>
+        <button type="submit" class="btn btn-success"><i class="bx bxs-edit bx-md">{{__('home.update')}}</i></button>
         </form>
      </div>
      <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
@@ -169,4 +180,5 @@ function preview_image(event)
         } 
     }
 </script>
+
  @endsection

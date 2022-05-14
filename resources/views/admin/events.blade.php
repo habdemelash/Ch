@@ -35,7 +35,7 @@
 
 @section('content')
 
-
+@include('admin.styles')
 <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
 
 <h1 class="h3 mb-3"><strong>{{__('home.events_nav')}}</strong> {{__('home.administration')}}</h1>
@@ -98,7 +98,7 @@
 										<tr id="eid{{$event->id}}">
 											<?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>
 											
-											<td class="text-dark" style="font-style: initial;">{{ $event->title }}</td>
+											<td class="text-dark" style="font-style: initial;"><?php echo $event->{'title_'.app()->getLocale()}; ?></td>
 											<td class=" d-xl-table-cell text-info">{{ $formatted_date }}</td>
 											<td class=" d-xl-table-cell text-primary">{{ $start }}</td>
 											<td>{{ $end}}</td>
@@ -189,9 +189,12 @@
 
 
 
-<script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
-<script src="{{ asset('admin/other/toastr.min.js') }}"></script>
+
+@include('admin.scripts')
 <script src="{{ asset('site/assets/js/ec.js') }}"></script>
+
+    <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
 <script type="text/javascript" src="https://unpkg.com/ethiopian-calendar-date-converter@%5E1" ></script>
 
 <script >

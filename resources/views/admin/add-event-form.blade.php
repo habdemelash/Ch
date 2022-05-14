@@ -90,7 +90,7 @@
                       <label class="col-md-2 btn" for="pic" style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">{{__('home.click_here')}}</label>
                       <label for="pic" id="file-name" onchange="preview_image(event)">{{__('home.no_file_choosen')}}</label>
                        <input type="file" id="pic" name="picture" class="form-control-lg col-md-10" accept="image/*" onchange="preview_image(event)" style="display: none;">
-  <span class="text-primary">{{__('home.a_good_news_pic')}}</span>
+  <span class="text-primary">{{__('home.a_good_event_pic')}}</span>
   <img src="{{asset('site/assets/img/digital_22.jpg')}}" alt="" class="img-thumbnail rounded-circle" width="200" height="200" id="output_image">
   
 </div>

@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
         "sentry/sentry-laravel": "^2.12",
+        "twilio/sdk": "^6.37",
         "yoeunes/toastr": "^1.2"
     },
     "require-dev": {

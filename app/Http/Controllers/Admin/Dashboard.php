@@ -30,7 +30,7 @@ class Dashboard extends Controller
     return str_replace($amh, $or, $month);
     }
     public static function oromicTime($month)
-    {
+    { 
 
     $amh = ["ጠዋት","ቀን","ሌሊት"];
     $or   = ["Ganama","Guyyaa", "Galgala"];
@@ -40,7 +40,7 @@ class Dashboard extends Controller
     public static  function backToLocalTime($time)
     {  
         $am = ["ቀን","ማታ"];
-        $or   = ["Guyyaa", "Galgala"];
+        $or   = ["Gu", "Ga"];
         $en  = ["AM", "PM"];
 
          if(app()->getLocale() == 'am')
@@ -113,12 +113,7 @@ class Dashboard extends Controller
             $file->move('uploads/event-pictures',$filename);
             $event->picture = $filename;
         }
-    // $eventDate = new Carbon( new DateTime($request->due_date));
-    // $today = Carbon::now();
-    // if($today->greaterThan($eventDate)){
-    //    $difference = $eventDate->diff($today)->format('%a');
-      
-    // }
+    
         $event->needed_vols = $request->needed_vols;
         $event->due_date = $request->due_date;
          if ($locale == 'am' || $locale == 'or') 
@@ -157,48 +152,65 @@ class Dashboard extends Controller
 
 
     public function updateEvent(Request $request,$id)
-    {
+    {   
+        $event = Event::find($id);
+        $locale = app()->getLocale();
         $validated = $request->validate([
-            'title' => ['required', 'string'],
-            'short_desc' => ['required', 'string', 'max:500','min:1'],
-            'picture' => [ 'image'],
-            'details' => ['required', 'string', 'max:1024','min:3'],
-            'due_date' => ['required', 'string', 'max:20'],
+            'title_am' => ['required', 'string', 'max:255'],
+            'title_or' => ['required', 'string', 'max:255'],
+            'title_en' => ['required', 'string', 'max:255'],
+            'location_am' => ['required', 'string', 'max:255'],
+            'location_or' => ['required', 'string', 'max:255'],
+            'location_en' => ['required', 'string', 'max:255'],
+            'short_desc_am' => ['required', 'string', 'max:500','min:1'],
+            'short_desc_or' => ['required', 'string', 'max:500','min:1'],
+            'short_desc_en' => ['required', 'string', 'max:500','min:1'],
+            'details_am' => ['required', 'string', 'max:1024','min:3'],
+            'details_or' => ['required', 'string', 'max:1024','min:3'],
+            'details_en' => ['required', 'string', 'max:1024','min:3'],
+            'due_date' => ['required', 'date', 'max:20'],
             'needed_vols' => ['required', 'integer', 'min:1'],
-            
+            'picture' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
             
         ]);
-        $event = Event::find($id);
+        
         if($request->hasFile('picture'))
         {
-            $path = 'uploads/event-pictures/'.$event->picture;
-            if(File::exists($path))
-            {
-                File::delete($path);
-            }
-
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $file->move('uploads/event-pictures',$filename);
             $event->picture = $filename;
-
         }
-        $event->title = $request->title;
-        $event->status = $request->status;
-        if($event->status == 'Cancelled')
-        {
-            $leave = DB::table('event_user')->where('event_id','=',$id)->delete();
-        }
-        $event->short_desc = $request->short_desc;
-        $event->details = $request->details;
-        $event->due_date = $request->due_date;
+    
         $event->needed_vols = $request->needed_vols;
-        $event->start_time = $request->start_time;
-        $event->end_time = $request->end_time;
-        $event->location = $request->location;
+        $event->due_date = $request->due_date;
+         if ($locale == 'am' || $locale == 'or') 
+        {
+        $arr = explode('-',$request->due_date);
+        $event->due_date = (\Andegna\DateTimeFactory::of($arr[0],$arr[1],$arr[2]))->toGregorian()->format('Y-m-d');              
+        }
+         
+
+
+        $amor   = ["ቀን","ማታ","Gu","Ga"];
+        $en   = ["AM","PM","AM","PM"];
+        $event->start_time = str_replace($amor,$en,$request->start_time);
+        $event->end_time = str_replace($amor,$en,$request->end_time);
+        foreach (config('app.available_locales') as $locale) 
+        {
+        
+        $event->{'title_'.$locale} = $request->{'title_'.$locale};
+        $event->{'short_desc_'.$locale} = $request->{'short_desc_'.$locale};
+        $event->{'details_'.$locale} = $request->{'details_'.$locale};
+            
+        $event->{'location_'.$locale} = $request->{'location_'.$locale};
+        }
+   
         $event->update();
-        return redirect(route('admin.events'))->with('message','Event has been updated successfully!');
+         
+         
+        return redirect(route('admin.events'))->with('message',__('home.event_updated'));
     }
 
 
@@ -226,20 +238,18 @@ public function addNewsForm()
 }
 public function addNews(Request $request)
     {
+        $locale = app()->getLocale();
        
-        $validated = $request->validate([
+        $validated = $request->validate([ 
            
-            'heading_am' => ['required_without:heading_or,heading_en', 'string', 'min:3','max:400'],
-            'body_am'=> ['required_without:body_or,body_en', 'string', 'max:10000','min:10'],
-            'heading_or' => ['required_without:heading_am,heading_en', 'string', 'min:3','max:400'],
-            'body_or'=> ['required_without:body_am,body_en', 'string', 'max:10000','min:10'],
-            'heading_en' => ['required_without:heading_am,heading_or', 'string', 'min:3','max:400'],
-            'body_en'=> ['required_without:body_am,body_or', 'string', 'max:10000','min:10'],
+            __('home.heading').'_'.'አማርኛ' => ['required', 'string', 'min:3','max:400'],
+            __('home.body').'_'.'አማርኛ'=> ['required', 'string', 'max:10000','min:10'],
+            __('home.heading').'_'.'afaan_oromoo' => ['required', 'string', 'min:3','max:400'],
+            __('home.body').'_'.'afaan_oromoo' =>['required', 'string', 'max:10000','min:10'],
+            __('home.heading').'_'.'english' => ['required', 'string', 'min:3','max:400'],
+            __('home.body').'_'.'english' =>['required', 'string', 'max:10000','min:10'],
             
-
             
-    
-
         
             'picture' => ['required','image'],    
             
@@ -254,16 +264,17 @@ public function addNews(Request $request)
             $news->picture = $filename;
 
         }
-        foreach (config('app.available_locales') as $locale) {
-        $news->{'heading_'.$locale} = $request->{'heading_'.$locale};
-        $news->{'body_'.$locale }= $request->{'body_'.$locale};
+        foreach (config('app.available_locales') as $value => $locale) {
+        $news->{'heading_'.$locale} = $request->{'heading_'.$value};
+        $news->{'body_'.$locale }= $request->{'body_'.$value};
         $news->author_id = Auth::user()->id;
        
         }
          $news->save();
         
         
-        return redirect()->back()->with('message','News added successfully!');
+        return redirect()->back()->with('message',__('home.news_added'));
+        dd($request);
 
     }
 
@@ -277,35 +288,43 @@ public function addNews(Request $request)
     // save news update
     public function updateNews(Request $request, $id)
     {
-        $news = News::find($id);
+       $news = News::find($id);
+        $locale = app()->getLocale();
         $validated = $request->validate([
-            'heading' => ['required', 'string', 'min:3','max:400'],
-            'body' => ['required', 'string', 'max:10000','min:1'],
-            'picture' => ['image'],
+            'heading_am' => ['required', 'string', 'max:255'],
+            'heading_or' => ['required', 'string', 'max:255'],
+            'heading_en' => ['required', 'string', 'max:255'],
             
+            'body_am' => ['required', 'string', 'max:8024','min:3'],
+            'body_or' => ['required', 'string', 'max:8024','min:3'],
+            'body_en' => ['required', 'string', 'max:8024','min:3'],
+           
+            'picture' => 'image|mimes:jpg,jpeg,png,gif|max:2048',
             
         ]);
+        
         if($request->hasFile('picture'))
         {
-            $path = 'uploads/news-pictures/'.$news->picture;
-            if(File::exists($path))
-            {
-                File::delete($path);
-            }
-
             $file = $request->file('picture');
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $file->move('uploads/news-pictures',$filename);
             $news->picture = $filename;
-
         }
+    
+       
+         
 
-        $news->heading = $request->heading;
-        $news->author_id = Auth::user()->id;
-        $news->body = $request->body;
-        $news->save();
-        return redirect(route('admin.news'))->with('message','News updated successfully!');
+
+       
+        foreach (config('app.available_locales') as $locale) 
+        {
+        
+        $news->{'heading_'.$locale} = $request->{'heading_'.$locale};
+        $news->{'body_'.$locale} = $request->{'body_'.$locale};
+        }
+        $news->update();
+        return redirect(route('admin.news'))->with('message',__('home.news_updated'));
 
     }
     public function deleteNews(Request $request)
