@@ -54,32 +54,63 @@
   <input type="number" class="form-control" name="needed_vols"  value="{{old('needed_vols')}}" min="1">
   
 </div>
+
+
+@if(app()->getLocale() == 'am')
 <div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
-  <input type="text" class="form-control" name="start_time" id="start-time" autocomplete="off">
+  <input id="" class="form-control amharic-start-time" />
   
 </div>
 <div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-  <input type="tex"t class="form-control" name="end_time" id="end-time"  autocomplete="off">
+  <input id="" class="form-control amharic-end-time"  />
   
 </div>
 
-@if(app()->getLocale() == 'am')
 <div class=" col-md-4 my-1">
   <label for="due_date">{{__('home.date')}}</label>
-  <input class="form-control" type="text" name="due_date" id="amharic" autocomplete="off">
+  <input class="form-control" type="text" name="due_date" id="amharic" autocomplete="off" >
   
 </div>
+ {{-- Amharic datetime ends --}}
+
+ {{-- Oromic date time input begins here --}}
 @elseif(app()->getLocale() == 'or')
-<div class=" col-md-4 my-1">
-    <label for="due_date">{{__('home.date')}}</label>
-  <input class="form-control" type="text" name="due_date" id="oromic" autocomplete="off">
+<div class=" col-md-2 my-1">
+  <label for="start_time">{{__('home.start_time')}}</label>
+  <input id="" class="form-control oromic-start-time" />
+  
 </div>
-@else
+<div class=" col-md-2 my-1">
+  <label for="end_time">{{__('home.end_time')}}</label>
+  <input id="" class="form-control oromic-end-time"  />
+  
+</div>
+
 <div class=" col-md-4 my-1">
   <label for="due_date">{{__('home.date')}}</label>
-  <input class="form-control" type="text" name="due_date" id="gregorian" autocomplete="off">
+  <input class="form-control" type="text" name="due_date" id="oromic" autocomplete="off" >
+  
+</div>
+ {{-- Oromic date time input ends here --}}
+
+@elseif(app()->getLocale() == 'en')
+<div class=" col-md-2 my-1">
+  <label for="start_time">{{__('home.start_time')}}</label>
+  <input id="" class="form-control english-start-time" />
+  
+</div>
+<div class=" col-md-2 my-1">
+  <label for="end_time">{{__('home.end_time')}}</label>
+  <input id="" class="form-control english-end-time"  />
+  
+</div>
+
+<div class=" col-md-4 my-1">
+
+  <label for="due_date">{{__('home.date')}}</label>
+  <input class="form-control" type="text" name="due_date" id="gregorian" autocomplete="off" >
 </div>
 @endif
   

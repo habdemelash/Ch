@@ -86,10 +86,10 @@ class Dashboard extends Controller
     {
         $locale = app()->getLocale();
         $validated = $request->validate([
-            'title_am' => ['required', 'string', 'max:255'],
-            'title_or' => ['required', 'string', 'max:255'],
-            'title_en' => ['required', 'string', 'max:255'],
-            'location_am' => ['required', 'string', 'max:255'],
+            'title_am' => ['required_without_all:title_or,title_en', 'sometimes:string', 'max:255'],
+            'title_or' => ['required_without_all:title_am,title_en', 'string', 'max:255'],
+            'title_en' => ['required_without_all:title_am,title_en', 'string', 'max:255'],
+            'location_am' => ['required_without_all:location_or,location_en', 'string', 'max:255'],
             'location_or' => ['required', 'string', 'max:255'],
             'location_en' => ['required', 'string', 'max:255'],
             'short_desc_am' => ['required', 'string', 'max:500','min:1'],

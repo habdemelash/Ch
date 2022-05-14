@@ -10,7 +10,7 @@
 								  <option value="2">{{__('home.date')}}</option>
 								  <option value="3">{{__('home.status')}}</option>
 								</select>
-								<select class="select form-select mb-3" id="status" disabled style="display: none"  >
+								<select class="select form-select mb-3 mx-2" id="status" disabled style="display: none; width: 200px;"  >
 								  <option data-searchType="{{__('home.status')}}" value="1">{{__('home.upcoming')}}</option>
 								  <option data-searchType="{{__('home.status')}}" value="2">{{__('home.cancelled')}}</option>
 								  <option data-searchType="{{__('home.status')}}" value="3">{{__('home.past')}}</option>
@@ -19,7 +19,7 @@
 
                             <div class="container-fluid">
 							    <form class="d-flex">
-							      <input class="form-control" type="search" placeholder="{{__('home.search_place')}}" aria-label="Search">
+							      <input class="form-control" id="searchfield" type="search" placeholder="{{__('home.search_place')}}" aria-label="Search">
 							      <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
 							    </form>
 							  </div>
@@ -226,9 +226,11 @@
       toMove.appendTo("#option-container"); // moves role elements in #option-container
       $("#status").removeAttr("disabled"); // enables select
       document.getElementById("status").style.display = "block";
+      document.getElementById("searchfield").style.display = "none";
       }
       else{
       	document.getElementById("status").style.display = "none";
+      	document.getElementById("searchfield").style.display = "block";
 
       }
 };

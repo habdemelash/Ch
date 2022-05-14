@@ -113,7 +113,7 @@ return [
     'required_with' => 'የ :attribute ግብዓት የ :values ግብዓት ካለ የግድ አስፈላጊ ነው።',
     'required_with_all' => 'የ :attribute ግብዓት የ :values ግብዓቶች በሚኖሩበት ጊዜ የግድ አስፈላጊ ነው።',
     'required_without' => 'የ :attribute ግብዓት የ :values ግብዓት በማይኖርበት ጊዜ የግድ አስፈላጊ ነው።',
-    'required_without_all' => 'የ :attribute ግብዓት የ :values ግብዓት ካለ የግድ አስፈላጊ ነው።',
+    'required_without_all' => 'የ :attribute ግብዓት የ :values ግብዓቶች ከሌሉ የግድ አስፈላጊ ነው።',
     'same' => 'የ :attribute ግብዓት እና :other ግብዓት ተመሳሳይ መሆን አለበት።',
     'size' => [
         'array' => 'የ :attribute ግብዓት :size ያህል ነጠላ አባላትን መያዝ አለበት።',
