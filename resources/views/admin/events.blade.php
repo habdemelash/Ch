@@ -7,7 +7,6 @@
  								<select class="form-select mb-3 select" aria-label=".form-select-lg example" id="searchType" onchange="filterRole();">
 								  <option selected>{{__('home.title')}}</option>
 								  <option value="1">{{__('home.location')}}</option>
-								  <option value="2">{{__('home.date')}}</option>
 								  <option value="3">{{__('home.status')}}</option>
 								</select>
 								<select class="select form-select mb-3 mx-2" id="status" disabled style="display: none; width: 200px;"  >
@@ -81,7 +80,7 @@
 								$formatted_date = $on->toFormattedDateString(); 
 								if(app()->getLocale() == 'am'){
 									$gregorian = new DateTime($event->due_date);
-	$formatted_date = Andegna\DateTimeFactory::fromDateTime($gregorian)->format('F j ቀን Y');
+	$formatted_date = Andegna\DateTimeFactory::fromDateTime($gregorian)->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);
 	$start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A');
      $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A');
 
@@ -89,7 +88,7 @@
 								}
 
                 elseif(app()->getLocale() == 'or'){
-      $formatted_date = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($event->due_date)))->format('F j , Y'));
+      $formatted_date = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($event->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
       $start = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A'));
       $end = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A'));
 

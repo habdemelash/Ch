@@ -1,15 +1,6 @@
 @extends('layouts.site')
 
-@section('search')
-<div class="container-fluid">
-                  <form class="d-flex">
-                    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-                    <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
-                  </form>
-                </div>
 
-
-@endsection
 
 @section('content')
 
@@ -20,12 +11,8 @@
 
     <!-- Favicon -->
     <link rel="icon" href="{{asset('site/read-news/img/core-img/favicon.ico')}}">
-
-    <!-- Stylesheet -->
     <link rel="stylesheet" href="{{asset('site/read-news/style.css')}}">
-
    <?php $locale = app()->getLocale();?>
-
      <a href="{{url('read-news',$latest->id)}}">
     <div class="post-details-title-area bg-overlay clearfix img-fluid" style="background-image: url({{ asset('uploads/news-pictures') }}/{{ $latest->picture}});top: 100px;">
         <div class="container-fluid h-100">
@@ -34,10 +21,10 @@
                 	<?php 
                 	$fmla = (new Carbon\Carbon(new DateTime($main->created_at)))->toDayDateTimeString();
                     if($locale == 'am'){
-                    $fmla = Andegna\DateTimeFactory::fromDateTime($latest->created_at)->format('F j ቀን Y g:i A');}
+                    $fmla = Andegna\DateTimeFactory::fromDateTime($latest->created_at)->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);}
 
                     elseif(app()->getLocale() == 'or'){
-      $fmla = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($latest->created_at)))->format('F j , Y g:i a'));
+      $fmla = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($latest->created_at)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
       ;
 
                 }
@@ -61,9 +48,9 @@
     	<?php $author = App\Http\Controllers\Admin\Dashboard::findAuthor($main->author_id);
         $formatted = (new Carbon\Carbon(new DateTime($main->created_at)))->toDayDateTimeString();
                       if(app()->getLocale() == 'am'){
-                    $formatted = Andegna\DateTimeFactory::fromDateTime($main->created_at)->format('F j ቀን Y g:i A');}
+                    $formatted = Andegna\DateTimeFactory::fromDateTime($main->created_at)->format(\Andegna\Constants::DATE_ETHIOPIAN);}
                 elseif($locale == 'or'){
-      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($main->created_at)))->format('F j , Y g:i a'));
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($main->created_at)))->format(\Andegna\Constants::DATE_ETHIOPIAN));
       ;
 
                 }?>
@@ -118,9 +105,9 @@
 
                     $formatted = (new Carbon\Carbon(new DateTime($article->created_at)))->toDayDateTimeString();
                       if(app()->getLocale() == 'am'){
-                    $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i A');}
+                    $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);}
                     elseif($locale == 'or'){
-      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($article->created_at)))->format('F j , Y g:i a'));
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($article->created_at)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
       ;
 
                 }

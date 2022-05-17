@@ -166,9 +166,9 @@ trait Formatter
     public function getTimeOfDay(): string
     {
         $array = [
-            'ቀን'  => [2,3,4,5,6,7,8,9,10,11,12],
-            'ጠዋት'=>[23,0,1],
-            'ሌሊት'  => [13,14,15,16,17,18,19,20,21,22],
+            'ቀን'  => [0,1,2,3,4,5,6,7,8,9,10,11],
+           
+            'ማታ'  => [12,13,14,15,16,17,18,19,20,21,22,23],
             
 
 
@@ -202,7 +202,7 @@ trait Formatter
      */
     public function getTextualEra(): string
     {
-        return $this->getYear() > 0 ? 'ዓ/ም' : 'ዓ/ዓ';
+        return $this->getYear() > 0 ? 'ዓ.ም' : 'ዓ.ዓ';
     }
 
     /**

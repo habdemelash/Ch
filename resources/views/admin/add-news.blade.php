@@ -4,7 +4,7 @@
  @section('content')
 
      <div class="row d-flex justify-content-center">
-      <span><strong><a href="{{route('admin.news')}}">Back</a> to the list</strong></span>
+      
      	<form action="{{ route('admin.news.add') }}" method="POST" enctype="multipart/form-data">
       		@csrf
       		<div class="row d-flex justify-content-start">
@@ -28,14 +28,14 @@
 
   @foreach(config('app.languages') as $locale=>$value) 		
    <div class="form-group mb-3 col-md-4 my-1">
-    <label for="heading-{{$locale}}" class="text-primary">Heading-{{strtoupper($value)}}</label>
-  <input type="text" id="heading-{{$locale}}" class="form-control" name="<?php echo strtolower(__('home.heading').'_'.$value);?>" value="{{old('heading')}}">
+    <label for="heading-{{$locale}}" class="text-primary">@lang('home.heading')-{{strtoupper($value)}}</label>
+  <input type="text" id="heading-{{$locale}}" class="form-control" name="<?php echo 'heading_'.$locale;?>" value="{{old('heading_'.$locale)}}">
   
 </div>
 
 <div class="form-group my-1 col-md-8">
-  <label for="body-{{$locale}}" class="text-primary">Body-{{strtoupper($value)}}</label>
-  <textarea class="form-control" id="body-{{$locale}}" name="<?php echo strtolower(__('home.body').'_'.$value);?>" style="height: 200px;"></textarea>
+  <label for="body-{{$locale}}" class="text-primary">@lang('home.body')-{{strtoupper($value)}}</label>
+  <textarea class="form-control" id="body-{{$locale}}" name="<?php echo 'body_'.$locale;?>" style="height: 200px;">{{old('body_'.$locale)}}</textarea>
   
 </div>
 @endforeach
@@ -48,10 +48,10 @@
 
 
 <div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">
-  <label for="inputCompany5">@lang('home.photo')</label>
+  <label for="inputCompany5">@lang('home.picture')</label>
                       <label class="col-md-2 btn" for="pic" style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">{{__('home.click_here')}}</label>
                       <label for="pic" id="file-name" onchange="preview_image(event)">{{__('home.no_file_choosen')}}</label>
-                       <input type="file" id="pic" name="picture" class="form-control-lg col-md-10" accept="image/*" onchange="preview_image(event)" style="display: none;">
+                       <input type="file" id="pic" name="@lang('home.picture')" class="form-control-lg col-md-10" accept="image/*" onchange="preview_image(event)" style="display: none;">
   <span class="text-primary">{{__('home.a_good_news_pic')}}</span>
   <img src="{{asset('site/assets/img/digital_22.jpg')}}" alt="" class="img-thumbnail rounded-circle" width="200" height="200" id="output_image">
   

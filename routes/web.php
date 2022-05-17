@@ -18,35 +18,36 @@ use Twilio\Rest\Client;
 
 Route::get('try', function ()
 {
+    $email = DB::table('users')->where('id', Auth::user()->id)->value('locale');
+    dd($email,\Request::route());
 
-$receiver = '+251920763031';
-$message = 'Hi Habte';
-try{
-    $account_sid = getenv('TWILIO_SID');
-    $auth_token = getenv('TWILIO_TOKEN');
-    $tw_no = getenv('TWILIO_FROM');
-    $client = new Client($account_sid, $auth_token);
-    $client->messages->create($receiver,['from'=>$tw_no,
-'body'=>$message]);
-    dd('Sent!');
+// $receiver = '+251920763031';
+// $message = 'Hi Habte';
+// try{
+//     $account_sid = getenv('TWILIO_SID');
+//     $auth_token = getenv('TWILIO_TOKEN');
+//     $tw_no = getenv('TWILIO_FROM');
+//     $client = new Client($account_sid, $auth_token);
+//     $client->messages->create($receiver,['from'=>$tw_no,
+// 'body'=>$message]);
+//     dd('Sent!');
 
-} catch (Exception $e){
-    dd('Error: ', $e->getMessage());
-}	
+// } catch (Exception $e){
+//     dd('Error: ', $e->getMessage());
+// }	
 });
 
 
 
 
-Route::get('/', function () {
-    return redirect()->route('site.home', app()->getLocale());
-})->name('home');
 
 Route::get('/', [Home::class, 'home'])->name('site.home');
+Route::get('/search-news', [Home::class, 'searchNews'])->name('site.home.searchnews');
+Route::get('/search-events', [Home::class, 'searchEvents'])->name('site.home.searchevents');
 Route::get('events/', [Home::class, 'events'])->name('site.events');
 Route::get('staff/', [Home::class, 'staff'])->name('site.staff');
 Route::get('lets-help', [Home::class, 'letsHelp'])->name('site.letshlep');
-Route::get('help-me-form', [Home::class, 'tipForm'])->name('site.helpmeform');
+Route::get('help-me-form', [Home::class, 'helpmeForm'])->name('site.helpmeform');
 Route::post('help-me-application',[HelpmeController::class, 'sendHelpMe'])->name('site.helpme.send');
 Route::get('dash', [Dashboard::class, 'index'])->name('admin.dashboard');
 Route::get('join-us',[Home::class,'registrationView'])->name('joinus');

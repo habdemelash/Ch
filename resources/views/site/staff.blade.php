@@ -3,7 +3,7 @@
 @section('search')
 <div class="container-fluid">
                   <form class="d-flex">
-                    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                    <input class="form-control" type="search" placeholder="@lang('home.search_place')" aria-label="Search">
                     <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
                   </form>
                 </div>
@@ -18,9 +18,9 @@
       <div class="container">
 
         <div class="section-title" style="margin-top: 140px;">
-          <span>Staff</span>
-          <h2>Our Kind Hearted Staff</h2>
-          <p>Know about our good-hearted staff behind all this humanitarian effort...</p>
+          <span>@lang('home.staff')</span>
+          <h2>{{__("Our Kind Hearted Staff")}}</h2>
+          <p>{{__("Know about our good-hearted staff behind all this humanitarian effort...")}}</p>
         </div>
 
 
@@ -34,7 +34,7 @@
               <img class="rounded-circle" src="{{asset('uploads/profile-photos')}}/{{$member->profile_photo_path}}" alt="" height="200" width="200">
              @endif
               <h4>{{$member->name}}</h4>
-              <span>Staff</span>
+              
               <div  style="text-align: center; align-self: center;">
                 <p>
               <i class="bx bxs-envelope"></i> {{$member->email}}

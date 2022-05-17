@@ -78,7 +78,7 @@ $messageCount= $all->count();
                     
 
                     <li class="sidebar-item {{ strpos($address,'dash/users') ? 'active' : '';}}">
-                        <a class="sidebar-link" href="{{route('admin.users')}}">
+                        <a class="sidebar-link" href="{{route("admin.users")}}">
               <i class="bx bxs-group bx-md"></i> <span class="align-middle">{{__('home.users')}}</span>
             </a>
                     </li>
@@ -207,9 +207,9 @@ $messageCount= $all->count();
 
                         {{-- Language Toggler dropdown --}}
                         <li class="nav-item dropdown">
-                            <a class="nav-icon dropdown-toggle" href="#" id="lang" data-bs-toggle="dropdown">
-                                
-                                    <span class="text-success fw-bold">{{ strtoupper(app()->getLocale()) }}</span>
+                            <a class="nav-icon dropdown-toggle" href="#" id="lang" data-bs-toggle="dropdown" style="text-decoration: none">
+                               
+                                    <span class="text-success fw-bold" style="font-size: 13px">{{  config('app.languages')[ app()->getLocale()]  }}</span>
                                 
                             </a>
                             <div class="dropdown-menu dropdown-menu-end py-0 " aria-labelledby="lang" style="width: 150px;">
@@ -222,7 +222,7 @@ $messageCount= $all->count();
                                            
                                             <div class="col-10">
                                                 
-                                                <div class="text-dark"><a class="nav-link dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a></div>
+                                                <div class="text-dark"><a class="nav-link dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}"> {{ $langName }}</a></div>
                                                 
                                             </div>
                                         </div>

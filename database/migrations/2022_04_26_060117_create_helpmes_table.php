@@ -15,12 +15,20 @@ return new class extends Migration
     {
         Schema::create('helpmes', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); 
+            $table->string('name_am')->nullable(); 
+            $table->string('name_or')->nullable(); 
+            $table->string('name_en')->nullable(); 
             $table->string('phone');
             $table->string('email');
-            $table->string('address');
-            $table->string('problem_title');
-            $table->text('problem_details');
+            $table->string('address_am')->nullable();
+            $table->string('address_or')->nullable();
+            $table->string('address_en')->nullable();
+            $table->string('problem_title_am')->nullable();
+            $table->string('problem_title_or')->nullable();
+            $table->string('problem_title_en')->nullable();
+            $table->text('problem_details_am')->nullable();
+            $table->text('problem_details_or')->nullable();
+            $table->text('problem_details_en')->nullable();
             $table->boolean('seen')->default(0);
              $table->enum('status',['Pending','Rejected','Accepted'])->default('Pending');
             $table->bigInteger('sender')->unsigned()->nullable();

@@ -1,8 +1,10 @@
+
 @extends('layouts.site',['myevents'=>$myevents])
 @section('search')
 <div class="container-fluid">
-                  <form class="d-flex">
-                    <input class="form-control" type="search" placeholder="@lang('home.search_place')" aria-label="Search">
+                  <form class="d-flex" action="{{route('site.home.searchnews')}}" method="GET">
+                    @csrf
+                    <input class="form-control" type="search" placeholder="@lang('home.search_place')" aria-label="Search" name="key" value="{{old('query')}}">
                     <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
                   </form>
                 </div>
@@ -10,8 +12,6 @@
 
 @endsection
 @section('search')
-
-
 
 @endsection
 
@@ -60,8 +60,13 @@
 
   </section>
 <section id="about" class="about" style="">
-  <div>
+  <div class="text-center">
     <h4 class="text-center text-success"><i class="bx bxs-news bx-md"></i>@lang('home.spend_afew')</h4>
+    @if(Session::has('result'))
+    <strong class="text-dark text-center">
+      @lang('home.your_search'): "{{Session::get('result')}}" 
+    </strong>
+    @endif
   </div>
   <hr class="text-success">
   
@@ -74,12 +79,12 @@
           <?php $on = new Carbon\Carbon(new DateTime($article->created_at));
                       $formatted = $on->toDayDateTimeString(); 
                       if(app()->getLocale() == 'am'){
-                               $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->format('F j ቀን Y g:i:A');
+                               $formatted = Andegna\DateTimeFactory::fromDateTime($article->created_at)->modify('-2 hours')->format(\Andegna\Constants::DATE_ETHIOPIAN);
 
 
                       }
                        elseif(app()->getLocale() == 'or'){
-      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($article->created_at)))->format('F j , Y g:i a'));
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($article->created_at)))->modify('-2 hours')->format(\Andegna\Constants::DATE_ETHIOPIAN));
       ;
 
                 }
@@ -125,4 +130,5 @@
      
     </section>
     </div>
+    <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
     @endsection

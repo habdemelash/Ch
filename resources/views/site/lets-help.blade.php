@@ -12,7 +12,7 @@
 @endsection
 
 @section('content')
-
+<?php $locale = app()->getLocale(); ?>
 <div class="container">
 <section id="hero" class="d-flex align-items-center">
   <style >
@@ -77,12 +77,22 @@
                     <div class="col-md-6 col-lg-4 wrapper my-2">
                        <a href="{{url('lets-help/view',$help->id)}}">
                        	 <div class="single-definition">
-                            <strong class="text-info"><i class="bx bxs-user-circle bx-md"></i>{{$help->name}}</strong><br>
+                            <strong class="text-info"><i class="bx bxs-user-circle bx-md"></i><?php echo $help->{'name_'.$locale}; ?></strong><br>
                             <?php $on = new Carbon\Carbon(new DateTime($help->created_at));
-											$formatted = $on->toDayDateTimeString(); ?>
-                            <span class="text-secondary">On: {{$formatted}}</span><br>
+											$formatted = $on->toDayDateTimeString(); 
+                      if(app()->getLocale() == 'am'){
+                               $formatted = Andegna\DateTimeFactory::fromDateTime($help->created_at)->modify('-2 hours')->format(\Andegna\Constants::DATE_ETHIOPIAN);
+
+
+                      }
+                       elseif(app()->getLocale() == 'or'){
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($help->created_at)))->modify('-2 hours')->format(\Andegna\Constants::DATE_ETHIOPIAN));
+      ;
+
+                }?>
+                            <span class="badge bg-info">@lang('home.sent_at')</span><span class="text-secondary">: {{$formatted}}</span><br>
                             <strong class="badge bg-danger">{{$help->problem_title}}</strong><br>
-                            <p>{{mb_substr($help->problem_details,0,100,'UTF-8')}} ...</p>
+                            <p><?php echo mb_substr($help->{'problem_details_'.$locale},0,100,'UTF-8'); ?> ...</p>
                             <a href="{{url('lets-help/view',$help->id)}}">@lang('home.see_full_info')</a>
                         </div>  
                        </a>

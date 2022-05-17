@@ -75,6 +75,7 @@ $locale = app()->getLocale();?>
           <li><a class="nav-link scrollto {{ strpos($address,'lets-help') ? 'active' : '';}} " href="{{route('site.letshlep')}}">@lang('home.letshelp_nav')<i class="bi-calendar-event-fill"></i></a></li>
           <li class="dropdown "><a class="nav nav-link {{Request::is('all-my-events') ? 'active' : ''}}" href="{{route('all.my.events')}}"><span>@lang('home.my_events_nav')
             @if(Auth::check())
+            <?php \App\Http\Controllers\Site\Home::localizer(); ?>
             <span class="badge bg-primary">{{$myevents}}</span>
             @endif
           </span></a>
@@ -92,10 +93,10 @@ $locale = app()->getLocale();?>
       $formatted = (new Carbon\Carbon( new DateTime($ev->due_date)))->toFormattedDateString();
 
               if(app()->getLocale() == 'am'){
-      $formatted = (new Andegna\DateTime(new DateTime($ev->due_date)))->format('F j ፥ Y');
+      $formatted = (new Andegna\DateTime(new DateTime($ev->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);
                 }
                 elseif(app()->getLocale() == 'or'){
-      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($ev->due_date)))->format('F j , Y'));
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($ev->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
     
                 }
                
@@ -170,13 +171,13 @@ $locale = app()->getLocale();?>
          return substr($s,0,$w).$tha.substr($s,$w+strlen($thi));
          }?>
          
-  <li class="dropdown mx-2"><a href="#"><span>{{ strtoupper(app()->getLocale()) }}</span> <i class="bi bi-chevron-down"></i></a>
+  <li class="dropdown mx-2"><a href="#" style="font-size: 13px"><span>{{config('app.languages') [app()->getLocale()] }}</span> <i class="bi bi-chevron-down"></i></a>
 
 
 @if(count(config('app.languages')) > 1)
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
     @foreach(config('app.languages') as $langLocale => $langName)
-    <li><a class="nav-link scrollto" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ strtoupper($langLocale) }} ({{ $langName }})</a></li>
+    <li><a class="nav-link scrollto" href="{{ url()->current() }}?change_language={{ $langLocale }}">{{ $langName }}</a></li>
    
     @endforeach
   </ul>

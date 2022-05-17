@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Event;
@@ -14,11 +15,16 @@ use App\Models\Helpme;
 use App\Models\Role;
 use App\Models\Docs;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\App;
+
 class Home extends Controller
 {
-    
+    public static function localizer()
+    {
+       $lang = DB::table('users')->where('id', Auth::user()->id)->value('locale');
+       return redirect(url()->current(). '? change_language='. $lang );
+    }
     public function profile()
     {
         $my = Auth::user();
@@ -128,6 +134,26 @@ class Home extends Controller
 
     	return view('site.home',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister(),'news'=>$news]);
     }
+// Search news
+    public function searchNews(Request $request)
+    {
+        $locale = App::getLocale();
+        $key = $request->input('key');
+        $news = News::where('heading_'.$locale,'LIKE','%'.$key.'%')->orWhere('body_'.$locale,'LIKE','%'.$key.'%')->paginate(5);
+        $count = $news->count();
+        Session::flash('result', $key); 
+        return view('site.home',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister(),'news'=>$news,'count'=>$count]);
+    }
+    public function searchEvents(Request $request)
+    {
+        $locale = App::getLocale();
+        $key = $request->input('key');
+        $events = Event::where('title_'.$locale,'LIKE','%'.$key.'%')->orWhere('short_desc_'.$locale,'LIKE','%'.$key.'%')->orWhere('location_'.$locale,'LIKE','%'.$key.'%')->paginate(5);
+        $count = $events->count();
+        Session::flash('result', $key); 
+        return view('site.events',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister(),'events'=>$events,'count'=>$count]);
+
+    }
 
 // Events page renderer method
      public function events()
@@ -180,6 +206,7 @@ public function viewEvent($id)
 // let's help page renderer method
      public function letsHelp()
     {
+        $locale = app()->getLocale();
         $helpme = Helpme::where('status','=','Accepted')->orderBy('id','DESC')->paginate(10);
     	return view('site.lets-help',['helpme'=>$helpme,'myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister()]);
     }
@@ -198,7 +225,7 @@ public function viewLetsHelp($id)
 }
 
 // help me form renderer
-    public function tipForm()
+    public function helpmeForm()
     {
     	return view('site.help-me-form',['myevents'=>$this->myevents(),'myEventsList'=>$this->myEventLister()]);
     }

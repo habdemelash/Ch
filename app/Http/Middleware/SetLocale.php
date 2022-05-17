@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SetLocale
 {
@@ -40,7 +42,15 @@ class SetLocale
                 session()->put('language', $language);
             }
         } elseif (config('app.locale')) {
-            $language = config('app.locale');
+            if(Auth::check())
+            {
+                 $language = DB::table('users')->where('id', Auth::user()->id)->value('locale');
+            }
+            else
+            {
+                $language = config('app.locale');
+            }
+            
         }
 
         if (isset($language) && in_array($language, $languages)) {

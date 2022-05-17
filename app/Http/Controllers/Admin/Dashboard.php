@@ -24,16 +24,22 @@ class Dashboard extends Controller
     public static function oromicDate($month)
     {
 
-    $amh = ["ጠዋት","ቀን","ሌሊት","መስከረም", "ጥቅምት", "ኅዳር","ታኅሣሥ","ጥር","የካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰኔ","ሐምሌ","ነሐሴ","ጳጉሜን"];
-    $or   = ["Ganama","Guyyaa", "Galgala","Fuulbana", "Onkololeessa", "Sadaasa","Muddee","Amajjii","Guraandhala","Bitooteessa","Elba","Caamsa","Waxabajji","Adooleessa","Hagayya","Qaammee"];
-
-    return str_replace($amh, $or, $month);
+    $amh = ['፣','ዓ.ም','እሑድ',' ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሐሙስ', 'ዓርብ', 'ቅዳሜ',"ቀን","ማታ","መስከረም", "ጥቅምት", "ኅዳር","ታኅሣሥ","ጥር","የካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰኔ","ሐምሌ","ነሐሴ","ጳጉሜን"];
+    $or   = [',','Bara','Sanbata Gudda', 'Dafnoo', 'Facaasaa', 'Roobii', 'Kamisa', 'Jimaata', 'Sanbata Duraa',"Gu", "Ga","Fuulbana", "Onkololeessa", "Sadaasa","Muddee","Amajjii","Guraandhala","Bitooteessa","Elba","Caamsa","Waxabajji","Adooleessa","Hagayya","Qaammee"];
+    // dd(explode(" ",str_replace($amh, $or, $month)));
+    $pre = explode(" ",str_replace($amh, $or, $month));
+    $year = $pre[5];
+    $bara = $pre[6];
+    $pre[5] = $bara;
+    $pre[6] = $year;
+   
+     return implode(' ',$pre);
     }
     public static function oromicTime($month)
     { 
 
-    $amh = ["ጠዋት","ቀን","ሌሊት"];
-    $or   = ["Ganama","Guyyaa", "Galgala"];
+    $amh = ["ቀን","ማታ"];
+    $or   = ["Gu", "Ga"];
 
     return str_replace($amh, $or, $month);
     }
@@ -88,16 +94,16 @@ class Dashboard extends Controller
         $validated = $request->validate([
             'title_am' => ['required_without_all:title_or,title_en', 'sometimes:string', 'max:255'],
             'title_or' => ['required_without_all:title_am,title_en', 'string', 'max:255'],
-            'title_en' => ['required_without_all:title_am,title_en', 'string', 'max:255'],
-            'location_am' => ['required_without_all:location_or,location_en', 'string', 'max:255'],
-            'location_or' => ['required', 'string', 'max:255'],
-            'location_en' => ['required', 'string', 'max:255'],
-            'short_desc_am' => ['required', 'string', 'max:500','min:1'],
-            'short_desc_or' => ['required', 'string', 'max:500','min:1'],
-            'short_desc_en' => ['required', 'string', 'max:500','min:1'],
-            'details_am' => ['required', 'string', 'max:1024','min:3'],
-            'details_or' => ['required', 'string', 'max:1024','min:3'],
-            'details_en' => ['required', 'string', 'max:1024','min:3'],
+            'title_en' => ['required_without_all:title_am,title_en', 'sometimes:string', 'max:255'],
+            'location_am' => ['required_without_all:location_or,location_en', 'sometimes:string', 'max:255'],
+            'location_or' => ['required_without_all:location_en,location_am', 'sometimes:string', 'max:255'],
+            'location_en' => ['required_without_all:location_am,location_or', 'sometimes:string', 'max:255'],
+            'short_desc_am' => ['required_without_all:short_desc_or,short_desc_en', 'sometimes:string', 'max:500','min:1'],
+            'short_desc_or' => ['required_without_all:short_desc_en,short_desc_am', 'sometimes:string', 'max:500','min:1'],
+            'short_desc_en' => ['required_without_all:short_desc_am,short_desc_or', 'sometimes:string', 'max:500','min:1'],
+            'details_am' => ['required_without_all:details_or,details_en', 'sometimes:string', 'max:1024','min:3'],
+            'details_or' => ['required_without_all:details_am.details_en', 'sometimes:string', 'max:1024','min:3'],
+            'details_en' => ['required_without_all:details_am,details_or', 'sometimes:string', 'max:1024','min:3'],
             'due_date' => ['required', 'date', 'max:20'],
             'needed_vols' => ['required', 'integer', 'min:1'],
             'picture' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
@@ -124,7 +130,7 @@ class Dashboard extends Controller
          
 
 
-        $amor   = ["ቀን","ማታ","Guyyaa","Galgala"];
+        $amor   = ["ቀን","ማታ","Gu","Ga"];
         $en   = ["AM","PM","AM","PM"];
         $event->start_time = str_replace($amor,$en,$request->start_time);
         $event->end_time = str_replace($amor,$en,$request->end_time);
@@ -141,6 +147,7 @@ class Dashboard extends Controller
         $event->save();
          
          return redirect()->back()->with('message',__('home.event_added'));
+        // dd($request);
     }
     public function updateEventView($id)
     {
@@ -242,22 +249,22 @@ public function addNews(Request $request)
        
         $validated = $request->validate([ 
            
-            __('home.heading').'_'.'አማርኛ' => ['required', 'string', 'min:3','max:400'],
-            __('home.body').'_'.'አማርኛ'=> ['required', 'string', 'max:10000','min:10'],
-            __('home.heading').'_'.'afaan_oromoo' => ['required', 'string', 'min:3','max:400'],
-            __('home.body').'_'.'afaan_oromoo' =>['required', 'string', 'max:10000','min:10'],
-            __('home.heading').'_'.'english' => ['required', 'string', 'min:3','max:400'],
-            __('home.body').'_'.'english' =>['required', 'string', 'max:10000','min:10'],
+            'heading_am' => ['required', 'string', 'min:3','max:400'],
+           'body_am'=> ['required', 'string', 'max:10000','min:10'],
+            'heading_or' => ['required', 'string', 'min:3','max:400'],
+           'body_or' =>['required', 'string', 'max:10000','min:10'],
+           'heading_en' => ['required', 'string', 'min:3','max:400'],
+           'body_en' =>['required', 'string', 'max:10000','min:10'],
             
             
         
-            'picture' => ['required','image'],    
+            __('home.picture') => ['required','image'],    
             
         ]);
         $news = new News();
-        if($request->hasFile('picture'))
+        if($request->hasFile(__('home.picture')))
         {
-            $file = $request->file('picture');
+            $file = $request->file(__('home.picture'));
             $extension = $file->getClientOriginalExtension();
             $filename = time().'.'.$extension;
             $file->move('uploads/news-pictures',$filename);
@@ -265,8 +272,8 @@ public function addNews(Request $request)
 
         }
         foreach (config('app.available_locales') as $value => $locale) {
-        $news->{'heading_'.$locale} = $request->{'heading_'.$value};
-        $news->{'body_'.$locale }= $request->{'body_'.$value};
+        $news->{'heading_'.$locale} = $request->{'heading_'.$locale};
+        $news->{'body_'.$locale }= $request->{'body_'.$locale};
         $news->author_id = Auth::user()->id;
        
         }
@@ -336,7 +343,7 @@ public function addNews(Request $request)
                 File::delete($path);
             }
        $news->delete();
-       return redirect()->back()->with('message','News deleted successfully!');
+       return redirect()->back()->with('message',__('home.news_deleted'));
 
 
     }
@@ -370,14 +377,14 @@ public function addNews(Request $request)
         $helpme = Helpme::find($id);
         $helpme->status='Accepted';
         $helpme->update();
-        return redirect()->back()->with('message','Application has been accepted!');
+        return redirect()->back()->with('message',__('home.app_accepted'));
     }
     public function rejectHelpme($id)
     {
         $helpme = Helpme::find($id);
         $helpme->status='Rejected';
         $helpme->update();
-        return redirect()->back()->with('message','Application has been rejected!');
+        return redirect()->back()->with('message',__('home.app_rejected'));
     }
     public function removeHelpme($id)
     {
@@ -385,7 +392,7 @@ public function addNews(Request $request)
         $helpme = Helpme::find($id);
         $helpme->delete();
    
-        return redirect(route('admin.helpmes'))->with('message','Application has been removed!');
+        return redirect(route('admin.helpmes'))->with('message',__('home.app_removed'));
     }
     public function improveHelpme($id)
     {
@@ -398,17 +405,40 @@ public function addNews(Request $request)
     }
     public function updateHelpme(Request $request, $id)
     {
+        // dd($request);
         $helpme = Helpme::find($id);
+        $locale = app()->getLocale();
         $validated = $request->validate([
-            'problem_title' => ['required', 'string', 'min:3','max:400'],
-            'problem_details' => ['required', 'string', 'max:10000','min:3'],
-                  
+            'name_am' => ['required_without_all: name_or,name_en', 'string', 'max:255'],
+            'name_or' => ['required_without_all: name_am,name_en', 'string', 'max:255'],
+            'name_en' => ['required_without_all: name_am,name_or', 'string', 'max:255'],
+            'proble_title_am' => ['required_without_all:problem_title_or, problem_title_en', 'string', 'max:255'],
+            'problem_title_or' => ['required_without_all:problem_title_or, problem_title_am', 'string', 'max:255'],
+            'problem_title_en' => ['required', 'string', 'max:255'],
+            'address_am' => ['required_without_all: address_or,address_en', 'string', 'max:255'],
+            'address_or' => ['required_without_all: address_am,address_en', 'string', 'max:255'],
+            'address_en' => ['required_without_all: address_or,address_am', 'string', 'max:255'],
+            'problem_details_am' => ['required_without_all: problem_details_or, problem_title_en', 'string', 'max:1024','min:3'],
+            'problem_details_or' => ['required_without_all: problem_details_en,problem_details_am', 'string', 'max:1024','min:3'],
+            'problem_details_en' => ['required_without_all:problem_details_am.problem_details_or', 'string', 'max:1024','min:3'],
+            
+            
         ]);
-       
-        $helpme->problem_title = $request->problem_title;
-        $helpme->problem_details = $request->problem_details;
+        
+    
+    
+         
+
+        foreach (config('app.available_locales') as $locale) 
+        {
+        
+        $helpme->{'name_'.$locale} = $request->{'name_'.$locale};
+        $helpme->{'problem_title_'.$locale} = $request->{'problem_title_'.$locale};
+        $helpme->{'address_'.$locale} = $request->{'address_'.$locale};
+        $helpme->{'problem_details_'.$locale} = $request->{'problem_details_'.$locale};
+        }
         $helpme->update();
-        return redirect()->back()->with('message','Application Improved successfully!');
+        return redirect(route('admin.helpmes'))->with('message',__('home.app_improved'));
     }
 
     public static function countUnseenHelpmes()

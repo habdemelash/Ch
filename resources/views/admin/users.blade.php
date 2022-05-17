@@ -4,24 +4,12 @@
 
 
  							<li class="d-flex flex-column flex-md-row">
- 								<label class="text-primary fw-bold mx-1 text-center" style="white-space: nowrap;">Filter:</label>
- 								<select class="form-select mb-3 select" aria-label=".form-select-lg example" id="searchType" onchange="filterRole();">
-								  <option selected>Name</option>
-								  <option value="1">Email</option>
-								  <option value="2">Phone</option>
-								  <option value="3">Address</option> 
-								  <option value="3">Role</option>
-								</select>
-								<select class="select form-select mb-3" id="role" disabled style="display: none"  >
-								  <option data-searchType="Role" value="1">Volunteer</option>
-								  <option data-searchType="Role" value="2">Staff</option>
-								  <option data-searchType="Role" value="3">Admin</option>
-								</select>
-						<span id="option-container" style="visibility: hidden; position:absolute;"></span>
-
-                            <div class="container-fluid">
-							    <form class="d-flex">
-							      <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+ 								
+								
+					
+                            <div class="container-fluid" id="searchForm">
+							    <form class="d-flex" >
+							      <input class="form-control" placeholder="@lang('home.search_place')" aria-label="Search">
 							      <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
 							    </form>
 							  </div>
@@ -38,7 +26,7 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
 
-<h1 class="h3 mb-3"><strong>Users'</strong> Management</h1>
+<h1 class="h3 mb-3"><strong>@lang("home.users'")</strong> @lang('home.administration')</h1>
 <div class="row d-flex mt-3 justify-content-center">
 	
 	<div class="container">		        		
@@ -58,14 +46,14 @@
 									<thead>
 										<tr >
 										
-											<th class=" d-xl-table-cell"> Name</th>
-											<th class=" d-xl-table-cell"> Phone</th>
-											<th class=" d-xl-table-cell"> Email</th>
-											<th class=" d-xl-table-cell"> Address</th>
+											<th class=" d-xl-table-cell"> @lang('home.full_name')</th>
+											<th class=" d-xl-table-cell"> @lang('home.phone')</th>
+											<th class=" d-xl-table-cell"> @lang('home.email')</th>
+											<th class=" d-xl-table-cell"> @lang('home.location')</th>
 										
-											<th class=" d-md-table-cell text-center">Roles</th>
-											<th class=" d-md-table-cell">Photo</th>
-											<th>Actions</th>
+											<th class=" d-md-table-cell text-center">@lang('home.roles')</th>
+											<th class=" d-md-table-cell">@lang('home.photo')</th>
+											<th>@lang('home.actions')</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -86,21 +74,21 @@
 											<td>
 												<div class="col d-flex flex-column">
 													@if(in_array('Volunteer',$roleList))
-													<a class="btn btn-sm btn-success my-1"  style="text-align: left;"><span><i class="bi bi-check-circle"></i> Volunteer</span></a>
+													<span class=" btn-sm btn-success my-1"  style="text-align: left;"><span><i class="bi bi-check-circle"></i> @lang('home.volunteer')</span></span>
 													@else
-													<a class="btn btn-sm btn-danger my-1" href="" style="text-align: left;"><span><i class="bi bi-circle"></i> Volunteer</span></a>
+													<a class="btn btn-sm btn-danger my-1" href="" style="text-align: left;"><span><i class="bi bi-circle"></i> @lang('home.volunteer')</span></a>
 
 													@endif
 													@if(in_array('Staff',$roleList))
-													<a class="btn btn-sm btn-success my-1" href="{{url('dash/users/staffdown',$user->id)}}" style="text-align: left;"><span><i class="bi bi-check-circle"></i> Staff</span></a>
+													<a class="btn btn-sm btn-success my-1" href="{{url('dash/users/staffdown',$user->id)}}" style="text-align: left;"><span><i class="bi bi-check-circle"></i> @lang('home.staff')</span></a>
 													@else
-													<a class="btn btn-sm btn-danger my-1" href="{{url('dash/users/staffup',$user->id)}}" style="text-align: left;"><span><i class="bi bi-circle"></i> Staff</span></a>
+													<a class="btn btn-sm btn-danger my-1" href="{{url('dash/users/staffup',$user->id)}}" style="text-align: left;"><span><i class="bi bi-circle"></i> @lang('home.staff')</span></a>
 
 													@endif
 													@if(in_array('Admin',$roleList))
-													<a class="btn btn-sm btn-success my-1" href="{{url('dash/users/admindown',$user->id)}}" style="text-align: left;"><span><i class="bi bi-check-circle"></i> Admin</span></a>
+													<a class="btn btn-sm btn-success my-1" href="{{url('dash/users/admindown',$user->id)}}" style="text-align: left;"><span><i class="bi bi-check-circle"></i> @lang('home.admin')</span></a>
 													@else
-													<a class="btn btn-sm btn-danger my-1" href="{{url('dash/users/adminup',$user->id)}}" style="text-align: left;"><span><i class="bi bi-circle"></i> Admin</span></a>
+													<a class="btn btn-sm btn-danger my-1" href="{{url('dash/users/adminup',$user->id)}}" style="text-align: left;"><span><i class="bi bi-circle"></i> @lang('home.admin')</span></a>
 
 													@endif
 
@@ -153,23 +141,22 @@
 				  		@csrf
 				  		  <div class="modal-content">
 				      <div class="modal-header">
-				        <h5 class="modal-title text-danger" id="exampleModalLabel">Delete User</h5>
+				        <h5 class="modal-title text-danger" id="exampleModalLabel">@lang('home.delete_user')</h5>
 				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				      </div>
 				      <div class="modal-body">
 				        <input type="hidden" name="user_id" id="user_id" >
-				        <p class="fw-bold">Do you really want to delete this user?</p>
+				        <p class="fw-bold">@lang('home.do_you_delete_user')</p>
 				      </div>
 				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-				        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Yes, delete</button>
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@lang('home.no')</button>
+				        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">@lang('home.yes_delete')</button>
 				      </div>
 				    </div>
 				  	</form>
 				  
 				  </div>
 				</div>
-
 
 
                     <!-- Modal -->
@@ -199,23 +186,6 @@
 		});
 	});
 	
-</script>
-<script>
-
-    function filterRole(){
-      var searchType = $("#searchType").find('option:selected').text();
-      if (searchType == 'Role') { // stores searchType
-      $("#option-container").children().appendTo("#role"); // moves <option> contained in #option-container back to their <select>
-      var toMove = $("#role").children("[data-searchType!='"+searchType+"']"); // selects role elements to move out
-      toMove.appendTo("#option-container"); // moves role elements in #option-container
-      $("#role").removeAttr("disabled"); // enables select
-      document.getElementById("role").style.display = "block";
-      }
-      else{
-      	document.getElementById("role").style.display = "none";
-
-      }
-};
 </script>
 
 	<script>

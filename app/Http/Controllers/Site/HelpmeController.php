@@ -14,28 +14,50 @@ class HelpmeController extends Controller
 
    public function sendHelpMe(Request $request)
     {
+        $locale = app()->getLocale();
+         $helpme = new Helpme();
+        if(!Auth::check()){
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'problem_title' => ['required', 'string', 'max:255'],
-            'problem_details' => ['required', 'string', 'max:10000'],
+            'name_'.$locale => ['required', 'string', 'max:255'],
+            'address_'.$locale => ['required', 'string', 'max:255'],
+            'problem_title_'.$locale => ['required', 'string', 'max:255'],
+            'problem_details_'.$locale => ['required', 'string', 'max:10000'],
             'document' => ['required'],
             'document.*' => ['image'],
             'email' => ['sometimes', 'email', 'max:500'],
-            'phone' => ['required'],
+            'phone' => ['required','max:20'],
             
         ]);
-        $helpme = new Helpme();
-        $helpme->name = $request->name;
+            $helpme->{'name_'.$locale} = $request->{'name_'.$locale};
+            $helpme->{'address_'.$locale} = $request->{'address_'.$locale};
+            $helpme->email = $request->email;
+            $helpme->phone = $request->phone;
+
+    }
+        else{
+            $validated = $request->validate([
+            
+            'problem_details_'.$locale => ['required', 'string', 'max:10000'],
+            'document' => ['required'],
+            'document.*' => ['image'],
+            'email' => ['sometimes', 'email', 'max:500'],
+           
+        ]);
+             $helpme->{'name_'.$locale} = Auth::user()->name;
+             $helpme->{'address_'.$locale} = Auth::user()->address;
+            $helpme->email = Auth::user()->email;
+            $helpme->phone = Auth::user()->phone;
+
+        }
+       
+       
         if(Auth::check())
         {
         $helpme->sender = Auth::user()->id;
         }
-        $helpme->address = $request->address;
-        $helpme->problem_title = $request->problem_title;
-        $helpme->email = $request->email;
-        $helpme->phone = $request->phone;
-        $helpme->problem_details = $request->problem_details;      
+        
+        $helpme->{'problem_title_'.$locale} = $request->{'problem_title_'.$locale}; 
+        $helpme->{'problem_details_'.$locale} = $request->{'problem_details_'.$locale};
         $helpme->save();
         if($request->hasFile('document'))
         {  

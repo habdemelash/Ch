@@ -14,4 +14,8 @@ return [
 
    'previous' => '&laquo; የቀደመው',
     'next' => 'ቀጣይ &raquo;',
+     'showing'=>"የሚታየው",
+    'to'=>"እስከ",
+    'of'=>"ከ",
+    'results'=>"ያሉ ውጤቶችን",
 ];

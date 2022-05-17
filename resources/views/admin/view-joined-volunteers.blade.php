@@ -6,8 +6,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 order-md-1 order-last">
-                <h3>You can have details of volunteers who have joinded this event.</h3>
-                <p class="text-subtitle text-muted">Use this information only for good cause and volunteering. Thanks!<strong>&nbsp;<a href="{{route('admin.events')}}">Back</a> &nbsp;</strong>  to the event list?</p>
+                <h3>@lang('home.see_details_of_joined_vols') </h3>
+                <p class="text-subtitle text-muted">@lang('home.use_this_info')<strong>&nbsp;<a href="{{route('admin.events')}}">@lang('home.back')</a></strong>  @lang('home.to_the_list')</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                
@@ -24,26 +24,21 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h4 class="card-title">All volunteers of this event... </h4>
+        <h4 class="card-title">@lang('home.all_joined_this') </h4>
       </div>
       <div class="card-content">
       	<?php
             $users = App\Http\Controllers\Site\Home::listJoindeVolunteers($event);
             ?>
-              
-        @if($users == null)
-
-        <div class="alert alert-danger"> No one has joined this event so far!</div>
-
-        @endif
+        
         <div class="table-responsive table-secondary">
           <table class="table table-bordered mb-0">
             <thead>
               <tr>
-                <th><i class="bx bxs-user text-success text-nowrap" style="font-size: 25px;">Name</i></th>
-                <th><i class="bx bxs-phone  text-danger text-nowrap" style="font-size: 25px;"> Phone</i></th>
-                <th><i class="bx bxs-map  text-primary text-nowrap" style="font-size: 25px;">Address</i></th>
-                <th><i class="bx bxs-envelope  text-info text-nowrap" style="font-size: 25px;"> E-mail</i></th>
+                <th><i class="bx bxs-user text-success text-nowrap" style="font-size: 25px;">@lang('home.full_name')</i></th>
+                <th><i class="bx bxs-phone  text-danger text-nowrap" style="font-size: 25px;"> @lang('home.phone')</i></th>
+                <th><i class="bx bxs-map  text-primary text-nowrap" style="font-size: 25px;">@lang('home.location')</i></th>
+                <th><i class="bx bxs-envelope  text-info text-nowrap" style="font-size: 25px;"> @lang('home.email')</i></th>
               </tr>
             </thead>
             <tbody>

@@ -48,14 +48,14 @@
               $end = (new Carbon\Carbon(new DateTime($ev->end_time)))->format('g:i A');
               if(app()->getLocale() == 'am'){
                   $gregorian = new DateTime($ev->due_date);
-  $formatted = Andegna\DateTimeFactory::fromDateTime($gregorian)->format('F j ቀን Y');
+  $formatted = Andegna\DateTimeFactory::fromDateTime($gregorian)->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);
   $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->start_time))->format('g:i A');
      $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->end_time))->format('g:i A');
 
                 }
 
                 elseif(app()->getLocale() == 'or'){
-      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($ev->due_date)))->format('F j , Y'));
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($ev->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
       $start = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->start_time))->format('g:i A'));
       $end = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($ev->end_time))->format('g:i A'));
 

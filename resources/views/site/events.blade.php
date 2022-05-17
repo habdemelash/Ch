@@ -3,8 +3,9 @@
 
 @section('search')
 <div class="container-fluid">
-                  <form class="d-flex">
-                    <input class="form-control" type="search" placeholder="@lang('home.search_place')" aria-label="Search">
+                  <form class="d-flex" method="GET" action="{{route('site.home.searchevents')}}">
+                    @csrf
+                    <input class="form-control" type="search" placeholder="@lang('home.search_place')" aria-label="Search" name="key">
                     <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
                   </form>
                 </div>
@@ -47,7 +48,11 @@
 
         <div class="row d-flex justify-content-center">
           
-
+      @if(Session::has('result') )
+          <strong class="text-dark text-center">
+            @lang('home.your_search'): "{{Session::get('result')}}" 
+          </strong>
+          @endif
       <?php $locale = app()->getLocale(); ?>
            @php foreach($events as $event): @endphp
            
@@ -103,12 +108,12 @@
       $start = (new Carbon\Carbon(new DateTime($event->start_time)))->format('g:i A');
       $end = (new Carbon\Carbon(new DateTime($event->end_time)))->format('g:i A');
               if(app()->getLocale() == 'am'){
-      $formatted = (new Andegna\DateTime(new DateTime($event->due_date)))->format('F j ፥ Y');
+      $formatted = (new Andegna\DateTime(new DateTime($event->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);
       $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A');
       $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A');
                 }
                 elseif(app()->getLocale() == 'or'){
-      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($event->due_date)))->format('F j , Y'));
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($event->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
       $start = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A'));
       $end = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A'));
 

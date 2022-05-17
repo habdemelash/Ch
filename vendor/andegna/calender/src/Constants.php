@@ -7,7 +7,8 @@ namespace Andegna;
  */
 class Constants
 {
-    const DATE_ETHIOPIAN = 'l፣ F d ቀን H:i:s a T Y E';
+    const DATE_ETHIOPIAN = 'l ፣ F d ፣ Y E ፣ g:i a ';
+    const DATE_ETHIOPIAN_PART = 'l ፣ F d ፣ Y E';
     const DATE_ETHIOPIAN_ORTHODOX = 'l፣ F d ቀን (x) H:i:s a T Y (X) E';
 
     const DATE_GEEZ = 'l፣ F V ቀን H:i:s a T K E';
@@ -17,7 +18,7 @@ class Constants
         1 => 'መስከረም', 'ጥቅምት', 'ኅዳር', 'ታኅሣሥ', 'ጥር', 'የካቲት',
         'መጋቢት', 'ሚያዝያ', 'ግንቦት', 'ሰኔ', 'ሐምሌ', 'ነሐሴ', 'ጳጉሜን', ];
 
-    const WEEK_NAME = [1 => 'ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሐሙስ', 'ዓርብ', 'ቅዳሜ', 'እሑድ'];
+    const WEEK_NAME = [1 => ' ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሐሙስ', 'ዓርብ', 'ቅዳሜ', 'እሑድ'];
 
     const ORTHODOX_YEAR_NAME = ['ዮሐንስ', 'ማቴዎስ', 'ማርቆስ', 'ሉቃስ'];
 

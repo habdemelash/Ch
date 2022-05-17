@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
 @section('content')
-
+<?php $locale = app()->getLocale(); ?>
 <div class="container">
 <section id="hero" class="d-flex align-items-center">
   <style >
@@ -40,6 +40,7 @@
 
 	.single-definition{
 		padding: 10px;
+    border-style: solid;
 		border-radius: 10px;
 		border-color: green;
         border-width: 0.5px;
@@ -78,43 +79,57 @@
 <section id="about" class="about" style="">
  <div class="section-top-border">
 
+<?php $on = new Carbon\Carbon(new DateTime($helpme->created_at));
+                                            $formatted = $on->toDayDateTimeString(); 
+                                            if(app()->getLocale() == 'am'){
+                    $formatted = Andegna\DateTimeFactory::fromDateTime($helpme->created_at)->modify('-2 hours')->format(\Andegna\Constants::DATE_ETHIOPIAN);}
+                    elseif($locale == 'or'){
+      $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate( (new Andegna\DateTime(new DateTime($helpme->created_at)))->modify('-2 hours')->format(\Andegna\Constants::DATE_ETHIOPIAN));
+      ;
 
+                }?>
  	<div class="row">
  		<div class="col-lg-9 col-md-9 col-sm-12 main">
  			<div class="container">
 	   
             <div class="section-top-border">
-                <h3 class="mb-30 title_color"><strong class="text-info"><i class="bx bxs-user-circle bx-md"></i>{{$helpme->name}} </strong>@lang('home.really_needs_your_help')</h3>
+                <h3 class="mb-30 title_color"><strong class="text-info"><i class="bx bxs-user-circle bx-md"></i><?php echo $helpme->{'name_'.$locale} ?> </strong>@lang('home.really_needs_your_help')</h3>
 
                 <div class="row">
                     <div class="col-md-4">
                         <div class="single-definition">
                             <h4 class="mb-20 text-success">@lang('home.applicant_name')</h4>
-                            <p>{{$helpme->name}}</p>
+                            <p><?php echo $helpme->{'name_'.$locale} ?></p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="single-definition">
                             <h4 class="mb-20 text-success">@lang('home.address_town')</h4>
-                            <p>{{$helpme->address}}</p>
+                            <p><?php echo $helpme->{'address_'.$locale} ?></p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="single-definition">
                             <h4 class="mb-20 text-success">@lang('home.problem_subject')</h4>
-                            <p>{{$helpme->problem_title}}</p>
+                            <p><?php echo $helpme->{'problem_title_'.$locale} ?></p>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="single-definition ">
                             <h4 class="mb-20 text-success">@lang('home.phone')</h4>
                             <p>{{$helpme->phone}}</p>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="single-definition">
                             <h4 class="mb-20  text-success">@lang('home.email')</h4>
                             <p>{{$helpme->email}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 offset-md-3">
+                        <div class="single-definition">
+                            <h4 class="mb-20 text-success">@lang('home.sent_at')</h4>
+                            <p class="">{{$formatted}}</p>
                         </div>
                     </div>
                 </div>
@@ -125,7 +140,7 @@
                 <div class="row">
                     <div class="col-lg-12 ">
                         <blockquote class="generic-blockquote">
-                            “{{$helpme->problem_details}}” 
+                           <?php echo $helpme->{'problem_details_'.$locale} ?>
                         </blockquote>
                     </div>
                 </div>
@@ -170,12 +185,12 @@
                     <div class="col my-2">
                        <a href="{{url('lets-help/view',$other->id)}}">
                        	 <div class="single">
-                            <strong class="text-info"><i class="bx bxs-user-circle"></i>{{$other->name}}</strong><br>
+                            <strong class="text-info"><i class="bx bxs-user-circle"></i><?php echo $other->{'name_'.$locale} ?></strong><br>
                             <?php $on = new Carbon\Carbon(new DateTime($other->created_at));
 											$formatted = $on->toDayDateTimeString(); ?>
-                            <span class="text-secondary">On: {{$formatted}}</span><br>
+                            <span class="text-secondary">@lang('home.sent_at'): {{$formatted}}</span><br>
                             <strong class="badge bg-danger">{{$other->problem_title}}</strong><br>
-                            <p>{{mb_substr($other->problem_details,0,100,'UTF-8')}} ...</p>
+                            <p><?php echo mb_substr($other->{'problem_details_'.$locale},0,100,'UTF-8');?> ...</p>
                             <a href="{{url('lets-help/view',$other->id)}}">@lang('home.see_full_info')</a>
                         </div>  
                        </a>

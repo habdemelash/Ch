@@ -59,12 +59,12 @@
 @if(app()->getLocale() == 'am')
 <div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
-  <input id="" class="form-control amharic-start-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->start_time)}}"/>
+  <input id="" class="form-control amharic-start-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->start_time)}}" name="start_time" autocomplete="off" />
   
 </div>
 <div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-  <input id="" class="form-control amharic-end-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->end_time)}}" />
+  <input id="" class="form-control amharic-end-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->end_time)}}" name="end_time" autocomplete="off" />
   
 </div>
 <?php  $formatted = (new Andegna\DateTime(new DateTime($event->due_date)))->format('Y-m-d'); ?>
@@ -79,18 +79,18 @@
 @elseif(app()->getLocale() == 'or')
 <div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
-  <input id="" class="form-control oromic-start-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->start_time)}}"/>
+  <input id="" class="form-control oromic-start-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->start_time)}}" name="start_time" autocomplete="off" />
   
 </div>
 <div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-  <input id="" class="form-control oromic-end-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->end_time)}}" />
+  <input id="" class="form-control oromic-end-time" value="{{App\Http\Controllers\Admin\Dashboard::backToLocalTime($event->end_time)}}" name="end_time" autocomplete="off"/>
   
 </div>
 <?php  $formatted = (new Andegna\DateTime(new DateTime($event->due_date)))->format('Y-m-d'); ?>
 <div class=" col-md-4 my-1">
   <label for="due_date">{{__('home.date')}}</label>
-  <input class="form-control" type="text" name="due_date" id="oromic" autocomplete="off" value="{{$formatted}}">
+  <input class="form-control" type="text" name="due_date" id="oromic" autocomplete="off" value="{{$formatted}}" >
   
 </div>
  {{-- Oromic date time input ends here --}}
@@ -98,12 +98,12 @@
 @elseif(app()->getLocale() == 'en')
 <div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
-  <input id="" class="form-control english-start-time" value="{{$event->start_time}}"/>
+  <input id="" class="form-control english-start-time" value="{{$event->start_time}}" name="start_time" autocomplete="off" />
   
 </div>
 <div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-  <input id="" class="form-control english-end-time" value="{{$event->end_time}}" />
+  <input id="" class="form-control english-end-time" value="{{$event->end_time}}" name="end_time" autocomplete="off"/>
   
 </div>
 

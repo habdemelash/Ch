@@ -29,22 +29,22 @@
 @foreach(config('app.languages') as $locale=>$value)  
 <div class=" mb-3 col-md-4 my-1">
    <label for="title">{{__('home.title').'-'.$value}}</label>
-  <input type="text" class="form-control" name="{{'title_'.$locale}}" value="{{old('title')}}">
+  <input type="text" class="form-control" name="{{'title_'.$locale}}" value="{{old('title_'.$locale)}}">
  
 </div>
 <div class=" col-md-8 my-1">
   <label for="short_desc">{{__('home.short_desc').'-'.$value}}</label>
-  <input type="text" class="form-control" name="{{'short_desc_'.$locale}}" >
+  <input type="text" class="form-control" name="{{'short_desc_'.$locale}}" value="{{old('short_desc_'.$locale)}}" >
   
 </div>
 <div class=" col-md-4 my-1">
   <label for="location">{{__('home.location').'-'.$value}}</label>
-  <input type="text" class="form-control" name="{{'location_'.$locale}}" placeholder="">
+  <input type="text" class="form-control" name="{{'location_'.$locale}}" value="{{old('location_'.$locale)}}">
   
 </div>
 <div class=" my-1 col-md-8">
   <label for="details">{{__('home.details').'-'.$value}}</label>
-  <textarea class="form-control"  name="{{'details_'.$locale}}" style="height: 100px;"></textarea>
+  <textarea class="form-control"  name="{{'details_'.$locale}}" style="height: 100px;">{{old('details_'.$locale)}}</textarea>
   
 </div>
 <hr>
@@ -59,12 +59,12 @@
 @if(app()->getLocale() == 'am')
 <div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
-  <input id="" class="form-control amharic-start-time" />
+  <input id="" class="form-control amharic-start-time" name="start_time" autocomplete="off" />
   
 </div>
 <div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-  <input id="" class="form-control amharic-end-time"  />
+  <input id="" class="form-control amharic-end-time" name="end_time" autocomplete="off" />
   
 </div>
 
@@ -79,12 +79,12 @@
 @elseif(app()->getLocale() == 'or')
 <div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
-  <input id="" class="form-control oromic-start-time" />
+  <input id="" class="form-control oromic-start-time" name="start_time" />
   
 </div>
 <div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-  <input id="" class="form-control oromic-end-time"  />
+  <input id="" class="form-control oromic-end-time" name="end_time"  />
   
 </div>
 
@@ -95,15 +95,15 @@
 </div>
  {{-- Oromic date time input ends here --}}
 
-@elseif(app()->getLocale() == 'en')
+@else
 <div class=" col-md-2 my-1">
   <label for="start_time">{{__('home.start_time')}}</label>
-  <input id="" class="form-control english-start-time" />
+  <input id="" class="form-control english-start-time" name="start_time" />
   
 </div>
 <div class=" col-md-2 my-1">
   <label for="end_time">{{__('home.end_time')}}</label>
-  <input id="" class="form-control english-end-time"  />
+  <input id="" class="form-control english-end-time" name="end_time" />
   
 </div>
 
