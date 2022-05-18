@@ -9,6 +9,7 @@
         "andegna/calender": "^2.3",
         "astrotomic/laravel-translatable": "^11.10",
         "brian2694/laravel-toastr": "^5.57",
+        "consoletvs/charts": "7.*",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/jetstream": "^2.7",

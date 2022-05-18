@@ -18,8 +18,9 @@ use Twilio\Rest\Client;
 
 Route::get('try', function ()
 {
-    $email = DB::table('users')->where('id', Auth::user()->id)->value('locale');
-    dd($email,\Request::route());
+   
+    // $email = DB::table('users')->where('id', Auth::user()->id)->value('locale');
+    // dd($email,\Request::route());
 
 // $receiver = '+251920763031';
 // $message = 'Hi Habte';

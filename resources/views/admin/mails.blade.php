@@ -71,7 +71,7 @@
                                     @endforeach              
                                
                                 <div class="col-md-6">
-                                	{{$messages->links('pagination::bootstrap-5')}}
+                                	{{$messages->links('pagination::bootstrap-4')}}
                                 </div>
 
 @endsection

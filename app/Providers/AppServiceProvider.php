@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Config\app;
+use ConsoleTVs\Charts\Registrar as Charts;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -24,8 +25,13 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(Charts $charts)
     {
-        //
+        $charts->register([
+            \App\Charts\EventsChart::class,
+            \App\Charts\UsersChart::class,
+            \App\Charts\HelpmesChart::class,
+            \App\Charts\SiteChart::class,
+        ]);
     }
 }
