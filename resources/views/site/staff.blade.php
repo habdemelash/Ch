@@ -26,13 +26,13 @@
                @endif
                <h4>{{$member->name}}</h4>
                <div  style="text-align: center; align-self: center;">
-                  <p>
+                  <p class="text-primary">
                      <i class="bx bxs-envelope"></i> {{$member->email}}
                   </p>
-                  <p>
+                  <p class="text-dark">
                      <i class="bx bxs-phone"></i> {{$member->phone}}
-                  </p>
-                  <p>
+                  </p class="text-dark">
+                  <p class="text-dark">
                      <i class="bx bxs-map"></i>{{$member->address}}
                   </p>
                </div>

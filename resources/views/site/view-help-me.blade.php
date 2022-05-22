@@ -125,7 +125,7 @@
                   <h3 class="mb-30 title_color">@lang('home.problem_details_and')</h3>
                   <div class="row">
                      <div class="col-lg-12 ">
-                        <blockquote class="generic-blockquote">
+                        <blockquote class="generic-blockquote" style="white-space: pre-wrap;">
                            <?php echo $helpme->{'problem_details_'.$locale} ?>
                         </blockquote>
                      </div>

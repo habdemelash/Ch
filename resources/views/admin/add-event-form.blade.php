@@ -3,6 +3,7 @@
 @include('admin.styles')
 <link rel="stylesheet" type="text/css" href="{{asset('admin/other/toastr.min.css')}}">
 <div class="row d-flex justify-content-center">
+   
    <form action="{{ route('admin.event.add') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div class="row d-flex justify-content-start">

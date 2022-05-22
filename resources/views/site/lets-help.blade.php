@@ -79,7 +79,7 @@
                      <span class="badge bg-info">@lang('home.sent_at')</span><span class="text-secondary">: {{$formatted}}</span><br>
                      <strong class="badge bg-danger">{{$help->problem_title}}</strong><br>
                      <p><?php echo mb_substr($help->{'problem_details_'.$locale},0,100,'UTF-8'); ?> ...</p>
-               <a href="{{url('lets-help/view',$help->id)}}">@lang('home.see_full_info')</a>
+               <a class="text-primary" href="{{url('lets-help/view',$help->id)}}">@lang('home.see_full_info')</a>
                </div>  
                </a>
             </div>

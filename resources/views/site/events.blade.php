@@ -74,7 +74,7 @@
                   @endif
                   </strong>
                   <div class="row d-flex flex-column justify-content-start">
-                     <div class="col"><strong class="text-success"> <i class="bx bxs-calendar-event text-success">@lang('home.date'):</i><?php
+                     <div class="col"><strong class="text-success"> <i class="bx bxs-calendar-event text-success"></i><span class="text text-primary">@lang('home.date') </span>:<?php
                         $formatted = (new Carbon\Carbon( new DateTime($event->due_date)))->toFormattedDateString();
                         $start = (new Carbon\Carbon(new DateTime($event->start_time)))->format('g:i A');
                         $end = (new Carbon\Carbon(new DateTime($event->end_time)))->format('g:i A');
@@ -94,8 +94,8 @@
                         </strong><small class="text-danger fw-bold"></small>
                      </div>
                      <?php ?>
-                     <div class="col"><strong><i class="bx bx-time text-danger" style="font-family: sans-serif;">@lang('home.time'):</i> <?php echo($start);?> - <?php echo($end);?></strong><br></div>
-                     <div class="col"><strong><i class="bx bx-current-location text-danger">@lang('home.location')</i><?php echo(' '.$event->{'location_'.$locale});?></strong> </div>
+                     <div class="col"><strong><i class="bx bx-time text-danger" style="font-family: sans-serif;">:</i><span class="text text-primary">@lang('home.time') </span><?php echo($start);?> - <?php echo($end);?></strong><br></div>
+                     <div class="col"><strong><i class="bx bx-current-location text-danger"></i><span class="text text-primary">@lang('home.location') </span><?php echo(' '.$event->{'location_'.$locale});?></strong> </div>
                   </div>
                </div>
                @if(!in_array($event->id, $myEventsList))

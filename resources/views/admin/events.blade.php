@@ -4,7 +4,7 @@
    <span id="option-container" style="visibility: hidden; position:absolute;"></span>
    <div class="container-fluid">
       <form class="d-flex">
-         <input class="form-control" id="searchfield" type="search" placeholder="{{__('home.search_place')}}" aria-label="Search">
+         <input class="form-control" id="searchEvent" type="search" name="searchEvent" placeholder="{{__('home.search_place')}}" aria-label="Search">
          <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
       </form>
    </div>
@@ -96,6 +96,7 @@
          </tr>
          @endforeach
       </tbody>
+      <tbody id="content"></tbody>
    </table>
 </div>
 <div class="modal fade" id="deleteEventModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -127,9 +128,8 @@
 </div>
 </div>
 </div>
-@include('admin.scripts')
-<script src="{{ asset('site/assets/js/ec.js') }}"></script>
 <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ asset('site/assets/js/ec.js') }}"></script>
 <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
 <script type="text/javascript" src="https://unpkg.com/ethiopian-calendar-date-converter@%5E1" ></script>
 <script >
@@ -143,6 +143,20 @@
    	});
    });
    
+</script>
+<script type="text/javascript">
+   $('#searchEvent').on('keyup',function(){
+      $value = $(this).val();
+      $.ajax({
+         type: 'get',
+         url: '{{URL::to('dash/search-event')}}',
+         data: {'searchEvent': $value},
+         success: function(data){
+            console.log(data);
+            $('#content').html(data);
+         }
+      });
+   })
 </script>
 @if(Session::has('message'))
 <script >

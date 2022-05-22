@@ -57,7 +57,7 @@
                </div>
                <p class="text-success fw-bold">{{$formatted}}</p>
                <img class="mb-30" src="{{ asset('uploads/news-pictures') }}/{{ $main->picture}}" alt="">
-               <p class="fw-bold"><?php echo $main->{'body_'.$locale};?></p>
+               <p class="fw-bold" style="white-space: pre-wrap;"><?php echo $main->{'body_'.$locale};?></p>
                <p></p>
                <h5 class="mb-30"></h5>
                <p></p>

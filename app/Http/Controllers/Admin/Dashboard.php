@@ -329,6 +329,16 @@ class Dashboard extends Controller
             ->back()
             ->with("message", "Event has been deleted!");
     }
+    public function searchEvent(Request $request)
+    {
+        $output = '';
+        $locale = app()->getLocale();
+        $events = Event::where('title_'.$locale,'LIKE','%'.$request->searchEvent.'%')
+                ->orWhere('short_desc_'.$locale,'LIKE','%'.$request->searchEvent.'%')
+                ->get();
+        return view('admin.events',['events'=>$events]);
+        
+    }
     public function viewMembers($id)
     {
         return view("admin.view-joined-volunteers", ["event" => $id]);
@@ -541,19 +551,19 @@ class Dashboard extends Controller
             "problem_details_am" => [
                 "required_without_all: problem_details_or, problem_title_en",
                 "string",
-                "max:1024",
+                "max:10024",
                 "min:3",
             ],
             "problem_details_or" => [
                 "required_without_all: problem_details_en,problem_details_am",
                 "string",
-                "max:1024",
+                "max:10024",
                 "min:3",
             ],
             "problem_details_en" => [
                 "required_without_all:problem_details_am.problem_details_or",
                 "string",
-                "max:1024",
+                "max:10024",
                 "min:3",
             ],
         ]);
@@ -684,7 +694,7 @@ class Dashboard extends Controller
 
         return redirect()
             ->back()
-            ->with("success", "You have given this user a Admin role.");
+            ->with("success", "You have given this user an Admin role.");
     }
     public function admindown($id)
     {

@@ -93,6 +93,7 @@ return [
     'gregorian'=>"በፈረንጆች",
     'hands_waiting'=>"የእርስዎን እርዳታ የሚጠብቁ ምስኪን እጆች...",
     'see_full_info'=>"ሙሉ መረጃውን ይመልከቱ",
+    'see_all'=>'ሁሉንም ይመልከቱ',
      'really_needs_your_help'=>"በእውነት የእርስዎን እርዳታ ይፈልጋሉ!",
      'applicant_name'=>"የአመልካቹ ስም",
      'problem_subject'=>"የችግሩ ዋነኛ ጉዳይ",

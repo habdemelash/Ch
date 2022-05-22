@@ -90,6 +90,7 @@ return [
      'gregorian'=>"",
      'hands_waiting'=>"Hands waiting for your help...",
      'see_full_info'=>"See full information",
+     'see_all'=>'See all',
      'relly_needs_your_help'=>"Really needs your help!",
      'applicant_name'=>"Applicant name",
      'problem_subject'=>"Problem subject",

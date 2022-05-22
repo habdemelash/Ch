@@ -52,7 +52,7 @@ Route::get('help-me-form', [Home::class, 'helpmeForm'])->name('site.helpmeform')
 Route::post('help-me-application',[HelpmeController::class, 'sendHelpMe'])->name('site.helpme.send');
 Route::get('dash', [Dashboard::class, 'index'])->name('admin.dashboard');
 Route::get('join-us',[Home::class,'registrationView'])->name('joinus');
-Route::get('all-my-evnts',[Home::class,'allMyEvents'])->name('all.my.events');
+Route::get('all-my-events',[Home::class,'allMyEvents'])->name('all.my.events');
 Route::get('donate-materials',[Home::class,'donateMaterialsForm'])->name('donate.materials.form');
 Route::get('contact-us',[Home::class,'contactForm'])->name('contact.form');
 
@@ -77,6 +77,7 @@ Route::get('personal-info', [Home::class, 'profile'])->name('profile');
 Route::post('update-profile', [Home::class, 'updateProfile'])->name('update.profile');
 
 Route::get('dash/events', [Dashboard::class, 'events'])->name('admin.events');
+Route::get('/search-event', [Dashboard::class, 'searchEvent'])->name('admin.events.search');
 Route::get('dash/news', [Dashboard::class, 'news'])->name('admin.news');
 
 Route::get('dash/helpmes', [Dashboard::class, 'helpmes'])->name('admin.helpmes');
