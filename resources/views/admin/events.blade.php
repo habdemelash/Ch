@@ -40,7 +40,7 @@
          </tr>
       </thead>
       <tbody>
-         @foreach($events as $event)
+         @forelse($events as $event)
          <?php $on = new Carbon\Carbon(new DateTime($event->due_date));
             $start = (new Carbon\Carbon(new DateTime($event->start_time)))->format('g:i A');
             $end = (new Carbon\Carbon(new DateTime($event->end_time)))->format('g:i A');
@@ -94,7 +94,11 @@
                </button>
             </td>
          </tr>
-         @endforeach
+         @empty
+         <tr><h4 class="text-center">No events yet</h4></tr>
+
+         
+         @endforelse
       </tbody>
       <tbody id="content"></tbody>
    </table>

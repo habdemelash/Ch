@@ -60,11 +60,13 @@
                      <i class="bx bxs-message bx-md" ></i> <span class="align-middle">{{__('home.mails')}}<span class="badge bg-info ml-1">{{$messageCount}}</span> </span>
                      </a>
                   </li>
+                  @can('admins', Auth::user())
                   <li class="sidebar-item {{ strpos($address,'dash/users') ? 'active' : '';}}">
                      <a class="sidebar-link" href="{{route("admin.users")}}">
                      <i class="bx bxs-group bx-md"></i> <span class="align-middle">{{__('home.users')}}</span>
                      </a>
                   </li>
+                  @endcan
                </ul>
             </div>
          </nav>

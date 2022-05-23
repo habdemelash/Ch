@@ -22,6 +22,7 @@
          </div>
       </div>
    </div>
+   
 </section>
 <div class="row">
    <h1 class="text-center">@lang('home.your_events')</h1>

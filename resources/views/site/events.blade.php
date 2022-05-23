@@ -36,7 +36,7 @@
          </strong>
          @endif
          <?php $locale = app()->getLocale(); ?>
-         @php foreach($events as $event): @endphp
+         @forelse($events as $event)
          <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-2" style="margin-right: 10px; margin-left: 10px; border-width: 5px;">
             <div class="icon-box row d-flex justify-content-center">
                <h4><?php echo($event->{'title_'.$locale}); ?></h4>
@@ -115,9 +115,9 @@
                @endif           
             </div>
          </div>
-         @php
-         endforeach;
-         @endphp
+         @empty
+         <h1 class="text-center">No events yet... come back later</h1>
+         @endforelse
          <div class="text-center col-md-4">
             {{$events->links('pagination::bootstrap-4')}}
          </div>

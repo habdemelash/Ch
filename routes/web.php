@@ -14,11 +14,19 @@ use App\Http\Controllers\Signout;
 use App\Http\Controllers\Admin\Dashboard;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Site\HelpmeController;
-use Twilio\Rest\Client;
+// use Twilio\Rest\Client;
 
 Route::get('try', function ()
 {
-   
+   if (Gate::allows('admins', Auth::user())) {
+            return 'Welcome you are admin';
+        }
+        else{
+
+            return redirect()->back();
+        
+        }
+
     // $email = DB::table('users')->where('id', Auth::user()->id)->value('locale');
     // dd($email,\Request::route());
 

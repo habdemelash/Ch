@@ -28,12 +28,28 @@ class UserCreatedListener
      */
     public function handle(UserCreated $event)
     {
-        
-        $id = $event->user->id;
-        DB::table('role_user')->insert([
+         $id = $event->user->id;
+        if($id == 1)
+        {
+
+
+            $roles = [
+                 ['role_id'=>1, 'user_id'=> $id],
+                 ['role_id'=>2, 'user_id'=> $id],
+                 ['role_id'=>3, 'user_id'=> $id],
+    
+            ];
+            DB::table('role_user')->insert($roles);
+
+        }
+        else
+        {
+             DB::table('role_user')->insert([
             'role_id'=>1,
             'user_id'=>$id
-        ]); 
+        ]);
+        }
+        
 
         $welcome = MessageBox::create([
 

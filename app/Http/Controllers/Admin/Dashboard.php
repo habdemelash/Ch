@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 use Carbon\Carbon;
 use DateTime;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -460,10 +461,16 @@ class Dashboard extends Controller
         $docs = $helpme->documents;
         $helpme->seen = 1;
         $helpme->update();
+        
+        if (Gate::allows('admins', Auth::user()) or Gate::allows('staffs', Auth::user()) ) {
         return view("admin.view-helpme", [
             "helpme" => $helpme,
             "docs" => $docs,
         ]);
+        }
+        else{
+            return redirect()->back();
+        }
     }
     public function acceptHelpme($id)
     {
@@ -498,8 +505,12 @@ class Dashboard extends Controller
         $helpme = Helpme::find($id);
         $helpme->seen = 1;
         $helpme->update();
-
+        if (Gate::allows('admins', Auth::user()) or Gate::allows('staffs', Auth::user())) {
         return view("admin.improve-helpme", ["helpme" => $helpme]);
+        }
+        else{
+            return redirect()->back();
+        }
     }
     public function updateHelpme(Request $request, $id)
     {
@@ -611,7 +622,15 @@ class Dashboard extends Controller
         $users = User::where("id", "!=", Auth::user()->id)
             ->orderBy("id", "DESC")
             ->paginate(10);
-        return view("admin.users", ["users" => $users]);
+            if (Gate::allows('admins', Auth::user())) {
+             return view("admin.users", ["users" => $users]);
+            }
+            else{
+
+            return redirect()->back();
+        
+             }
+       
     }
 
     public static function userRoles($id)

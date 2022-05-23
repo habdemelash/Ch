@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class SetLocale
 {
@@ -19,6 +20,11 @@ class SetLocale
     {
         $languages = array_keys(config('app.languages'));
         $route = $request->route();
+        if(Auth::check()){
+            $user = User::find(Auth::user()->id);
+
+        }
+       
 
         if (request('change_language')) {
             session()->put('language', request('change_language'));
@@ -28,7 +34,13 @@ class SetLocale
                 $route->parameters['locale'] = $language;
 
                 if (in_array($language, $languages)) {
-                    app()->setLocale($language);
+
+                    app()->setLocale($language); 
+                    if(Auth::check()){
+                        $user->locale =$language;
+                        $user->update();
+                    }
+                    
                 }
 
                 return redirect(route($route->getName(), $route->parameters));
@@ -44,7 +56,7 @@ class SetLocale
         } elseif (config('app.locale')) {
             if(Auth::check())
             {
-                 $language = DB::table('users')->where('id', Auth::user()->id)->value('locale');
+                 $language = DB::table('users')->where('id','=', Auth::user()->id)->value('locale');
             }
             else
             {
@@ -53,8 +65,13 @@ class SetLocale
             
         }
 
-        if (isset($language) && in_array($language, $languages)) {
+        if (isset($language) && in_array($language, $languages))
+        {
             app()->setLocale($language);
+             if(Auth::check()){
+                        $user->locale =$language;
+                        $user->update();
+            }
         }
 
         return $next($request);
