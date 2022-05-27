@@ -606,7 +606,7 @@ class Dashboard extends Controller
 
     public function mails()
     {
-        return view("admin.mails");
+        return view("admin.chat");
     }
     public function viewMail($id)
     {
@@ -615,7 +615,7 @@ class Dashboard extends Controller
 
     public function reply($id)
     {
-        return view("admin.mails");
+        return view("admin.chat");
     }
     public function users()
     {
