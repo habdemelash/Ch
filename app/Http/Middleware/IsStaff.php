@@ -24,8 +24,7 @@ class IsStaff
                 if($role->role == 'Staff'){
                     $hasRole = true;
                     
-                }
-                   
+                }      
                 
             }
             if($hasRole == true){
