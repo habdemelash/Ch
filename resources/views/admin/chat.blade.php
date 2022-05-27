@@ -30,8 +30,8 @@
                             <?php $sender = App\Http\Controllers\Messages::sender($mail->id); ?>
                             <a href="{{ url('contacted/read', $mail->sender) }}">
                                 <li class="list-group-item">
-                                    <strong class="text-left">{{ $sender}} </strong>
-                                    <p>{{ mb_substr($mail->content, 0, 30, 'UTF-8') }}...</p>
+                                    <strong class="text-left">Abebe </strong>
+                                    <p>Hello habte o...</p>
                                 </li>
                             </a>
                         @empty
