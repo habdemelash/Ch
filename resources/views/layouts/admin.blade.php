@@ -140,9 +140,7 @@
                                     </div>
                                     <div class="col-10 ps-2">
                                        <?php $sender = App\Http\Controllers\Messages::sender($mail->sender); 
-                                          if($mail->sender == $mail->receiver){
-                                              $sender = 'Charity Team';
-                                          }
+                                         
                                           ?>
                                        <div class="text-dark">{{$sender}}</div>
                                        <div class="text-muted small mt-1">{{mb_substr($mail->content,0,30,'UTF-8')}} ...</div>

@@ -14,6 +14,7 @@ use App\Models\News;
 use App\Models\User;
 use App\Models\Helpme;
 use App\Models\Docs;
+use App\Models\Message;
 
 //and even more
 
@@ -606,7 +607,9 @@ class Dashboard extends Controller
 
     public function mails()
     {
-        return view("admin.chat");
+        $mails = Message::all();
+        $main = Message::first();
+        return view("admin.chat",['mails'=>$mails,'main'=>$main]);
     }
     public function viewMail($id)
     {

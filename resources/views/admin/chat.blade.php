@@ -30,7 +30,7 @@
                             <?php $sender = App\Http\Controllers\Messages::sender($mail->id); ?>
                             <a href="{{ url('contacted/read', $mail->sender) }}">
                                 <li class="list-group-item">
-                                    <strong class="text-left">{{ $sender[0]->name }} </strong>
+                                    <strong class="text-left">{{ $sender}} </strong>
                                     <p>{{ mb_substr($mail->content, 0, 30, 'UTF-8') }}...</p>
                                 </li>
                             </a>
@@ -41,13 +41,13 @@
                         @endforelse
 
                     </ul>
-                    {{ $mails->links('pagination::bootstrap-4') }}
+                    {{-- {{ $mails->links('pagination::bootstrap-4') }} --}}
                 </div>
                 @isset($mains)
                     <div class="col-md-8">
                         <div class="card" id="chat2">
                             <div class="card-header d-flex justify-content-between align-items-center p-3">
-                                <h5 class="mb-0">{{ App\Http\Controllers\Messages::sender($mains[0]->id)[0]->name }}
+                                <h5 class="mb-0">{{ App\Http\Controllers\Messages::sender($mains->id) }}
                                 </h5> With
                                 <h5 class="badge bg-primary">You</h5>
                             </div>
