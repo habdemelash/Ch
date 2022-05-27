@@ -3,7 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\UserCreated;
-use App\Models\MessageBox;
+use App\Models\Message;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\DB;
@@ -51,7 +51,7 @@ class UserCreatedListener
         }
         
 
-        $welcome = MessageBox::create([
+        $welcome = Message::create([
 
             'content'=>'Welcome to our coalition to good cause. You have joined us for good cause, for making others live and we hope you will stay with us as long as possible----->',
             'receiver'=>$event->user->id,

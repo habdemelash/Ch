@@ -34,7 +34,7 @@ class EventCreatedListener
      foreach($users as $user){
         $welcome = MessageBox::create([
 
-            'content'=>'Have you heard? A new event has been scheduled. \n'. $event->event->title.' '.'at '.$event->event->location,
+            'content'=>'Have you heard? A new event has been scheduled.'. $event->event->title.' '.'at '.$event->event->location,
             'receiver'=>$user->id,
             'sender'=>$user->id,
 
