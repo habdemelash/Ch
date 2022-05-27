@@ -209,6 +209,7 @@ return [
     'new'=>"New",
     'delete_user'=>"Delete user",
     'showing'=>"Showing",
-   
+    'how_are_you'=>"How are you ",
+    'we_have_taken'=>"We have taken the remaining information from your profile information about your. Please complete only the sections of the form below.",
 
 ];

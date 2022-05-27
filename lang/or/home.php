@@ -209,6 +209,8 @@ return [
     'your_search'=>"barbaadi keessan",
     'new'=>"haaraa",
     'delete_user'=>"Tajaajilamaa ballessi",
+    'how_are_you'=>"Akkam jirta",
+    'we_have_taken'=>"Odeeffannoo hafe odeeffannoo dhuunfaa keessan waa'ee herrega seensaa keessanii irraa fudhanneerra. Mee kutaalee unkaa armaan gadii qofa guutaa.",
     
     
 ];

@@ -41,7 +41,7 @@
                   @endforeach
                   @endif
                   @if(!Auth::check())
-                  <div class="form-group">
+                  <div class="form-group"> 
                      <label for="name"><i class="bx bxs-user mx-1 text-danger"></i>@lang('home.full_name')</label>
                      <input type="text" name="{{'name_'.$locale}}" class="form-control" id="name" required placeholder="@lang('home.full_name')*">
                   </div>
@@ -56,7 +56,7 @@
                   @endif
                </div>
                @auth
-               <span class="text-success">እንዴት አሉ</span> <strong class="text-info"> {{Auth::user()->name}}?</strong> <span>እርስዎ በመለያዎ ስለገቡ ቀሪ መረጃዎችን ከግል መረጃዎ ወስደናል። እባክዎ ከዚህ በታች ያሉትን የቅፁ ክፍሎች ብቻ ይሙሉ።</span>
+               <span class="text-success">@lang('home.how_are_you')</span> <strong class="text-info"> {{Auth::user()->name}}?</strong> <span>@lang('home.we_have_taken')</span>
                @endauth
                <hr>
                <div class="form-group mt-3">
