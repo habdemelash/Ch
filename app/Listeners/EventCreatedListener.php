@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use App\Models\Event;
 use App\Models\User;
-use App\Models\MessageBox;
+use App\Models\Message;
 
 class EventCreatedListener
 {
@@ -32,7 +32,7 @@ class EventCreatedListener
      $users = User::all();
 
      foreach($users as $user){
-        $welcome = MessageBox::create([
+        $welcome = Message::create([
 
             'content'=>'Have you heard? A new event has been scheduled.'. $event->event->title.' '.'at '.$event->event->location,
             'receiver'=>$user->id,
