@@ -20,6 +20,7 @@
    .read-more{
    background-color: green;
    border: none;
+   margin-top: 15px;
    }
    }
 </style>
@@ -87,7 +88,7 @@
                   <p class="col-md-6 text-info">{{$formatted}}</p>
                   <p><?php echo mb_substr($article->{'body_'.app()->getLocale()},0,100,'UTF-8'); ?> ...</p>
                </div>
-               <div class="text-center col"><a href="{{url('read-news',$article->id)}}" class="btn btn-primary col-sm-6 read-more d-inline"><i class="bx bxs-book-reader mx-1"></i>@lang('home.read_more')</a></div>
+               <div class="text-center col"><a href="{{url('read-news',$article->id)}}" class="btn btn-primary col-sm-6 read-more d-inline my-2"><i class="bx bxs-book-reader mx-1"></i>@lang('home.read_more')</a></div>
                </p>
             </div>
          </div>

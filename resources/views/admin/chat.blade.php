@@ -27,8 +27,8 @@
                     <h4>People contacted you</h4>
                     <ul class="list-group">
                         @forelse($mails as $mail)
-                            <?php $sender = App\Http\Controllers\Messages::sender($mail->id); ?>
-                            <a href="{{ url('contacted/read', $mail->sender) }}">
+                            <?php ?>
+                            <a href="">
                                 <li class="list-group-item">
                                     <strong class="text-left">Abebe </strong>
                                     <p>Hello habte o...</p>
@@ -47,7 +47,7 @@
                     <div class="col-md-8">
                         <div class="card" id="chat2">
                             <div class="card-header d-flex justify-content-between align-items-center p-3">
-                                <h5 class="mb-0">{{ App\Http\Controllers\Messages::sender($mains->id) }}
+                                <h5 class="mb-0">Habte
                                 </h5> With
                                 <h5 class="badge bg-primary">You</h5>
                             </div>

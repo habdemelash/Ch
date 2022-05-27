@@ -121,7 +121,7 @@
                      <ul>
                         <li><a href="{{route('profile')}}">@lang('home.profile')<i class="bx bxs-user"></i></a></li>
                         @can('staffs',Auth::user())
-                        <li><a href="{{route('admin.events')}}">@lang('home.administration')<i class="bi-gear-fill"></i></a></li>
+                        <li><a href="{{route('admin.dashboard')}}">@lang('home.administration')<i class="bi-gear-fill"></i></a></li>
                         @endcan
                         <li><a class="nav-link scrollto" href="{{route('logout')}}">@lang('home.logout')<i class="bx bx-lock"></i></a></li>
                      </ul>

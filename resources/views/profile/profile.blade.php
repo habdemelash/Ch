@@ -14,7 +14,8 @@
     <!-- Icons CSS -->
     <link rel="stylesheet" href="{{asset('profile/css/feather.css') }}">
     <!-- Date Range Picker CSS -->
-    <link rel="stylesheet" href="{{asset('profile/css/daterangepicker.css') }}">
+    <link href="{{ asset('site/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('site/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
     <!-- App CSS -->
     <link rel="stylesheet" href="{{asset('profile/css/app-light.css') }}" id="lightTheme">
     <link rel="stylesheet" href="{{asset('profile/css/app-dark.css') }}" id="darkTheme" disabled>
@@ -32,8 +33,8 @@
               </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="{{route('site.home')}}">@lang('home.site')</a>
-              <a class="dropdown-item" href="{{route('logout')}}">@lang('home.logout')</a>
+              <a class="dropdown-item text-primary h5" href="{{route('site.home')}}"><i class="bx bxs-lock"></i> @lang('home.site')</a>
+              <a class="dropdown-item text-danger h5" href="{{route('logout')}}"><i class="bx bxs-lock"></i> @lang('home.logout')</a>
             
               
             </div>

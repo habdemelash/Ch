@@ -24,7 +24,7 @@
    </div>
 </div>
 <div class="" style="overflow-x: auto;">
-   <table class="table table-hover my-0 table-responsive" id="eventsTable">
+   <table class="table table-hover my-0 table-responsive" id="eventsTable" style="border: none">
       <thead>
          <tr >
             <th>{{__('home.title')}}</th>
@@ -59,8 +59,8 @@
             ?>
          <tr id="eid{{$event->id}}">
             <?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>
-            <td class="text-dark" style="font-style: initial;"><?php echo $event->{'title_'.app()->getLocale()}; ?></td>
-            <td class=" d-xl-table-cell text-primary" style="white-space: nowrap;">{{ $formatted_date }}</td>
+            <td class="text-success fw-bold" style="font-style: initial; white-space: nowrap;"><?php echo $event->{'title_'.app()->getLocale()}; ?></td>
+            <td class="text-primary" style="white-space: nowrap">{{ $formatted_date }}</td>
             <td class=" d-xl-table-cell text-primary">{{ $start }}</td>
             <td class="text-primary">{{ $end}}</td>
             <td class=" d-md-table-cell text-dark">{{ $event->short_desc }}</td>
@@ -89,8 +89,8 @@
             </td>
             <td><img src="{{ asset('uploads/event-pictures') }}/{{ $event->picture}}" class="rounded-circle rounded me-1" alt="{{__('home.no_pic')}}" style="height: 60px;width: 60px;" /></td>
             <td class="d-flex flex-row">
-               <a href="{{url('dash/event/updateform',$event->id)}}" class="mx-1"><i class="bx bxs-edit bx-md"></i></a>
-               <button value="{{$event->id}}" type="button" class="btn deleteEvent" data-bs-toggle="modal" data-bs-target="#deleteEventModal"><i class="bx bxs-trash bx-md text-danger"></i>
+               <a href="{{url('dash/event/updateform',$event->id)}}" class="mx-2 my-4"><i class="bi-pen-fill" style="font-size: 20pt"></i></a>
+               <button value="{{$event->id}}"  class="btn mx-2 deleteEvent" data-bs-toggle="modal" data-bs-target="#deleteEventModal"><i class="bi-trash-fill text-danger" style="font-size: 20pt"></i>
                </button>
             </td>
          </tr>

@@ -167,9 +167,9 @@
                         {{Auth::user()->name}}@endauth</span>
                         </a>
                         <div class="dropdown-menu">
-                           <a class="dropdown-item" href="{{route('profile')}}"><i class="align-middle me-1" data-feather="user"></i> {{__('home.profile')}}</a>
-                           <a class="dropdown-item" href="{{route('site.home')}}"><i class="bx bxs-home-heart"></i> {{__('home.site')}}</a>
-                           <a class="dropdown-item" href="{{route('logout')}}"><i class="bx bx-lock"></i>{{__('home.logout')}}</a>
+                           <a class="dropdown-item text-primary" href="{{route('profile')}}"><i class="align-middle me-1" data-feather="user"></i> {{__('home.profile')}}</a>
+                           <a class="dropdown-item text-primary" href="{{route('site.home')}}"><i class="bx bxs-home-heart"></i> {{__('home.site')}}</a>
+                           <a class="dropdown-item text-danger" href="{{route('logout')}}"><i class="bx bx-lock"></i>{{__('home.logout')}}</a>
                         </div>
                      </li>
                      {{-- User icon dropdown ends here --}}
@@ -184,7 +184,7 @@
                               @foreach(config('app.languages') as $langLocale => $langName)
                               <div class="row g-0 align-items-center">
                                  <div class="col-10">
-                                    <div class="text-dark"><a class="nav-link dropdown-item" href="{{ url()->current() }}?change_language={{ $langLocale }}"> {{ $langName }}</a></div>
+                                    <div class="text-dark"><a class="nav-link dropdown-item fw-bold" href="{{ url()->current() }}?change_language={{ $langLocale }}"> {{ $langName }}</a></div>
                                  </div>
                               </div>
                               @endforeach
@@ -207,13 +207,13 @@
                      <div class="col-6 text-end">
                         <ul class="list-inline">
                            <li class="list-inline-item">
-                              <a class="text-muted" href="{{route('site.home')}}" >{{__('home.site')}}</a>
+                              <a class="text-primary" href="{{route('site.home')}}" >{{__('home.site')}}</a>
                            </li>
                            <li class="list-inline-item">
-                              <a class="text-muted" href="{{route('profile')}}" >{{__('home.profile')}}</a>
+                              <a class="text-primary" href="{{route('profile')}}" >{{__('home.profile')}}</a>
                            </li>
                            <li class="list-inline-item">
-                              <a class="text-muted" href="{{route('logout')}}" target="_blank">{{__('home.logout')}}</a>
+                              <a class="text-primary" href="{{route('logout')}}" target="_blank">{{__('home.logout')}}</a>
                            </li>
                         </ul>
                      </div>
