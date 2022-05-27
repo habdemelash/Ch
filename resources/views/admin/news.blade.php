@@ -36,7 +36,7 @@
       <tbody>
          @foreach($news as $article)
          <tr>
-            <td class="text-info fw-bold" style="font-family: Times New Roman;">{{substr($article->{'heading_'.$locale},0,60)}} ...</td>
+            <td class="text-info fw-bold" style="font-family: Times New Roman;">{{mb_substr($article->{'heading_'.$locale},0,60,'UTF-8')}} ...</td>
             <td class="text-gray-dark">
                {{mb_substr($article->{'body_'.$locale},0,100,'UTF-8')}} ...
                </td style="font-family: Times New Roman;">
@@ -54,7 +54,7 @@
             <td class="text-dark" style="font-family: Times New Roman;" >{{$formatted}}</td>
             <td><img src="{{ asset('uploads/news-pictures') }}/{{ $article->picture}}" class="rounded-circle rounded me-1" alt="No picture" style="height: 60px;width: 60px;" /></td>
             <td class="d-flex flex-row">
-               <a href="{{url('dash/news/updateform',$article->id)}}" class="mx-1"><i class="bx bxs-edit bx-md"></i></a>
+               <a href="{{url('dash/news/updateform',$article->id)}}" class="mx-1 my-3"><i class="bx bxs-edit bx-md"></i></a>
                <button value="{{$article->id}}" type="button" class="btn deleteNews" data-bs-toggle="modal" data-bs-target="#deleteNewsModal"><i class="bx bxs-trash bx-md text-danger"></i>
                </button>
             </td>

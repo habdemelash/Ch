@@ -20,7 +20,7 @@
          </div>
          <div class="my-1 col-md-8">
             <label for="body" class="text-danger fw-bold">@lang('home.body'){{'-'.$value}}</label>
-            <textarea class="form-control"  name="{{'body_'.$locale}}" style="height: 200px;"><?php echo $news->{'heading_'.$locale}; ?></textarea>
+            <textarea class="form-control"  name="{{'body_'.$locale}}" style="height: 200px;"><?php echo $news->{'body_'.$locale}; ?></textarea>
          </div>
          @endforeach
          <div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">
