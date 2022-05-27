@@ -120,19 +120,21 @@
                      </a>
                      <ul>
                         <li><a href="{{route('profile')}}">@lang('home.profile')<i class="bx bxs-user"></i></a></li>
+                        @can('staffs',Auth::user())
                         <li><a href="{{route('admin.events')}}">@lang('home.administration')<i class="bi-gear-fill"></i></a></li>
+                        @endcan
                         <li><a class="nav-link scrollto" href="{{route('logout')}}">@lang('home.logout')<i class="bx bx-lock"></i></a></li>
                      </ul>
                   </li>
                   @endauth
                   @guest
                   @if(Request::is('login'))
-                  <li><a class="getstarted scrollto fw-bold" href="{{route('joinus')}}"><i class="bx bxs-user-plus mx-1" style="font-size:20px;"></i>@lang('home.join_btn')</a></li>
+                  <li><a class="getstarted scrollto fw-bold my-1" href="{{route('joinus')}}"><i class="bx bxs-user-plus mx-1" style="font-size:20px;"></i>@lang('home.join_btn')</a></li>
                   @else
-                  <li><a class="getstarted scrollto fw-bold" href="{{route('login')}}"><i class="bx bxs-lock-open mx-1" style="font-size:20px;"></i>@lang('home.login')</a></li>
+                  <li><a class="getstarted scrollto fw-bold my-1" href="{{route('login')}}"><i class="bx bxs-lock-open mx-1" style="font-size:20px;"></i>@lang('home.login')</a></li>
                   @endif
                   @endguest
-                  <li class="dropdown mx-3">
+                  <li class="dropdown my-1">
                      <a href="#" style="font-size: 13px"><span>{{config('app.languages') [app()->getLocale()] }}</span> <i class="bi bi-chevron-down"></i></a>
                      @if(count(config('app.languages')) > 1)
                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
