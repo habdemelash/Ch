@@ -27,7 +27,12 @@
                             @endphp
                             @forelse($users as $user)
                             <li class="clearfix">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                                @if($user->profile_photo_path == null)
+                                    <img class="img-thumbnail rounded-circle" height="50" width="50" src="{{asset('site/assets/img/user.png')}}" >
+                                @else
+                                <img class="img-thumbnail rounded-circle" height="50" width="50" src="{{asset('uploads/profile-photos')}}/{{$user->profile_photo_path}}" alt="">
+                                 @endif 
+                                <span class="text-dark ">
                                 <div class="about">
                                     <a  href="{{url('dash/mails/open',$user->id)}}">
                                     <div class="name">{{$user->name}}</div>
@@ -43,13 +48,7 @@
                             </div>
 
                             @endforelse
-                            <li class="clearfix active">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
-                                <div class="about">
-                                    <div class="name">Aiden Chavez</div>
-                                    <div class="status"> <i class="fa fa-circle online"></i> online </div>
-                                </div>
-                            </li>
+                            
                             {{$users->links('pagination::bootstrap-4')}}
                         </ul>
                     </div>
@@ -62,16 +61,13 @@
                                         <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
                                     </a>
                                     <div class="chat-about">
-                                        <h6 class="m-b-0">{{App\Models\User::find($open[0]->sender)->name}}</h6>
+                                        @if(count($open) >0)
+                                        <h6 class="m-b-0">{{App\Models\User::find(Request::segment(4))->name}}</h6>
                                         <small>Last seen: 2 hours ago</small>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-lg-6 hidden-sm text-right">
-                                    <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
-                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
-                                </div>
+                               
                             </div>
                         </div>
                         <div class="chat-history" >
@@ -108,7 +104,7 @@
                                     @csrf 
                                     <div class="input-group mb-3 ms-3">
                                         <input type="text" name="message" class="form-control block" placeholder="Message..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                                        <input value="{{ App\Models\User::find($open[0]->sender)->id}}" name="receiver" hidden>
+                                        <input value="{{Request::segment(4)}}" name="receiver" hidden>
                                         <div class="input-group-append">
                                           <button type="submit" class="input-group-text" id="basic-addon2"><i class="fa fa-envelope"></i></button>
                                         </div>

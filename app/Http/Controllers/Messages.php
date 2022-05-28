@@ -42,6 +42,7 @@ class Messages extends Controller
     }
     public function reply(Request $request)
     {
+
        $message = new Message();
        if(isset($request->message)){
            $message->content = $request->message;
