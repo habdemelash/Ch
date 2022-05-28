@@ -40,6 +40,17 @@ class Messages extends Controller
         }
         return view("admin.chat",['open'=>$return]);
     }
+    public function reply(Request $request)
+    {
+       $message = new Message();
+       if(isset($request->message)){
+           $message->content = $request->message;
+           $message->receiver = $request->receiver;
+           $message->sender = Auth::user()->id;
+           $message->save();
+       }
+       return redirect()->back();
+    }
 
     /**
      * postSendMessage

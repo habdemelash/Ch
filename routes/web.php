@@ -43,6 +43,7 @@ Route::middleware([
 ])->group(function () { 
     Route::get('personal-info', [Home::class, 'profile'])->name('profile');
     Route::post('update-profile', [Home::class, 'updateProfile'])->name('update.profile');
+    Route::post('mail/reply', [Messages::class, 'reply'])->name('mail.reply');
 
     Route::group(['middleware' => ['isAdmin']],  function () {
         Route::get('dash/users', [Dashboard::class, 'users'])->name('admin.users');

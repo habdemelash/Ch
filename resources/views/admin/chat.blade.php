@@ -94,27 +94,28 @@
                                     <div class="message my-message">{{$mail->content}}</div>                                    
                                 </li>  
                                 @endif                             
-                                {{-- <li class="clearfix">
-                                    <div class="message-data">
-                                        <span class="message-data-time">{{$mail->created_at}}</span>
-                                    </div>
-                                    <div class="message my-message">Project has been already finished and I have results to show you.</div>
-                                </li> --}}
                                 @empty
-
+                                <li>
+                                    <div class="">No mails yet</div>
+                                </li>
                                 @endforelse
                                 
                             </ul>
                             
-                        </div>
-                        <div class="chat-message clearfix">
-                            <div class="input-group mb-0">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-send"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="Enter text here...">                                    
-                            </div>
-                        </div>
+                        </div>  
+                            <div class="input-group mb-0 row">
+                                <form action="{{route('mail.reply')}}" method="POST">
+                                    @csrf 
+                                    <div class="input-group mb-3 ms-3">
+                                        <input type="text" name="message" class="form-control block" placeholder="Message..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                        <input value="{{ App\Models\User::find($open[0]->sender)->id}}" name="receiver" hidden>
+                                        <div class="input-group-append">
+                                          <button type="submit" class="input-group-text" id="basic-addon2"><i class="fa fa-envelope"></i></button>
+                                        </div>
+                                    </form>
+                                    </div>                       
+                            
+                        
                     </div>
                     @endisset
                 </div>
