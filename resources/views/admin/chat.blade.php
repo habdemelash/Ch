@@ -92,17 +92,20 @@
                                                 <li class="clearfix">
                                                     <div class="message-data text-right">
                                                         <span class="message-data-time">{{ $mail->created_at }}</span>
-                                                        @if ($me->profile_photo_path == null)
-                                                    <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                                        src="{{ asset('site/assets/img/user.png') }}">
-                                                @else
-                                                    <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                                        src="{{ asset('uploads/profile-photos') }}/{{ $me->profile_photo_path }}"
-                                                        alt="">
-                                                @endif
+
+                                                        @if (!$me->profile_photo_path)
+                                                            <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                                                src="{{ asset('site/assets/img/user.png') }}">
+                                                        @else
+                                                            <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                                                src="{{ asset('uploads/profile-photos') }}/{{ $me->profile_photo_path }}"
+                                                                alt="">
+                                                        @endif
+                                                    </div>
+                                                    <div class="message other-message float-right"> {{ $mail->content }}
                                                     </div>
                                                     {{-- <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div> --}}
-                                                    <div class="message other-message float-right"> {{ $mail->content }}</div>
+
                                                 </li>
                                             @else
                                                 <li class="clearfix">

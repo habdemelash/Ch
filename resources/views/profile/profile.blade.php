@@ -109,8 +109,8 @@
 
 
                                         <label for="name">@lang('home.full_name')</label>
-                                        <input type="text" id="name" class="form-control" placeholder="@lang('home.full_name')"
-                                            name="name" value="{{ $my->name }}">
+                                        <input type="text" id="name" class="form-control"
+                                            placeholder="@lang('home.full_name')" name="name" value="{{ $my->name }}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="phone">@lang('home.phone')</label>

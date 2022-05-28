@@ -20,7 +20,8 @@ body {
     left: 0;
     top: 0;
     padding: 20px;
-    z-index: 7
+    z-index: 7;
+    background: #F5F7FB;
 }
 
 .chat-app .chat {
@@ -42,7 +43,7 @@ body {
 }
 
 .people-list .chat-list li:hover {
-    background: #efefef;
+    background: none;
     cursor: pointer
 }
 
@@ -238,7 +239,7 @@ body {
 @media only screen and (min-width: 768px) and (max-width: 992px) {
     .chat-app .chat-list {
         height: 650px;
-        overflow-x: auto
+        /* overflow-x: auto */
     }
     .chat-app .chat-history {
         height: 600px;
