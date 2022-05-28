@@ -1,114 +1,126 @@
 @extends('layouts.admin')
 @section('content')
-    <link rel="stylesheet" href="{{ asset('chat/assets/css/bootstrap.min.css') }}">
-    <style>
-        #chat2 .form-control {
-            border-color: transparent;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{asset('admin/css/bootstrap4.min.css')}}" >
+<link rel="stylesheet" href="{{asset('admin/css/chat.css')}}">
 
-        #chat2 .form-control:focus {
-            border-color: transparent;
-            box-shadow: inset 0px 0px 0px 1px transparent;
-        }
+</head>
+<body>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card chat-app">
+                    <div id="plist" class="people-list" >
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                        <ul class="list-unstyled chat-list mt-2 mb-0">
+                            @php
+                            $users = App\Models\User::paginate(10);
+                            @endphp
+                            @forelse($users as $user)
+                            <li class="clearfix">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="avatar">
+                                <div class="about">
+                                    <a  href="{{url('dash/mails/open',$user->id)}}">
+                                    <div class="name">{{$user->name}}</div>
+                                   
+                                    </a>
+                                    
+                                    <div class="status"> <i class="fa fa-circle offline"></i> {{$user->created_at}} </div>                                            
+                                </div>
+                            </li>
+                            @empty
+                            <div class="about">
+                                No users                                            
+                            </div>
 
-        .divider:after,
-        .divider:before {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: #eee;
-        }
-
-    </style>
-    <section style="margin-top: 20px">
-        <div class="container py-5">
-            <div class="row d-flex justify-content-center">
-                <div class="col-md{{ isset($main) ? -4 : '' }}">
-                    <h4>People contacted you</h4>
-                    <ul class="list-group">
-                        @forelse($mails as $mail)
-                            <?php ?>
-                            <a href="">
-                                <li class="list-group-item">
-                                    <strong class="text-left">Abebe </strong>
-                                    <p>Hello habte o...</p>
+                            @endforelse
+                            <li class="clearfix active">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                <div class="about">
+                                    <div class="name">Aiden Chavez</div>
+                                    <div class="status"> <i class="fa fa-circle online"></i> online </div>
+                                </div>
+                            </li>
+                            {{$users->links('pagination::bootstrap-4')}}
+                        </ul>
+                    </div>
+                    @isset($open)
+                    <div class="chat">
+                        <div class="chat-header clearfix">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="avatar">
+                                    </a>
+                                    <div class="chat-about">
+                                        <h6 class="m-b-0">{{App\Models\User::find($open[0]->sender)->name}}</h6>
+                                        <small>Last seen: 2 hours ago</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 hidden-sm text-right">
+                                    <a href="javascript:void(0);" class="btn btn-outline-secondary"><i class="fa fa-camera"></i></a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-info"><i class="fa fa-cogs"></i></a>
+                                    <a href="javascript:void(0);" class="btn btn-outline-warning"><i class="fa fa-question"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-history" >
+                            <ul class="m-b-0" style="overflow-y: scroll">
+                                @forelse($open as $mail)
+                                @if(Auth::user()->id == App\Models\User::find($mail->sender)->id)
+                                <li class="clearfix">
+                                    <div class="message-data text-right">
+                                        <span class="message-data-time">{{$mail->created_at}}</span>
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="avatar">
+                                    </div>              
+                                    {{-- <div class="message other-message float-right"> Hi Aiden, how are you? How is the project coming along? </div> --}}
+                                    <div class="message other-message float-right"> {{$mail->content}}</div>
                                 </li>
-                            </a>
-                        @empty
-                            <a href="" title="">
-                                <li>No one yet</li>
-                            </a>
-                        @endforelse
-
-                    </ul>
-                    {{-- {{ $mails->links('pagination::bootstrap-4') }} --}}
-                </div>
-                @isset($mains)
-                    <div class="col-md-8">
-                        <div class="card" id="chat2">
-                            <div class="card-header d-flex justify-content-between align-items-center p-3">
-                                <h5 class="mb-0">Habte
-                                </h5> With
-                                <h5 class="badge bg-primary">You</h5>
-                            </div>
-                            <div class="card-body" data-mdb-perfect-scrollbar="true"
-                                style="position: relative; height: 400px; overflow-y: scroll;">
-                                @forelse($mains as $main)
-                                    <div class="d-flex flex-row justify-content-start">
-
-
-                                        @if (!$main->sender !== Auth::user()->id && $main->receiver == Auth::user()->id)
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                                                alt="avatar 1" style="width: 45px; height: 100%;">
-                                            <div>
-                                                <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;">
-                                                    {{ $main->content }}
-                                                </p>
-
-                                                <p class="small ms-3 mb-3 rounded-3 text-muted">{{ $main->created_at }}</p>
-                                            </div>
-                                        @endif
-
+                                @else
+                                <li class="clearfix">
+                                    <div class="message-data">
+                                        <span class="message-data-time">{{$mail->created_at}}</span>
                                     </div>
-                                    <div class="divider d-flex align-items-center mb-4">
-
+                                    <div class="message my-message">{{$mail->content}}</div>                                    
+                                </li>  
+                                @endif                             
+                                {{-- <li class="clearfix">
+                                    <div class="message-data">
+                                        <span class="message-data-time">{{$mail->created_at}}</span>
                                     </div>
-                                    @if ($main->sender == Auth::user()->id && $main->sender !== Auth::user()->id)
-                                        <div class="d-flex flex-row justify-content-end mb-4 pt-1">
-                                            <div>
-                                                <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
-                                                    {{ $main->content }}</p>
-                                                <p class="small ms-3 mb-3 rounded-3 text-muted">{{ $main->created_at }}</p>
-
-                                            </div>
-                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp"
-                                                alt="avatar 1" style="width: 45px; height: 100%;">
-                                        </div>
-                                    @endif
+                                    <div class="message my-message">Project has been already finished and I have results to show you.</div>
+                                </li> --}}
                                 @empty
-                                    <p>Nothing yet</p>
+
                                 @endforelse
-                            </div>
-                             <form >
-                            <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
-                                    alt="avatar 3" style="width: 40px; height: 100%;">
-                               
-                                    <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
-                                        placeholder="Type message">
-                                    <button type="submit" style="border-style: none;s"><i class="bx bxs-paper-plane text-primary"></i></button>
                                 
+                            </ul>
+                            
+                        </div>
+                        <div class="chat-message clearfix">
+                            <div class="input-group mb-0">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-send"></i></span>
+                                </div>
+                                <input type="text" class="form-control" placeholder="Enter text here...">                                    
                             </div>
-                            </form>
                         </div>
                     </div>
-                @endisset
+                    @endisset
+                </div>
             </div>
         </div>
-    </section>
-    <script src="{{ asset('chat/assets/js/jquery.slim.min.js') }}"></script>
-    <script src="{{ asset('chat/assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script>
-        $('.card-body').scrollTop($('.card-body')[0].scrollHeight);
-    </script>
+        </div>
+        <script src="{{asset('admin/other/bootstrap.bundle.min.js')}}" ></script>
 @endsection
+

@@ -4,14 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
 use App\Http\Livewire\LetsHelp;
-use App\Models\User;
-use App\Models\Event;
-use App\Models\News;
-use App\Models\Helpme;
-use App\Models\MessageBox;
+
+use App\Models\Message;
 use App\Models\Role;
 use App\Http\Controllers\Site\Home;
 use App\Http\Controllers\Signout;
+use App\Http\Controllers\Messages;
 use App\Http\Controllers\Admin\Dashboard;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Site\HelpmeController;
@@ -72,9 +70,8 @@ Route::middleware([
         Route::post('dash/event/update/{id}', [Dashboard::class, 'updateEvent'])->name('admin.event.update');
         Route::post('/events/delete', [Dashboard::class, 'deleteEvent'])->name('admin.event.delete');
         Route::get('dash/event/viewmembers/{id}', [Dashboard::class, 'viewMembers'])->name('admin.event.viewmembers');
-        Route::get('dash/mails', [Dashboard::class, 'mails'])->name('user.mails');
-        Route::get('dash/mails/view/{id}', [Dashboard::class, 'viewMail'])->name('user.mails.view');
-        Route::get('dash/mails/reply/{id}', [Dashboard::class, 'reply'])->name('user.mails.reply');
+        Route::get('dash/mails', [Messages::class, 'chat'])->name('user.mails');
+        Route::get('dash/mails/open/{id}', [Messages::class, 'open'])->name('user.mails.open');
         Route::get('dash/helpmes/view/{id}', [Dashboard::class, 'viewHelpme'])->name('admin.helpmes.view');
         Route::get('dash/helpmes/accept/{id}', [Dashboard::class, 'acceptHelpme'])->name('admin.helpmes.accept');
         Route::get('dash/helpmes/reject/{id}', [Dashboard::class, 'rejectHelpme'])->name('admin.helpmes.reject');
@@ -85,12 +82,7 @@ Route::middleware([
 });
 
 Route::get('try', function () {
-    if (Gate::allows('admins', Auth::user())) {
-        return 'Welcome you are admin';
-    } else {
-
-        return redirect()->back();
-    }
+    dd(Message::all());
 
     // $email = DB::table('users')->where('id', Auth::user()->id)->value('locale');
     // dd($email,\Request::route());

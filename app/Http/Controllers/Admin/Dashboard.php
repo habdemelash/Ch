@@ -605,21 +605,7 @@ class Dashboard extends Controller
         return Helpme::where("seen", "=", 0)->paginate(5);
     }
 
-    public function mails()
-    {
-        $mails = Message::all();
-        $main = Message::first();
-        return view("admin.chat",['mails'=>$mails,'main'=>$main]);
-    }
-    public function viewMail($id)
-    {
-        return view("admin.reply");
-    }
-
-    public function reply($id)
-    {
-        return view("admin.chat");
-    }
+    
     public function users()
     {
         $users = User::where("id", "!=", Auth::user()->id)

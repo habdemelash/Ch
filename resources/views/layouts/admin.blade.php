@@ -22,9 +22,7 @@
    <?php $address = Request::url(); 
       $countUnseen = App\Http\Controllers\Admin\Dashboard::countUnseenHelpmes();
       $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
-      $messages = App\Http\Controllers\Messages::partialMessages(Auth::user()->id);
-      $all = App\Http\Controllers\Messages::allMessages(Auth::user()->id);
-      $messageCount= $all->count();
+     
       ?>
    <body>
       <div class="wrapper">
@@ -57,7 +55,7 @@
                   </li>
                   <li class="sidebar-item {{ strpos($address,'dash/mails') ? 'active' : '';}}">
                      <a class="sidebar-link" href="{{route('user.mails')}}">
-                     <i class="bx bxs-message bx-md" ></i> <span class="align-middle">{{__('home.mails')}}<span class="badge bg-info ml-1">{{$messageCount}}</span> </span>
+                     <i class="bx bxs-message bx-md" ></i> <span class="align-middle">{{__('home.mails')}}<span class="badge bg-info ml-1">5</span> </span>
                      </a>
                   </li>
                   @can('admins', Auth::user())
@@ -121,17 +119,17 @@
                      <li class="nav-item dropdown">
                         <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
                            <div class="position-relative">
-                              <i class="align-middle" data-feather="message-square"></i><span class="indicator">{{$messageCount}}</span>
+                              <i class="align-middle" data-feather="message-square"></i><span class="indicator">5</span>
                            </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0 " aria-labelledby="messagesDropdown" style="width: 300px;">
                            <div class="dropdown-menu-header">
                               <div class="position-relative">
-                                 <span class="badge bg-primary">{{$messageCount}}</span> {{__('home.new_mails')}}
+                                 <span class="badge bg-primary">5</span> {{__('home.new_mails')}}
                               </div>
                            </div>
                            <div class="list-group">
-                              @foreach($messages as $mail )
+                              @for($i=0;$i<4;$i++)
                               <a href="#" class="list-group-item">
                                  <div class="row g-0 align-items-center">
                                     <div class="col-2">
@@ -139,16 +137,14 @@
                                        <i class="bx bxs-user-circle bx-md"></i>
                                     </div>
                                     <div class="col-10 ps-2">
-                                       <?php $sender = App\Http\Controllers\Messages::sender($mail->sender); 
-                                         
-                                          ?>
-                                       <div class="text-dark">{{$sender}}</div>
-                                       <div class="text-muted small mt-1">{{mb_substr($mail->content,0,30,'UTF-8')}} ...</div>
-                                       <div class="text-muted small mt-1">{{$mail->created_at}}</div>
+                                      
+                                       <div class="text-dark">Kirubel</div>
+                                       <div class="text-muted small mt-1">Hi Habtish ...</div>
+                                       <div class="text-muted small mt-1">Jan 21, 2022 7:01 PM</div>
                                     </div>
                                  </div>
                               </a>
-                              @endforeach
+                              @endfor
                            </div>
                            <div class="dropdown-menu-footer">
                               <a href="#" class="text-muted">@lang('home.see_all')</a>

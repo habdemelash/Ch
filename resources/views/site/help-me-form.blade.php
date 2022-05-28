@@ -40,7 +40,7 @@
                   <div class="alert alert-danger">{{$error}}</div>
                   @endforeach
                   @endif
-                  @if(!Auth::check())
+                  @if(!Auth::check()) 
                   <div class="form-group"> 
                      <label for="name"><i class="bx bxs-user mx-1 text-danger"></i>@lang('home.full_name')</label>
                      <input type="text" name="{{'name_'.$locale}}" class="form-control" id="name" required placeholder="@lang('home.full_name')*">
