@@ -210,6 +210,7 @@ return [
     'new'=>"Haaraa",
     'delete_user'=>"Tajaajilamaa ballessi",
     'how_are_you'=>"Akkam jirta",
+    'your_message'=>"Ergaa keessan",
     'we_have_taken'=>"Odeeffannoo hafe odeeffannoo dhuunfaa keessan waa'ee herrega seensaa keessanii irraa fudhanneerra. Mee kutaalee unkaa armaan gadii qofa guutaa.",
     
     

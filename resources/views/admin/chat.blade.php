@@ -11,7 +11,7 @@
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" >
             <div class="row clearfix">
                 <div class="col-lg-12">
                     <div class="card chat-app">
@@ -20,11 +20,11 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-search"></i></span>
                                 </div>
-                                <input type="text" class="form-control" placeholder="Search...">
+                                <input type="text" class="form-control" placeholder="@lang('home.search_place')">
                             </div>
                             <ul class="list-unstyled chat-list mt-2 mb-0">
                                 @php
-                                    $users = App\Models\User::paginate(10);
+                                    $users = App\Models\User::paginate(6);
                                     $me = Auth::user();
                                 @endphp
                                 @forelse($users as $user)
@@ -129,7 +129,7 @@
                                         @csrf
                                         <div class="input-group mb-3 ms-3">
                                             <input type="text" name="message" class="form-control block"
-                                                placeholder="Message..." aria-label="Recipient's username"
+                                                placeholder="@lang('home.your_message')" aria-label="Recipient's username"
                                                 aria-describedby="basic-addon2">
                                             <input value="{{ Request::segment(4) }}" name="receiver" hidden>
                                             <div class="input-group-append">
