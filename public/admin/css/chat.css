@@ -91,7 +91,7 @@ body {
 }
 
 .chat .chat-history {
-    padding: 20px;
+    padding: 10px;
     border-bottom: 2px solid #fff
 }
 
@@ -101,7 +101,7 @@ body {
 
 .chat .chat-history ul li {
     list-style: none;
-    margin-bottom: 30px
+    margin-bottom: 10px
 }
 
 .chat .chat-history ul li:last-child {
@@ -215,7 +215,7 @@ body {
     .chat-app .people-list {
         height: 465px;
         width: 100%;
-        overflow-x: auto;
+        /* overflow-x: auto; */
         background: #fff;
         left: -400px;
         display: none
