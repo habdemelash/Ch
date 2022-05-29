@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <div id="plist" class="people-list" style="display: inline-block">
+                <div id="plist" class="people-list" >
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-search"></i></span>
@@ -102,14 +102,6 @@
                                         </div>
                                     @else
                                         <div class="">
-                                            @if ($talking->profile_photo_path == null)
-                                            <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                                src="{{ asset('site/assets/img/user.png') }}">
-                                        @else
-                                            <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                                src="{{ asset('uploads/profile-photos') }}/{{ $talking->profile_photo_path }}"
-                                                alt="">
-                                        @endif
                                             <span
                                                 class="">{{ $mail->created_at }}</span><br>
                                             {{ $mail->content }}</div>

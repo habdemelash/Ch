@@ -51,10 +51,6 @@
     color: #e47297
 }
 
-.me {
-    color: #1d8ecd
-}
-
 @media only screen and (max-width: 767px) {
     .chat-app .people-list {
         height: 465px;
