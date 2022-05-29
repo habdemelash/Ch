@@ -44,6 +44,8 @@ Route::middleware([
     Route::get('personal-info', [Home::class, 'profile'])->name('profile');
     Route::post('update-profile', [Home::class, 'updateProfile'])->name('update.profile');
     Route::post('mail/reply', [Messages::class, 'reply'])->name('mail.reply');
+    Route::get('dash/mails', [Messages::class, 'chat'])->name('user.mails');
+    Route::get('dash/mails/open/{id}', [Messages::class, 'open'])->name('user.mails.open');
 
     Route::group(['middleware' => ['isAdmin']],  function () {
         Route::get('dash/users', [Dashboard::class, 'users'])->name('admin.users');
@@ -71,8 +73,7 @@ Route::middleware([
         Route::post('dash/event/update/{id}', [Dashboard::class, 'updateEvent'])->name('admin.event.update');
         Route::post('/events/delete', [Dashboard::class, 'deleteEvent'])->name('admin.event.delete');
         Route::get('dash/event/viewmembers/{id}', [Dashboard::class, 'viewMembers'])->name('admin.event.viewmembers');
-        Route::get('dash/mails', [Messages::class, 'chat'])->name('user.mails');
-        Route::get('dash/mails/open/{id}', [Messages::class, 'open'])->name('user.mails.open');
+
         Route::get('dash/helpmes/view/{id}', [Dashboard::class, 'viewHelpme'])->name('admin.helpmes.view');
         Route::get('dash/helpmes/accept/{id}', [Dashboard::class, 'acceptHelpme'])->name('admin.helpmes.accept');
         Route::get('dash/helpmes/reject/{id}', [Dashboard::class, 'rejectHelpme'])->name('admin.helpmes.reject');

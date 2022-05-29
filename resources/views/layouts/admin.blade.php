@@ -35,33 +35,35 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                     <span class="align-middle">CVSMS</span>
                 </a>
                 <ul class="sidebar-nav">
-                    <li class="sidebar-item {{ Request::is('dash') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
-                            <i class="bx bx-stats bx-md"></i> <span
-                                class="align-middle">{{ __('home.dashboard') }}</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item {{ strpos($address, 'dash/event') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('admin.events') }}">
-                            <i class="bx bxs-calendar-check bx-md"></i> <span
-                                class="align-middle">{{ __('home.events_nav') }}</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item {{ strpos($address, 'dash/news') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('admin.news') }}">
-                            <i class="bx bxs-news bx-md"></i> <span
-                                class="align-middle">{{ __('home.news') }}</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item {{ strpos($address, 'dash/helpmes') ? 'active' : '' }}">
-                        <a class="sidebar-link" href="{{ route('admin.helpmes') }}">
-                            <i class="bx bxs-hand bx-md"></i> <span
-                                class="align-middle">{{ __('home.help_me') }}</span>
-                            @if ($countUnseen > 0)
-                                <span class="badge bg-primary">{{ $countUnseen }}</span>
-                            @endif
-                        </a>
-                    </li>
+                    @can('staffs', Auth::user())
+                        <li class="sidebar-item {{ Request::is('dash') ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.dashboard') }}">
+                                <i class="bx bx-stats bx-md"></i> <span
+                                    class="align-middle">{{ __('home.dashboard') }}</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ strpos($address, 'dash/event') ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.events') }}">
+                                <i class="bx bxs-calendar-check bx-md"></i> <span
+                                    class="align-middle">{{ __('home.events_nav') }}</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ strpos($address, 'dash/news') ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.news') }}">
+                                <i class="bx bxs-news bx-md"></i> <span
+                                    class="align-middle">{{ __('home.news') }}</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item {{ strpos($address, 'dash/helpmes') ? 'active' : '' }}">
+                            <a class="sidebar-link" href="{{ route('admin.helpmes') }}">
+                                <i class="bx bxs-hand bx-md"></i> <span
+                                    class="align-middle">{{ __('home.help_me') }}</span>
+                                @if ($countUnseen > 0)
+                                    <span class="badge bg-primary">{{ $countUnseen }}</span>
+                                @endif
+                            </a>
+                        </li>
+                    @endcan
                     <li class="sidebar-item {{ strpos($address, 'dash/mails') ? 'active' : '' }}">
                         <a class="sidebar-link" href="{{ route('user.mails') }}">
                             <i class="bx bxs-message bx-md"></i> <span
@@ -88,49 +90,51 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                 </a>
                 <div class="navbar-collapse collapse">
                     <ul class="navbar-nav navbar-align">
-                        @yield('search')
-                        <li class="nav-item dropdown">
-                            <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
-                                <div class="position-relative">
-                                    <i class="bx bxs-hand"></i>
-                                    @if ($countUnseen > 0)
-                                        <span class="indicator">{{ $countUnseen }}</span>
-                                    @endif
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
-                                aria-labelledby="alertsDropdown" style="width: 300px;">
-                                <div class="dropdown-menu-header">
-                                    @if ($countUnseen > 0)
-                                        <span class="badge bg-danger">{{ $countUnseen }}</span>
-                                        {{ __('home.new_helpme') }}
-                                    @else
-                                        {{ __('home.no_new_helpme') }}
-                                    @endif
-                                </div>
-                                <div class="list-group">
-                                    @foreach ($unseen as $un)
-                                        <a href="{{ url('dash/helpmes/view', $un->id) }}" class="list-group-item">
-                                            <div class="row g-0 align-items-center">
-                                                <div class="col-2">
-                                                    <i class="bx bxs-hand text-danger"></i>
+                        @can('staffs', Auth::user())
+                            @yield('search')
+                            <li class="nav-item dropdown">
+                                <a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
+                                    <div class="position-relative">
+                                        <i class="bx bxs-hand"></i>
+                                        @if ($countUnseen > 0)
+                                            <span class="indicator">{{ $countUnseen }}</span>
+                                        @endif
+                                    </div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0"
+                                    aria-labelledby="alertsDropdown" style="width: 300px;">
+                                    <div class="dropdown-menu-header">
+                                        @if ($countUnseen > 0)
+                                            <span class="badge bg-danger">{{ $countUnseen }}</span>
+                                            {{ __('home.new_helpme') }}
+                                        @else
+                                            {{ __('home.no_new_helpme') }}
+                                        @endif
+                                    </div>
+                                    <div class="list-group">
+                                        @foreach ($unseen as $un)
+                                            <a href="{{ url('dash/helpmes/view', $un->id) }}" class="list-group-item">
+                                                <div class="row g-0 align-items-center">
+                                                    <div class="col-2">
+                                                        <i class="bx bxs-hand text-danger"></i>
+                                                    </div>
+                                                    <div class="col-10">
+                                                        <div class="text-info fw-bold">{{ $un->name }}</div>
+                                                        <div class="text-muted small mt-1">{{ $un->problem_title }}</div>
+                                                        <?php $on = new Carbon\Carbon(new DateTime($un->created_at));
+                                                        $formatted = $on->toDayDateTimeString(); ?>
+                                                        <div class="text-dark small mt-1">{{ $formatted }}</div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-10">
-                                                    <div class="text-info fw-bold">{{ $un->name }}</div>
-                                                    <div class="text-muted small mt-1">{{ $un->problem_title }}</div>
-                                                    <?php $on = new Carbon\Carbon(new DateTime($un->created_at));
-                                                    $formatted = $on->toDayDateTimeString(); ?>
-                                                    <div class="text-dark small mt-1">{{ $formatted }}</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    @endforeach
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                    <div class="dropdown-menu-footer">
+                                        {{ $unseen->links('pagination::bootstrap-5') }}
+                                    </div>
                                 </div>
-                                <div class="dropdown-menu-footer">
-                                    {{ $unseen->links('pagination::bootstrap-5') }}
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                        @endcan
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown"
                                 data-bs-toggle="dropdown">
