@@ -212,6 +212,9 @@ return [
     'delete_user'=>"ተጠቃሚ መሰረዝ",
     'how_are_you'=>"እንዴት አሉ ",
     'your_message'=>"መልእክትዎ...",
+    'your_profile_deleted'=>"መለያዎት በተሳካ ሁኔታ ተሰርዟል።",
+    'delete_profile'=>"መለያ ሰርዝ",
+    'do_u_delete_profile'=>"እርግጠኛ ነዎት መለያዎትን መሰረዝ ይፈልጋሉ?",
     'we_have_taken'=>"እርስዎ በመለያዎ ስለገቡ ቀሪ መረጃዎችን ከግል መረጃዎ ወስደናል። እባክዎ ከዚህ በታች ያሉትን የቅፁ ክፍሎች ብቻ ይሙሉ።",
     
     

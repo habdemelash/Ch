@@ -34,13 +34,7 @@ Route::get('all-my-events', [Home::class, 'allMyEvents'])->name('all.my.events')
 Route::get('donate-materials', [Home::class, 'donateMaterialsForm'])->name('donate.materials.form');
 Route::get('contact-us', [Home::class, 'contactForm'])->name('contact.form');
 Route::get('/logout', [Signout::class, 'signout'])->name('logout')->middleware('auth');
-
-
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () { 
+Route::group(['middleware' => ['auth']],  function () {
     Route::get('personal-info', [Home::class, 'profile'])->name('profile');
     Route::post('update-profile', [Home::class, 'updateProfile'])->name('update.profile');
     Route::get('profile/delete', [Home::class, 'deleteProfile'])->name('delete.profile');
@@ -48,6 +42,13 @@ Route::middleware([
     Route::get('dash/mails', [Messages::class, 'chat'])->name('user.mails');
     Route::get('dash/mails/open/{id}', [Messages::class, 'open'])->name('user.mails.open');
 
+});
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () { 
     Route::group(['middleware' => ['isAdmin']],  function () {
         Route::get('dash/users', [Dashboard::class, 'users'])->name('admin.users');
         Route::get('dash/users/staffup/{id}', [Dashboard::class, 'staffup'])->name('admin.users.staffup');

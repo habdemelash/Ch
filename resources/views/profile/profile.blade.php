@@ -188,7 +188,7 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">@lang('home.save_change')</button>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                    data-bs-target="#deleteMe">@lang('delete_profile')
+                                    data-bs-target="#deleteMe">@lang('home.delete_profile')
                                 </button>
                                 
                             </form>

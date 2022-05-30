@@ -211,6 +211,9 @@ return [
     'delete_user'=>"Tajaajilamaa ballessi",
     'how_are_you'=>"Akkam jirta",
     'your_message'=>"Ergaa keessan",
+    'your_profile_deleted'=>"Profaayilli kee milkaa'inaan haqameera.",
+    'delete_profile'=>"Profaayilii haqi.",
+    'do_u_delete_profile'=>"Profaayilii kee haquu barbaaddu mirkaneeffatteettaa?",
     'we_have_taken'=>"Odeeffannoo hafe odeeffannoo dhuunfaa keessan waa'ee herrega seensaa keessanii irraa fudhanneerra. Mee kutaalee unkaa armaan gadii qofa guutaa.",
     
     

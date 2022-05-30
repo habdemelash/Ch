@@ -210,6 +210,9 @@ return [
     'delete_user'=>"Delete user",
     'showing'=>"Showing",
     'how_are_you'=>"How are you ",
+    'delete_profile'=>"Delete profile",
+    'do_u_delete_profile'=>"Are you sure you want to delete your profile?",
+    'your_profile_deleted'=>"Your profile has been deleted successfully.",
     'your_message'=>"Your message...",
     'we_have_taken'=>"We have taken the remaining information from your profile information about your. Please complete only the sections of the form below.",
 
