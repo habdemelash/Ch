@@ -122,7 +122,7 @@
         <div class="col-sm-6 mt-3 mb-lg-5">
             <strong>{{ $users->links('pagination::bootstrap-4') }}</strong>
         </div>
-      
+
     </div>
     <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
@@ -146,9 +146,9 @@
             localStorage.setItem('scrollpos', window.scrollY);
         };
     </script>
-     @if (Session::has('message'))
-     <script>
-         toastr.success("{!! Session::get('message') !!}");
-     </script>
+    @if (Session::has('message'))
+        <script>
+            toastr.success("{!! Session::get('message') !!}");
+        </script>
     @endif
 @endsection

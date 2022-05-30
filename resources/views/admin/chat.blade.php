@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm">
-                <div id="plist" class="people-list" >
+                <div id="plist" class="people-list">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text"><i class="fa fa-search"></i></span>
@@ -41,7 +41,7 @@
                             </li>
                         @empty
                             <div class="about">
-                                No users
+                                @lang('home.no_messages')
                             </div>
                         @endforelse
 
@@ -58,33 +58,24 @@
                                     @php
                                         $talking = App\Models\User::find(Request::segment(4));
                                     @endphp
-                                    <a href="javascript:void(0);" data-toggle="modal" data-target="#view_info">
-                                        @if ($talking->profile_photo_path == null)
-                                            <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                                src="{{ asset('site/assets/img/user.png') }}">
-                                        @else
-                                            <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                                src="{{ asset('uploads/profile-photos') }}/{{ $talking->profile_photo_path }}"
-                                                alt="">
-                                        @endif
-                                    </a>
-                                    <div class="chat-about">
 
-                                        <h6 class="m-b-0">{{ $talking->name }}</h6>
-                                       
+                                    <div class="row">
+                                        <div class="chat-about col-6">
 
-                                    </div>
-                                </div>
+                                            @if ($talking->profile_photo_path == null)
+                                                <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                                    src="{{ asset('site/assets/img/user.png') }}">
+                                            @else
+                                                <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                                    src="{{ asset('uploads/profile-photos') }}/{{ $talking->profile_photo_path }}"
+                                                    alt="">
+                                            @endif
 
-                            </div>
-                        </div>
-                        <div class="chat-history" style="overflow-y: scroll">
-                            <ul class="m-b-0" style="overflow-y: scroll; ">
-                                @forelse($open as $mail)
-                                    @if ($me->id == App\Models\User::find($mail->sender)->id)
-                                        <div class="text-right" style="">
+                                            <span class="m-b-2 text-sucess">{{ $talking->name }}</span>
 
-
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <span class="m-b-2 text-primary">{{ $me->name }}</span>
                                             @if (!$me->profile_photo_path)
                                                 <img class="img-thumbnail rounded-circle" height="50" width="50"
                                                     src="{{ asset('site/assets/img/user.png') }}">
@@ -94,17 +85,37 @@
                                                     alt="">
                                             @endif
                                         </div>
-                                        <div class="text-right" style="border-radius: 10px; text-align:right; margin-right:20px">
+                                    </div>
 
-                                            <span class="">{{ $mail->created_at }}</span>
-                                            <p class="bg-primary" >{{ $mail->content }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="chat-history">
+                            <ul class="m-b-0">
+                                @forelse($open as $mail)
+                                    @if ($me->id == App\Models\User::find($mail->sender)->id)
+                                        <div class="text-right" style="">
+
+
+
+                                        </div>
+                                        <div class="bg-primary text-center offset-5" style="border-radius: 10px; width:50%;">
+
+                                            <span class="fw-bold">{{ $me->name }}</span>
+                                            <span style="font-size: 11px; border-radius:5px">{{ $mail->created_at }}</span>
+                                            <hr>
+                                            <p class="">{{ $mail->content }}</p>
 
                                         </div>
                                     @else
-                                        <div class="">
-                                            <span
-                                                class="">{{ $mail->created_at }}</span><br>
-                                            {{ $mail->content }}</div>
+                                        <div class="bg-success text-center" style="border-radius: 10px; width:50%">
+                                            <span class="fw-bold">{{ $talking->name }}</span>
+                                            <span style="font-size: 11px; border-radius:5px">{{ $mail->created_at }}</span>
+                                            <hr>
+
+                                            <p class="">{{ $mail->content }}</p>
+                                        </div>
                                     @endif
                                 @empty
 

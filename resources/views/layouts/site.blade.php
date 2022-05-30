@@ -27,8 +27,8 @@
     <link href="{{ asset('admin/other/toastr.min.css') }}" rel="stylesheet">
     <link href="{{ asset('site/assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('site/assets/css/abyssinica-sil.css') }}" rel="stylesheet">
-      
-       
+
+
     <style>
         .more {
             display: none;

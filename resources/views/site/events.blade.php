@@ -1,5 +1,7 @@
 @extends('layouts.site', ['myevents' => $myevents, 'myEventsList' => $myEventsList])
 @section('search')
+
+
     <div class="container-fluid">
         <form class="d-flex" method="GET" action="{{ route('site.home.searchevents') }}">
             @csrf
@@ -91,28 +93,14 @@
                                 <div class="row d-flex flex-column justify-content-start">
                                     <div class="col"><strong class="text-success"> <i
                                                 class="bx bxs-calendar-event text-success"></i><span
-                                                class="text text-primary">@lang('home.date') </span>:<?php
-                                                $formatted = (new Carbon\Carbon(new DateTime($event->due_date)))->toFormattedDateString();
-                                                $start = (new Carbon\Carbon(new DateTime($event->start_time)))->format('g:i A');
-                                                $end = (new Carbon\Carbon(new DateTime($event->end_time)))->format('g:i A');
-                                                if (app()->getLocale() == 'am') {
-                                                    $formatted = (new Andegna\DateTime(new DateTime($event->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);
-                                                    $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A');
-                                                    $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A');
-                                                } elseif (app()->getLocale() == 'or') {
-                                                    $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate((new Andegna\DateTime(new DateTime($event->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
-                                                    $start = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A'));
-                                                    $end = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A'));
-                                                }
-                                                echo $formatted;
-                                                ?>
+                                                class="text text-primary">@lang('home.date')</span>: {{echo App\Http\Controllers\TimeFormatter::eventDateLOcal($event->due_date);}}
                                         </strong><small class="text-danger fw-bold"></small>
                                     </div>
                                     <?php ?>
                                     <div class="col"><strong><i class="bx bx-time text-danger"
                                                 style="font-family: sans-serif;">:</i><span
-                                                class="text text-primary">@lang('home.time') </span><?php echo $start; ?> -
-                                            <?php echo $end; ?></strong><br></div>
+                                                class="text text-primary">@lang('home.time') </span>{{ App\Http\Controllers\TimeFormatter::timeLocal($event->start_time); }} -
+                                                {{ App\Http\Controllers\TimeFormatter::timeLocal($event->end_time); }}</strong><br></div>
                                     <div class="col"><strong><i
                                                 class="bx bx-current-location text-danger"></i><span
                                                 class="text text-primary">@lang('home.location')

@@ -1,6 +1,6 @@
 @extends('layouts.site')
 @section('content')
-<script src="{{ asset('admin/other/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
     <section id="contact" class="contact mt-5">
         <div class="container">
 
@@ -84,11 +84,11 @@
         </div>
     </section>
     <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('admin/other/toastr.min.js') }}"></script> 
+    <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
 
     @if (Session::has('message'))
-    <script>
-        toastr.success("{!! Session::get('message') !!}");
-    </script>
-@endif
+        <script>
+            toastr.success("{!! Session::get('message') !!}");
+        </script>
+    @endif
 @endsection

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
+            $table->text('content');
             $table->bigInteger('receiver')->unsigned();
             $table->bigInteger('sender')->unsigned();
             $table->boolean('seen')->default(0);

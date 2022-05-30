@@ -53,7 +53,8 @@
                 @if (app()->getLocale() == 'am')
                     <div class=" col-md-2 my-1">
                         <label for="start_time">{{ __('home.start_time') }}</label>
-                        <input readonly id="" class="form-control amharic-start-time" name="start_time" autocomplete="off" />
+                        <input readonly id="" class="form-control amharic-start-time" name="start_time"
+                            autocomplete="off" />
                     </div>
                     <div class=" col-md-2 my-1">
                         <label for="end_time">{{ __('home.end_time') }}</label>

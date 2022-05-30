@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 
@@ -190,17 +189,20 @@
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal"
                                     data-bs-target="#deleteMe">@lang('home.delete_profile')
                                 </button>
-                                
+
                             </form>
-                            
-                            <div class="modal fade" id="deleteMe" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+
+                            <div class="modal fade" id="deleteMe" tabindex="-1" aria-labelledby="ModalLabel"
+                                aria-hidden="true">
                                 <div class="modal-dialog">
                                     <form action="{{ url('/profile/delete') }}" method="GET">
                                         @csrf
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title text-danger" id="ModalLabel">{{ __('home.delete_profile') }}</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <h5 class="modal-title text-danger" id="ModalLabel">
+                                                    {{ __('home.delete_profile') }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <p class="fw-bold">{{ __('home.do_u_delete_profile') }}</p>
