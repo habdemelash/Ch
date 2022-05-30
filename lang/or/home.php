@@ -214,6 +214,7 @@ return [
     'your_profile_deleted'=>"Profaayilli kee milkaa'inaan haqameera.",
     'delete_profile'=>"Profaayilii haqi.",
     'no_events_yet'=>"Sagantaan hin jiru.",
+    'no_mails_yet'=>"Ammatti ergaan hin jiru",
     'event_deleted'=>"Sagantaan kun haqameera.",
     'staffrole_given'=>"Gaheen Hojjetaa fayyadamaadhaaf kennameera.",
     'adminrole_given'=>"Gaheen Bulchaa fayyadamaaf kennameera.",

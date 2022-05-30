@@ -71,7 +71,7 @@
                                     <div class="chat-about">
 
                                         <h6 class="m-b-0">{{ $talking->name }}</h6>
-                                        <small>Last seen at Jan 23</small>
+                                       
 
                                     </div>
                                 </div>
@@ -94,10 +94,10 @@
                                                     alt="">
                                             @endif
                                         </div>
-                                        <div class="text-right" style="margin-right: 20px">
+                                        <div class="text-right" style="border-radius: 10px; text-align:right; margin-right:20px">
 
                                             <span class="">{{ $mail->created_at }}</span>
-                                            <p>{{ $mail->content }}</p>
+                                            <p class="bg-primary" >{{ $mail->content }}</p>
 
                                         </div>
                                     @else
@@ -108,7 +108,7 @@
                                     @endif
                                 @empty
 
-                                    <div class="">No mails yet</div>
+                                    <div class="">@lang('home.no_mails_yet')</div>
                                 @endforelse
 
                             </ul>

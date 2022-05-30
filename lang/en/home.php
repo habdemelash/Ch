@@ -220,6 +220,7 @@ return [
     'do_u_delete_profile'=>"Are you sure you want to delete your profile?",
     'your_profile_deleted'=>"Your profile has been deleted successfully.",
     'your_message'=>"Your message...",
+    'no_mails_yet'=>"No mails yet",
     'we_have_taken'=>"We have taken the remaining information from your profile information about your. Please complete only the sections of the form below.",
 
 ];

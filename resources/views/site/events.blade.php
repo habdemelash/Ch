@@ -142,7 +142,7 @@
                         </div>
                     </div>
                 @empty
-                    <h1 class="text-center">No events yet... come back later</h1>
+                    <h1 class="text-center">@lang('home.no_events_yet')</h1>
                 @endforelse
                 <div class="text-center col-md-4">
                     {{ $events->links('pagination::bootstrap-4') }}
