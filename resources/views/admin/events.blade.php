@@ -42,28 +42,14 @@
             </thead>
             <tbody>
                 @forelse($events as $event)
-                    <?php $on = new Carbon\Carbon(new DateTime($event->due_date));
-                    $start = (new Carbon\Carbon(new DateTime($event->start_time)))->format('g:i A');
-                    $end = (new Carbon\Carbon(new DateTime($event->end_time)))->format('g:i A');
-                    $formatted_date = $on->toFormattedDateString();
-                    if (app()->getLocale() == 'am') {
-                        $gregorian = new DateTime($event->due_date);
-                        $formatted_date = Andegna\DateTimeFactory::fromDateTime($gregorian)->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);
-                        $start = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A');
-                        $end = Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A');
-                    } elseif (app()->getLocale() == 'or') {
-                        $formatted_date = App\Http\Controllers\Admin\Dashboard::oromicDate((new Andegna\DateTime(new DateTime($event->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
-                        $start = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->start_time))->format('g:i A'));
-                        $end = App\Http\Controllers\Admin\Dashboard::oromicTime(Andegna\DateTimeFactory::fromDateTime(new DateTime($event->end_time))->format('g:i A'));
-                    }
-                    ?>
+                  
                     <tr id="eid{{ $event->id }}">
                         <?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>
                         <td class="text-success fw-bold" style="font-style: initial; white-space: nowrap;">
                             <?php echo $event->{'title_' . app()->getLocale()}; ?></td>
-                        <td class="text-primary" style="white-space: nowrap">{{ $formatted_date }}</td>
-                        <td class=" d-xl-table-cell text-primary">{{ $start }}</td>
-                        <td class="text-primary">{{ $end }}</td>
+                        <td class="text-primary" style="white-space: nowrap">{{ App\Http\Controllers\TimeFormatter::eventDateLocal($event->due_date) }}</td>
+                        <td class=" d-xl-table-cell text-primary">{{ App\Http\Controllers\TimeFormatter::timeLocal($event->start_time) }}</td>
+                        <td class="text-primary">{{ App\Http\Controllers\TimeFormatter::timeLocal($event->end_time) }}</td>
                         <td class=" d-md-table-cell text-dark">{{ $event->short_desc }}</td>
                         <td class="">
                             @if ($event->status == 'Upcoming')

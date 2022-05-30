@@ -45,15 +45,15 @@
                         @lang('home.your_search'): "{{ Session::get('result') }}"
                     </strong>
                 @endif
-                <?php $locale = app()->getLocale(); ?>
+                @php $locale = app()->getLocale(); @endphp
                 @forelse($events as $event)
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-2"
-                        style="margin-right: 10px; margin-left: 10px; border-width: 5px;">
+                    <div class="col-lg-4 col-md-6 d-flex mt-2"
+                        style="margin-right: 10px; margin-left: 10px; border-width: 5px; text-align:center">
                         <div class="icon-box row d-flex justify-content-center">
                             <h4><?php echo $event->{'title_' . $locale}; ?></h4>
                             <div class="icon" style="position: relative;">
-                                <?php $days = App\Http\Controllers\Site\Home::calculateDays($event->id); ?>
-                                <span id="days-left" class="badge bg-success">{{ $days }}</span>
+                               
+                                <span id="days-left" class="badge bg-success">{{ App\Http\Controllers\Site\Home::calculateDays($event->id) }}</span>
                                 @if (in_array($event->id, $myEventsList))
                                     <span id="yours-tag" class="badge bg-danger my-3">@lang('home.your_event')</span>
                                 @endif
@@ -91,15 +91,15 @@
                                     @endif
                                 </strong>
                                 <div class="row d-flex flex-column justify-content-start">
-                                    <div class="col"><strong class="text-success"> <i
+                                    <div class="col"><strong class="text-success" style="white-space: nowrap"> <i
                                                 class="bx bxs-calendar-event text-success"></i><span
-                                                class="text text-primary">@lang('home.date')</span>: {{echo App\Http\Controllers\TimeFormatter::eventDateLOcal($event->due_date);}}
+                                                class="text text-primary">@lang('home.date')</span>: {{App\Http\Controllers\TimeFormatter::eventDateLocal($event->due_date)}}
                                         </strong><small class="text-danger fw-bold"></small>
                                     </div>
                                     <?php ?>
                                     <div class="col"><strong><i class="bx bx-time text-danger"
                                                 style="font-family: sans-serif;">:</i><span
-                                                class="text text-primary">@lang('home.time') </span>{{ App\Http\Controllers\TimeFormatter::timeLocal($event->start_time); }} -
+                                                class="text text-primary">@lang('home.time') </span>{{ App\Http\Controllers\TimeFormatter::timeLocal($event->start_time) }} -
                                                 {{ App\Http\Controllers\TimeFormatter::timeLocal($event->end_time); }}</strong><br></div>
                                     <div class="col"><strong><i
                                                 class="bx bx-current-location text-danger"></i><span

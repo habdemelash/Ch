@@ -12,6 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'cvsms'=>"በግሥማሥ",
     'email'=>"ኢ-ሜይል",
     'password'=>"የይለፍ ቃል",
     'password_confirm'=>"በድጋሜ ማረጋገጫ",

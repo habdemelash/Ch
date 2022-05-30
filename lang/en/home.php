@@ -13,6 +13,7 @@ return [
     |
     */
     'email'=>"Email",
+    'cvsms'=>"CVSMS",
     'password'=>"Password",
     'password_confirm'=>"Confirm password",
     'email_place'=>"Email...",

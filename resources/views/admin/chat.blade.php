@@ -100,18 +100,18 @@
 
 
                                         </div>
-                                        <div class="bg-primary text-center offset-5" style="border-radius: 10px; width:50%;">
+                                        <div class=" text-center offset-5" style="border-radius: 10px; width:50%;  background:rgb(149, 177, 204)">
 
-                                            <span class="fw-bold">{{ $me->name }}</span>
-                                            <span style="font-size: 11px; border-radius:5px">{{ $mail->created_at }}</span>
+                                            <span class="fw-bold">{{ $me->name }}</span><br>
+                                            <span style="font-size: 11px; border-radius:5px">{{ App\Http\Controllers\TimeFormatter::eventDateLocal($mail->created_at).' '.App\Http\Controllers\TimeFormatter::timeLocal($mail->created_at) }}</span>
                                             <hr>
                                             <p class="">{{ $mail->content }}</p>
 
                                         </div>
                                     @else
-                                        <div class="bg-success text-center" style="border-radius: 10px; width:50%">
+                                        <div class=" text-center" style="border-radius: 10px; width:50%; background:rgb(136, 190, 172)">
                                             <span class="fw-bold">{{ $talking->name }}</span>
-                                            <span style="font-size: 11px; border-radius:5px">{{ $mail->created_at }}</span>
+                                            <span style="font-size: 11px; border-radius:5px">{{ App\Http\Controllers\TimeFormatter::eventDateLocal($mail->created_at).' '.App\Http\Controllers\TimeFormatter::timeLocal($mail->created_at) }}</span>
                                             <hr>
 
                                             <p class="">{{ $mail->content }}</p>
