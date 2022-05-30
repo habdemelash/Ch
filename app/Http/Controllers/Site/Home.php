@@ -84,6 +84,13 @@ class Home extends Controller
             ->back()
             ->with("message", __("home.info_updated"));
     }
+    // Delete profile
+    public function deleteProfile()
+    {
+        $me = Auth::user();
+        $me->delete();
+        return redirect(route('login'))->with('message',__('home.your_profile_deleted'));
+    }
     // Event counter method
     public static function myevents()
     {

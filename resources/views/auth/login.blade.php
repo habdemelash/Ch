@@ -1,7 +1,6 @@
 @extends('layouts.site')
-
-
 @section('content')
+<link rel="stylesheet" type="text/css" href="{{ asset('admin/other/toastr.min.css') }}">
     <section id="contact" class="contact mt-5">
         <div class="container">
 
@@ -84,4 +83,10 @@
 
         </div>
     </section>
+    <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
+    @if (Session::has('message'))
+    <script>
+        toastr.success("{!! Session::get('message') !!}");
+    </script>
+@endif
 @endsection

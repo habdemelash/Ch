@@ -27,9 +27,8 @@
     <link href="{{ asset('admin/other/toastr.min.css') }}" rel="stylesheet">
     <link href="{{ asset('site/assets/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('site/assets/css/abyssinica-sil.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    @toastr_css
+      
+       
     <style>
         .more {
             display: none;

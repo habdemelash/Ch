@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -10,6 +11,7 @@
     <title>Profile Management</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset('profile/css/simplebar.css') }}">
+    <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Fonts CSS -->
     <link
         href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
@@ -185,7 +187,34 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary">@lang('home.save_change')</button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                    data-bs-target="#deleteMe">@lang('delete_profile')
+                                </button>
+                                
                             </form>
+                            
+                            <div class="modal fade" id="deleteMe" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <form action="{{ url('/profile/delete') }}" method="GET">
+                                        @csrf
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title text-danger" id="ModalLabel">{{ __('home.delete_profile') }}</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="fw-bold">{{ __('home.do_u_delete_profile') }}</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">{{ __('home.no') }}</button>
+                                                <button type="submit" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">{{ __('home.yes_delete') }}</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div> <!-- /.card-body -->
                     </div> <!-- /.col-12 -->
                 </div> <!-- .row -->
@@ -194,16 +223,10 @@
 
         </main> <!-- main -->
     </div> <!-- .wrapper -->
-    <script src="{{ asset('profile/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('profile/js/popper.min.js') }}"></script>
-    <script src="{{ asset('profile/js/moment.min.js') }}"></script>
-    <script src="{{ asset('profile/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('profile/js/simplebar.min.js') }}"></script>
-    <script src='{{ asset('profile/js/daterangepicker.js') }}'></script>
-    <script src='{{ asset('profile/js/jquery.stickOnScroll.js') }}'></script>
-    <script src="{{ asset('profile/js/tinycolor-min.js') }}"></script>
-    <script src="{{ asset('profile/js/config.js') }}"></script>
-    <script src="{{ asset('profile/js/apps.js') }}"></script>
+    <script src="{{ asset('admin/js/app.js') }}"></script>
+    <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/other/popper.min.js') }}"></script>
+    <script src="{{ asset('admin/other/bootstrap.bundle.min.js') }}"></script>
     <script type='text/javascript'>
         function preview_image(event) {
             var reader = new FileReader();

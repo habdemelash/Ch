@@ -43,6 +43,7 @@ Route::middleware([
 ])->group(function () { 
     Route::get('personal-info', [Home::class, 'profile'])->name('profile');
     Route::post('update-profile', [Home::class, 'updateProfile'])->name('update.profile');
+    Route::get('profile/delete', [Home::class, 'deleteProfile'])->name('delete.profile');
     Route::post('mail/reply', [Messages::class, 'reply'])->name('mail.reply');
     Route::get('dash/mails', [Messages::class, 'chat'])->name('user.mails');
     Route::get('dash/mails/open/{id}', [Messages::class, 'open'])->name('user.mails.open');
