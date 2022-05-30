@@ -53,15 +53,15 @@
                 @if (app()->getLocale() == 'am')
                     <div class=" col-md-2 my-1">
                         <label for="start_time">{{ __('home.start_time') }}</label>
-                        <input id="" class="form-control amharic-start-time" name="start_time" autocomplete="off" />
+                        <input readonly id="" class="form-control amharic-start-time" name="start_time" autocomplete="off" />
                     </div>
                     <div class=" col-md-2 my-1">
                         <label for="end_time">{{ __('home.end_time') }}</label>
-                        <input id="" class="form-control amharic-end-time" name="end_time" autocomplete="off" />
+                        <input readonly id="" class="form-control amharic-end-time" name="end_time" autocomplete="off" />
                     </div>
                     <div class=" col-md-4 my-1">
                         <label for="due_date">{{ __('home.date') }}</label>
-                        <input class="form-control" type="text" name="due_date" id="amharic" autocomplete="off">
+                        <input readonly class="form-control" type="text" name="due_date" id="amharic" autocomplete="off">
                     </div>
                     {{-- Amharic datetime ends --}}
                     {{-- Oromic date time input begins here --}}

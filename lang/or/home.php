@@ -213,6 +213,12 @@ return [
     'your_message'=>"Ergaa keessan",
     'your_profile_deleted'=>"Profaayilli kee milkaa'inaan haqameera.",
     'delete_profile'=>"Profaayilii haqi.",
+    'no_events_yet'=>"Sagantaan hin jiru.",
+    'event_deleted'=>"Sagantaan kun haqameera.",
+    'staffrole_given'=>"Gaheen Hojjetaa fayyadamaadhaaf kennameera.",
+    'adminrole_given'=>"Gaheen Bulchaa fayyadamaaf kennameera.",
+    'staffrole_taken'=>"Gaheen Hojjetaa fayyadamaa irraa fudhatameera.",
+    'adminrole_taken'=>"Gaheen Bulchaa fayyadamaa irraa fudhatameera.",
     'do_u_delete_profile'=>"Profaayilii kee haquu barbaaddu mirkaneeffatteettaa?",
     'we_have_taken'=>"Odeeffannoo hafe odeeffannoo dhuunfaa keessan waa'ee herrega seensaa keessanii irraa fudhanneerra. Mee kutaalee unkaa armaan gadii qofa guutaa.",
     

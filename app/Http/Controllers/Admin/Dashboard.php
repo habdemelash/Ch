@@ -329,7 +329,7 @@ class Dashboard extends Controller
 
         return redirect()
             ->back()
-            ->with("message", "Event has been deleted!");
+            ->with("message",__('home.event_deleted'));
     }
     public function searchEvent(Request $request)
     {
@@ -506,12 +506,9 @@ class Dashboard extends Controller
         $helpme = Helpme::find($id);
         $helpme->seen = 1;
         $helpme->update();
-        if (Gate::allows('admins', Auth::user()) or Gate::allows('staffs', Auth::user())) {
+     
         return view("admin.improve-helpme", ["helpme" => $helpme]);
-        }
-        else{
-            return redirect()->back();
-        }
+        
     }
     public function updateHelpme(Request $request, $id)
     {
@@ -611,14 +608,8 @@ class Dashboard extends Controller
         $users = User::where("id", "!=", Auth::user()->id)
             ->orderBy("id", "DESC")
             ->paginate(10);
-            if (Gate::allows('admins', Auth::user())) {
+            
              return view("admin.users", ["users" => $users]);
-            }
-            else{
-
-            return redirect()->back();
-        
-             }
        
     }
 
@@ -653,7 +644,7 @@ class Dashboard extends Controller
 
         return redirect()
             ->back()
-            ->with("success", "You have given this user a Staff role.");
+            ->with("message", __('home.staffrole_given'));
     }
     public function staffdown($id)
     {
@@ -668,7 +659,7 @@ class Dashboard extends Controller
 
         return redirect()
             ->back()
-            ->with("success", "You have taken the Staff role from the user.");
+            ->with("message", __('home.staffrole_taken'));
     }
 
     public function adminup($id)
@@ -702,7 +693,7 @@ class Dashboard extends Controller
 
         return redirect()
             ->back()
-            ->with("success", "You have given this user an Admin role.");
+            ->with("message", __('home.adminrole_given'));
     }
     public function admindown($id)
     {
@@ -713,14 +704,14 @@ class Dashboard extends Controller
 
         return redirect()
             ->back()
-            ->with("message", "You have taken the Admin role from the user.");
+            ->with("message", __('home.adminrole_taken'));
     }
     public function deleteUser(Request $request)
     {
         if ($request->user_id == Auth::user()->id) {
             return redirect()
                 ->back()
-                ->with("message", "Sorry you are logged in!");
+                ->with("message", __('home.cant_delete_yourself'));
         } else {
             $user = User::find($request->user_id);
             $user->delete();
@@ -730,7 +721,7 @@ class Dashboard extends Controller
             }
             return redirect()
                 ->back()
-                ->with("message", "You have deleted the user.");
+                ->with("message", __('home.user_deleted'));
         }
     }
 }

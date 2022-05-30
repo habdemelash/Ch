@@ -105,7 +105,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <h4 class="text-center">No events yet</h4>
+                        <h4 class="text-center">@lang('home.no_events_yet')</h4>
                     </tr>
                 @endforelse
             </tbody>
