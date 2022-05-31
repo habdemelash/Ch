@@ -22,6 +22,7 @@ return [
     'password_place'=>"Jecha darbii",
     'search_place'=>"Barbaadi....",
      'location'=>"Bakka",
+     'view'=>"Ilaaluu",
     'call'=>"Waamuu",
     'adama'=>"Booleee, Adamaa,  Itoophiyaa",
     'join_btn' => 'Nutti makamaa',

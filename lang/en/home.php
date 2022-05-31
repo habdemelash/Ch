@@ -21,6 +21,7 @@ return [
     'search_place'=>"Search...",
     'location'=>"Location",
     'call'=>"Call",
+    'view'=>"View",
     'adama'=>"Bole, Nazreth, Ethiopia",
     'join_btn' => 'Join us',
     'we_strive' => 'We strive for good cause...',

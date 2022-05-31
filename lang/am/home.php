@@ -205,6 +205,7 @@ return [
     'do_you_delete_user'=>'በእውነት ይህን ተጠቃሚ መሰረዝ ይፈልጋሉ?',
     'volunteer'=>'በጎ ፈቃደኛ',
     'staff'=>'ሠራተኛ',
+    'view'=>'ይመልከቱ',
     'admin'=>'አስተዳዳሪ',
     "users'"=>"የተጠቃሚዎች",
     'filter'=>"ማጣሪያ",

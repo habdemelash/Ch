@@ -131,7 +131,7 @@
                                         <span
                                             style="font-size: 11px; border-radius:5px">{{ App\Http\Controllers\TimeFormatter::fullDateTime($mail->created_at) }}</span>
                                         <hr>
-                                        <p class="">{{ $mail->content }}</p>
+                                        <p class="">@php echo $mail->content; @endphp </p>
 
                                     </div>
                                 @else
@@ -142,7 +142,7 @@
                                             style="font-size: 11px; border-radius:5px">{{ App\Http\Controllers\TimeFormatter::fullDateTime($mail->created_at) }}</span>
                                         <hr>
 
-                                        <p class="">{{ $mail->content }}</p>
+                                        <p class="">@php echo $mail->content; @endphp</p>
                                     </div>
                                 @endif
                             @empty
