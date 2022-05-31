@@ -1,5 +1,6 @@
 @extends('layouts.site', ['myevents' => $myevents, 'myEventsList' => $myEventsList])
 @section('content')
+
     <?php $locale = app()->getLocale(); ?>
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/other/toastr.min.css') }}">
     <section id="contact" class="contact mt-5" style="margin-top: 30px;">
@@ -90,6 +91,7 @@
                         </div>
                         <div class="form-group mt-3 clone hide" style="display: none;">
                             <div class="realprocode">
+                                
                                 <div><input type="file" class="form-control-lg" name="document[]" id="document"
                                         placeholder="@lang('home.your_legal_docs')*">
                                     <a class="btn btn-danger" type="button">@lang('home.remove')</a>
