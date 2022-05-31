@@ -31,10 +31,10 @@ class TimeFormatter extends Controller
         return $time;
        
     }
-    public static function eventDateLocal($date)
+    public static function eventDateLocal($date,$mark)
     {
         
-                                             
+                                         
         if (app()->getLocale() == 'am') {
             return (new \Andegna\DateTime(new DateTime($date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);
            
@@ -42,6 +42,21 @@ class TimeFormatter extends Controller
             return \App\Http\Controllers\Admin\Dashboard::oromicDate((new \Andegna\DateTime(new DateTime($date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
             
         }
-        return  (new \Carbon\Carbon(new DateTime($date)))->toFormattedDateString();
+        return (new \Carbon\Carbon(new DateTime($date)))->toFormattedDateString();
+        // return  TimeFormatter::englishDateTime($date);
     }
+    public static function fullDateTime($datetime)
+    {
+         $on = new \Carbon\Carbon(new DateTime($datetime));
+         if (app()->getLocale() == 'am') {
+            return (new \Andegna\DateTime(new DateTime($datetime)))->format(\Andegna\Constants::DATE_ETHIOPIAN);
+           
+        } elseif (app()->getLocale() == 'or') {
+            return \App\Http\Controllers\Admin\Dashboard::oromicDate((new \Andegna\DateTime(new DateTime($datetime)))->format(\Andegna\Constants::DATE_ETHIOPIAN));
+            
+        }
+        return $on->toDayDateTimeString();
+        
+    }
+
 }

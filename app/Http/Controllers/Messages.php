@@ -36,7 +36,9 @@ class Messages extends Controller
         })->orderBy('created_at', 'DESC')->limit(10)->get();
         $return = [];
         foreach ($latestMessages->reverse() as $message) {
+            
             $return[] = $message;
+           
         }
         return view("admin.chat",['open'=>$return]);
     }

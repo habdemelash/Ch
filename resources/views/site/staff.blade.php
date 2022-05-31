@@ -40,7 +40,8 @@
                                 </p>
                             </div>
                             <div class="social">
-                                <a href=""><i class="bx bxs-message text-primary"></i></a>
+                                <a href="{{ url('dash/mails/open', $member->id) }}"><i
+                                        class="bx bxs-message text-primary"></i></a>
                             </div>
                         </div>
                     </div>

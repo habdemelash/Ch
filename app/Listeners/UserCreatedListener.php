@@ -50,7 +50,7 @@ class UserCreatedListener
         ]);
         }
         
-
+        $content = '';
         $welcome = Message::create([
 
             'content'=>'Welcome to our coalition to good cause. You have joined us for good cause, for making others live and we hope you will stay with us as long as possible----->',

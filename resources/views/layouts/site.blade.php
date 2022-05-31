@@ -59,7 +59,8 @@
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center justify-content-between">
             <h1 class="logo "><a class="text-success" href="/"><img
-                        src="{{ asset('site/assets/img/3dheart.png') }}" class="mx-3">@lang('home.cvsms')</a></h1>
+                        src="{{ asset('site/assets/img/3dheart.png') }}" class="mx-3">@lang('home.cvsms')</a>
+            </h1>
             <?php $address = Request::url();
             $myEventsList = App\Http\Controllers\Site\Home::myEventLister();
             $myevents = App\Http\Controllers\Site\Home::myevents();
