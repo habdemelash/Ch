@@ -69,29 +69,29 @@
                 @elseif(app()->getLocale() == 'or')
                     <div class=" col-md-2 my-1">
                         <label for="start_time">{{ __('home.start_time') }}</label>
-                        <input id="" class="form-control oromic-start-time" name="start_time" />
+                        <input readonly id="" class="form-control oromic-start-time" name="start_time" />
                     </div>
                     <div class=" col-md-2 my-1">
                         <label for="end_time">{{ __('home.end_time') }}</label>
-                        <input id="" class="form-control oromic-end-time" name="end_time" />
+                        <input readonly id="" class="form-control oromic-end-time" name="end_time" />
                     </div>
                     <div class=" col-md-4 my-1">
                         <label for="due_date">{{ __('home.date') }}</label>
-                        <input class="form-control" type="text" name="due_date" id="oromic" autocomplete="off">
+                        <input readonly class="form-control" type="text" name="due_date" id="oromic" autocomplete="off">
                     </div>
                     {{-- Oromic date time input ends here --}}
                 @else
                     <div class=" col-md-2 my-1">
                         <label for="start_time">{{ __('home.start_time') }}</label>
-                        <input id="" class="form-control english-start-time" name="start_time" />
+                        <input readonly id="" class="form-control english-start-time" name="start_time" />
                     </div>
                     <div class=" col-md-2 my-1">
                         <label for="end_time">{{ __('home.end_time') }}</label>
-                        <input id="" class="form-control english-end-time" name="end_time" />
+                        <input readonly id="" class="form-control english-end-time" name="end_time" />
                     </div>
                     <div class=" col-md-4 my-1">
                         <label for="due_date">{{ __('home.date') }}</label>
-                        <input class="form-control" type="text" name="due_date" id="gregorian" autocomplete="off">
+                        <input readonly class="form-control" type="text" name="due_date" id="gregorian" autocomplete="off">
                     </div>
                 @endif
                 <div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">

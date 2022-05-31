@@ -31,7 +31,7 @@ class TimeFormatter extends Controller
         return $time;
        
     }
-    public static function eventDateLocal($date,$mark)
+    public static function eventDateLocal($date)
     {
         
                                          

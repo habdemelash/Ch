@@ -30,11 +30,22 @@ class EventCreatedListener
     public function handle(EventCreated $event)
     {
      $users = User::all();
-
+    $content = '';
+    
      foreach($users as $user){
+         $locale = $user->locale;
+        if($locale == 'am'){
+            $content = 'ሰምተዋል? አዲስ መርኃ ግብር ተዘጋጅቷል።'.$event->event->{'title_'.$locale}.' '.__('home.location').$event->event->{'location_'.$locale};
+        }
+        elseif($locale == 'or'){
+            $content = 'Dhageessanii beektuu? Sagantaan haaraan beellamamee jira.';
+        }
+        else{
+            $content = 'Have you heard? A new event has been scheduled.';
+        }
         $welcome = Message::create([
 
-            'content'=>'Have you heard? A new event has been scheduled.'. $event->event->title.' '.'at '.$event->event->location,
+            'content'=>$content,
             'receiver'=>$user->id,
             'sender'=>$user->id,
 

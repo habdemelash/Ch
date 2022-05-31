@@ -51,9 +51,20 @@ class UserCreatedListener
         }
         
         $content = '';
+        if($event->user->locale == 'am'){
+            $content = "ወደ ድርጅታችን እንኳን በደህና መጡ። ከእኛ ጋር የተቀላቀሉት ለበጎ ምክንያት ነው፣ ሌሎችን እንዲኖሩ ለማድረግ በተቻለ መጠን ከእኛ ጋር እንደሚቆዩ ተስፋ እናደርጋለን...";
+        }
+        elseif($event->user->locale == 'or'){
+           $content = "Baga gara dhaabbata keenyaa gara kaayyoo gaariitti dhuftan. Kaayyoo gaariif, namoota biroo jiraachisuuf nutti makamteetta hanga danda'ametti nu bira akka turtan abdii qabna";
+        }
+        else{
+            $content = 'Welcome to our organization to good cause. You have joined us for good cause, for making others live and we hope you will stay with us as long as possible...';
+
+        }
+
         $welcome = Message::create([
 
-            'content'=>'Welcome to our coalition to good cause. You have joined us for good cause, for making others live and we hope you will stay with us as long as possible----->',
+            'content'=>$content,
             'receiver'=>$event->user->id,
             'sender'=>$event->user->id,
 
