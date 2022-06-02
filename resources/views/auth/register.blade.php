@@ -23,13 +23,13 @@
                         <div class="email">
                             <i class="bi bi-envelope"></i>
                             <h4>@lang('home.email'):</h4>
-                            <p>info@cvsms.com</p>
+                            <a href="mailto:info@cvsms.com">info@cvsms.com</a>
                         </div>
 
                         <div class="phone">
                             <i class="bi bi-phone"></i>
                             <h4>@lang('home.call'):</h4>
-                            <p>+251920763031</p>
+                            <a href="tel:+251920763031">+251920763031</a>
                         </div>
 
 
