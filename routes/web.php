@@ -11,6 +11,7 @@ use App\Http\Controllers\Site\Home;
 use App\Http\Controllers\Signout;
 use App\Http\Controllers\Messages;
 use App\Http\Controllers\Admin\Dashboard;
+use App\Http\Controllers\admin\EventControllerAdmin;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Site\HelpmeController;
 // use Twilio\Rest\Client;
@@ -75,6 +76,7 @@ Route::middleware([
         Route::post('dash/event/update/{id}', [Dashboard::class, 'updateEvent'])->name('admin.event.update');
         Route::post('/events/delete', [Dashboard::class, 'deleteEvent'])->name('admin.event.delete');
         Route::get('dash/event/viewmembers/{id}', [Dashboard::class, 'viewMembers'])->name('admin.event.viewmembers');
+        Route::get('dash/events/search',[EventControllerAdmin::class,'searchEvent'])->name('admin.events.search');
 
         Route::get('dash/helpmes/view/{id}', [Dashboard::class, 'viewHelpme'])->name('admin.helpmes.view');
         Route::get('dash/helpmes/accept/{id}', [Dashboard::class, 'acceptHelpme'])->name('admin.helpmes.accept');

@@ -1,13 +1,17 @@
 @extends('layouts.admin')
 @section('search')
+<script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('site/assets/js/ec.js') }}"></script>
+    <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
     <li class="d-flex flex-column flex-md-row">
         <span id="option-container" style="visibility: hidden; position:absolute;"></span>
         <div class="container-fluid">
-            <form class="d-flex">
-                <input class="form-control" id="searchEvent" type="search" name="searchEvent"
+            <form action="{{url('dash/events/search')}}" method="POST" class="d-flex">
+                <input class="form-control" id="searchEvent" type="text" name="keyword" 
                     placeholder="{{ __('home.search_place') }}" aria-label="Search">
                 <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
             </form>
+            <input type="text" name="search" id="search" class="form-control" placeholder="Search Customer Data" />
         </div>
     </li>
 @endsection
@@ -25,6 +29,7 @@
         </div>
     </div>
     <div class="" style="overflow-x: auto;">
+        <h3 align="center">Total Data : <span id="total_records"></span></h3>
         <table class="table table-hover my-0 table-responsive" id="eventsTable" style="border: none">
             <thead>
                 <tr>
@@ -131,10 +136,7 @@
     </div>
     </div>
     </div>
-    <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('site/assets/js/ec.js') }}"></script>
-    <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
-    <script type="text/javascript" src="https://unpkg.com/ethiopian-calendar-date-converter@%5E1"></script>
+
     <script>
         $(document).ready(function() {
             $(document).on('click', '.deleteEvent', function(e) {
@@ -146,22 +148,33 @@
             });
         });
     </script>
-    <script type="text/javascript">
-        $('#searchEvent').on('keyup', function() {
-            $value = $(this).val();
-            $.ajax({
-                type: 'get',
-                url: '{{ URL::to('dash/search-event') }}',
-                data: {
-                    'searchEvent': $value
-                },
-                success: function(data) {
-                    console.log(data);
-                    $('#content').html(data);
-                }
-            });
-        })
-    </script>
+ 
+    <script>
+        $(document).ready(function(){
+        
+         fetch_customer_data();
+        
+         function fetch_customer_data(query = '')
+         {
+          $.ajax({
+           url:"{{ route('admin.events.search') }}",
+           method:'GET',
+           data:{query:query},
+           dataType:'json',
+           success:function(data)
+           {
+            $('tbody').html(data.table_data);
+            $('#total_records').text(data.total_data);
+           }
+          })
+         }
+        
+         $(document).on('keyup', '#search', function(){
+          var query = $(this).val();
+          fetch_customer_data(query);
+         });
+        });
+        </script>
     @if (Session::has('message'))
         <script>
             toastr.success("{!! Session::get('message') !!}");
