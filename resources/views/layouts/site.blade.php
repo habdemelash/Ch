@@ -103,11 +103,11 @@
                                             
                                             ?>
                                             <span
-                                                class="badge bg-primary">{{ $i + 1 }}</span><strong>{{ $ev->{'title_'.$locale} }}</strong><br>
+                                                class="badge bg-primary">{{ $i + 1 }}</span><strong>{{ $ev->{'title_' . $locale} }}</strong><br>
                                             <small>@lang('home.date'): <span
                                                     class="text-primary">{{ ' ' . $formatted }}</span></small><br>
-                                            <small>@lang('home.location'): <span
-                                                    class="text-primary"> @php echo ' ' . $ev->{'location_'.$locale}; @endphp </span></small>
+                                            <small>@lang('home.location'): <span class="text-primary"> @php echo ' ' . $ev->{'location_'.$locale}; @endphp
+                                                </span></small>
                                         </div>
                                         <a id="leave-span" href="{{ url('leave-event', $ev->id) }}"><span
                                                 class="badge"
@@ -229,7 +229,7 @@
         </div>
         <div class="container footer-bottom clearfix">
             <div class="copyright">
-                &copy; @lang('home.copyright') <strong><span>@lang('home.kind_hearts')</span></strong>. @lang('home.all_rights_reserved')
+                &copy; @lang('home.copyright')<strong><span>@lang('home.kind_hearts')</span></strong>. @lang('home.all_rights_reserved')
             </div>
             <div class="credits">
                 @lang('home.developed_by')<a href="">ASTU Systems</a>

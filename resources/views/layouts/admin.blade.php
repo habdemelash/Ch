@@ -21,11 +21,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-<?php $address = Request::url();
-$countUnseen = App\Http\Controllers\Admin\Dashboard::countUnseenHelpmes();
-$unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
-
-?>
+@php
+$locale = app()->getLocale();
+$address = Request::url();
+$countUnseen = App\Models\Helpme::where('seen', 0)->count();
+$unseen = App\Models\Helpme::where('seen', 0)->paginate(5);
+$newMessagesCount = App\Models\Message::where('seen', 0)
+    ->where('receiver', Auth::user()->id)
+    ->count();
+$newMessages = App\Models\Message::where('seen', 0)
+    ->where('receiver', Auth::user()->id)
+    ->orderBy('id', 'DESC')
+    ->paginate(5);
+@endphp
 
 <body>
     <div class="wrapper">
@@ -68,7 +76,7 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                         <a class="sidebar-link" href="{{ route('user.mails') }}">
                             <i class="bx bxs-message bx-md"></i> <span
                                 class="align-middle">{{ __('home.mails') }}<span
-                                    class="badge bg-info ml-1">5</span>
+                                    class="badge bg-info ml-1">{{ $newMessagesCount }}</span>
                             </span>
                         </a>
                     </li>
@@ -120,9 +128,9 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                                                     </div>
                                                     <div class="col-10">
                                                         <div class="text-info fw-bold">{{ $un->name }}</div>
-                                                        <div class="text-muted small mt-1">{{ $un->problem_title }}</div>
+                                                        <div class="text-muted small mt-1"> @php echo $un->{'problem_title_'.$locale} @endphp </div>
                                                         <?php $on = new Carbon\Carbon(new DateTime($un->created_at));
-                                                        $formatted = $on->toDayDateTimeString(); ?>
+                                                        $formatted = \App\Http\Controllers\TimeFormatter::fullDateTime($un->created_at); ?>
                                                         <div class="text-dark small mt-1">{{ $formatted }}</div>
                                                     </div>
                                                 </div>
@@ -130,7 +138,7 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                                         @endforeach
                                     </div>
                                     <div class="dropdown-menu-footer">
-                                        {{ $unseen->links('pagination::bootstrap-5') }}
+                                        <a href="{{ route('admin.helpmes') }}">@lang('home.see_all')</a>
                                     </div>
                                 </div>
                             </li>
@@ -140,7 +148,7 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                                 data-bs-toggle="dropdown">
                                 <div class="position-relative">
                                     <i class="align-middle" data-feather="message-square"></i><span
-                                        class="indicator">5</span>
+                                        class="indicator">{{ $newMessagesCount }}</span>
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end py-0 "
@@ -151,7 +159,7 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                                     </div>
                                 </div>
                                 <div class="list-group">
-                                    @for ($i = 0; $i < 4; $i++)
+                                    @forelse ($newMessages as $message)
                                         <a href="#" class="list-group-item">
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-2">
@@ -160,20 +168,33 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                                                 </div>
                                                 <div class="col-10 ps-2">
 
-                                                    <div class="text-dark">Kirubel</div>
-                                                    <div class="text-muted small mt-1">Hi Habtish ...</div>
-                                                    <div class="text-muted small mt-1">Jan 21, 2022 7:01 PM</div>
+                                                    @if ($message->sender !== Auth::user()->id)
+                                                        <div class="text-dark">
+                                                            {{ App\Models\User::find($message->sender)->name }}</div>
+                                                    @else
+                                                        <div class="text-dark">@lang('home.cvsms')</div>
+                                                    @endif
+                                                    <div class="text-muted small mt-1">
+                                                       <p class="fw-bold"> {{ mb_substr($message->content, 0, 15, 'UTF-8') }} ... </p></div>
+                                                    <div class="text-muted small mt-1">
+                                                      <span class="text-info">  {{ App\Http\Controllers\TimeFormatter::fullDateTime($message->created_at) }} </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </a>
-                                    @endfor
+                                    @empty
+                                        <div class="col-10 ps-2">
+
+                                            <div class="text-dark">...</div>
+
+                                        </div>
+                                    @endforelse
                                 </div>
                                 <div class="dropdown-menu-footer">
-                                    <a href="#" class="text-muted">@lang('home.see_all')</a>
+                                    <a href="{{ route('user.mails') }}" class="text-muted">@lang('home.see_all')</a>
                                 </div>
                             </div>
                         </li>
-                        {{-- User icon dropdown begins here --}}
                         <li class="nav-item dropdown">
                             <a class="nav-icon dropdown-toggle text-decoration-none" href="#" data-bs-toggle="dropdown">
                                 @if (Auth::user()->profile_photo_path == null)
@@ -224,7 +245,7 @@ $unseen = App\Http\Controllers\Admin\Dashboard::unseenHelpmes();
                                     </div>
                                 </div>
                             </li>
-                            {{--  --}}
+
                         </ul>
                     </div>
                 </nav>

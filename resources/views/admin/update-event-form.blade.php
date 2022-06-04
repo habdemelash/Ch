@@ -96,8 +96,8 @@
                     </div>
                     <div class=" col-md-2 my-1">
                         <label for="end_time">{{ __('home.end_time') }}</label>
-                        <input readonly id="" class="form-control english-end-time" value="{{ $event->end_time }}" name="end_time"
-                            autocomplete="off" />
+                        <input readonly id="" class="form-control english-end-time" value="{{ $event->end_time }}"
+                            name="end_time" autocomplete="off" />
                     </div>
                     <div class=" col-md-4 my-1">
                         <label for="due_date">{{ __('home.date') }}</label>

@@ -91,7 +91,8 @@
                     </div>
                     <div class=" col-md-4 my-1">
                         <label for="due_date">{{ __('home.date') }}</label>
-                        <input readonly class="form-control" type="text" name="due_date" id="gregorian" autocomplete="off">
+                        <input readonly class="form-control" type="text" name="due_date" id="gregorian"
+                            autocomplete="off">
                     </div>
                 @endif
                 <div class="col-md-8 my-1 justify-content-start mx-1 d-flex flex-wrap my-1">

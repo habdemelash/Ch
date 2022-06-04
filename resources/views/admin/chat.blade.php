@@ -22,8 +22,10 @@
                     @endphp
                     @forelse($messages as $message)
                         @php
+                        $senderID = $message->sender;
                         $sender = App\Models\User::find($message->sender); @endphp
                         <li class="clearfix" style="list-style-type: none">
+                            @if($senderID !== Auth::user()->id)
                             @if ($sender->profile_photo_path == null)
                                 <img class="img-thumbnail rounded-circle" height="50" width="50"
                                     src="{{ asset('site/assets/img/user.png') }}">
@@ -41,6 +43,11 @@
                                 @else
                                     <span>{{ $sender->name }}</span>
                                 @endif
+                            @endif
+                            @else
+                            <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                    src="{{ asset('site/assets/img/3dheart.png') }}">
+                                    <span> @lang('home.cvsms') </span>
                             @endif
                             <span class="text-dark ">
                                 <div class="about">
@@ -85,21 +92,19 @@
 
                                     <div class="row">
                                         <div class="chat-about col-6">
-                                        @if($me->id !== $talking->id)
+                                            @if ($me->id !== $talking->id)
+                                                @if ($talking->profile_photo_path == null)
+                                                    <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                                        src="{{ asset('site/assets/img/user.png') }}">
+                                                @else
+                                                    <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                                        src="{{ asset('uploads/profile-photos') }}/{{ $talking->profile_photo_path }}"
+                                                        alt="">
+                                                @endif
 
-                                            @if ($talking->profile_photo_path == null)
-                                                <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                                    src="{{ asset('site/assets/img/user.png') }}">
+                                                <span class="m-b-2 text-sucess">{{ $talking->name }}</span>
                                             @else
-                                                <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                                    src="{{ asset('uploads/profile-photos') }}/{{ $talking->profile_photo_path }}"
-                                                    alt="">
-                                            @endif
-
-                                            <span class="m-b-2 text-sucess">{{ $talking->name }}</span>
-                                            @else
-                                            <span class="m-b-2 text-sucess">@lang('home.cvsms')</span>
-
+                                                <span class="m-b-2 text-sucess">@lang('home.cvsms')</span>
                                             @endif
 
                                         </div>

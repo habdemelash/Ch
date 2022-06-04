@@ -1,17 +1,17 @@
 @extends('layouts.admin')
 @section('search')
-<script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('site/assets/js/ec.js') }}"></script>
     <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
     <li class="d-flex flex-column flex-md-row">
         <span id="option-container" style="visibility: hidden; position:absolute;"></span>
         <div class="container-fluid">
-            <form action="{{url('dash/events/search')}}" method="POST" class="d-flex">
-                <input class="form-control" id="searchEvent" type="text" name="keyword" 
+            <form action="{{ url('dash/events/search') }}" method="POST" class="d-flex">
+                <input class="form-control" id="searchEvent" type="text" name="keyword"
                     placeholder="{{ __('home.search_place') }}" aria-label="Search">
                 <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
             </form>
-           
+
         </div>
     </li>
 @endsection
@@ -54,7 +54,7 @@
                         <td class="text-primary" style="white-space: nowrap">
                             {{ App\Http\Controllers\TimeFormatter::eventDateLocal($event->due_date) }}</td>
                         <td>
-                       @php echo $event->{'location_'.app()->getLocale()}; @endphp
+                            @php echo $event->{'location_'.app()->getLocale()}; @endphp
                         </td>
                         <td class=" d-xl-table-cell text-primary">
                             {{ App\Http\Controllers\TimeFormatter::timeLocal($event->start_time) }}</td>
@@ -151,8 +151,8 @@
             });
         });
     </script>
- 
-   
+
+
     @if (Session::has('message'))
         <script>
             toastr.success("{!! Session::get('message') !!}");

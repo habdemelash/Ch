@@ -86,13 +86,13 @@
                             <label for="document"><i class="bx bxs-file-pdf mx-1 text-danger"></i><i
                                     class="bx bxs-image mx-1 text-danger"></i>@lang('home.your_legal_docs')</label>
                             <p><small class="text-primary">@lang('home.document_exp')</small></p>
-                            <input type="file" class="inner" onchange="fetch()" class="  form-control-lg" name="document[]" id="document"
-                                placeholder="@lang('home.your_legal_docs')*">
-                                <span class="namer"> </span>
+                            <input type="file" class="inner" onchange="fetch()" class="  form-control-lg"
+                                name="document[]" id="document" placeholder="@lang('home.your_legal_docs')*">
+                            <span class="namer"> </span>
                         </div>
                         <div class="form-group mt-3 clone hide" style="display: none;">
                             <div class="realprocode">
-                                
+
                                 <div><input type="file" class="form-control-lg" name="document[]" id="document"
                                         placeholder="@lang('home.your_legal_docs')*">
                                     <a class="btn btn-danger" type="button">@lang('home.remove')</a>
@@ -123,7 +123,6 @@
                 $(this).parents(".realprocode").remove();
             });
         });
-        
     </script>
     @if (Session::has('message'))
         <script type="text/javascript">
