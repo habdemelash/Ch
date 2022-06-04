@@ -204,7 +204,7 @@
                     <div class="col-lg-6">
                         <img class="img-fluid " width="50" height="50"
                             src="{{ asset('site/assets/img/3dheart_filled.png') }}">
-                        <h3>CVSMS</h3>
+                        <h3>@lang('home.cvsms')</h3>
                         <p>
                             @lang('home.volunteering_is') – <strong>@lang('home.french')</strong>
                         </p>

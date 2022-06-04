@@ -51,7 +51,7 @@
                                 <div class="form-group col-md-6 mt-3 mt-md-0">
                                     <label for="name"><i
                                             class="bx bxs-envelope mx-1 text-danger"></i>@lang('home.email')</label>
-                                    <input type="email" class="form-control" name="email" id="email" required
+                                    <input type="email" class="form-control" name="email" id="email"
                                         placeholder="@lang('home.email')*">
                                 </div>
                                 <div class="form-group col-md-6">
