@@ -103,11 +103,11 @@
                                             
                                             ?>
                                             <span
-                                                class="badge bg-primary">{{ $i + 1 }}</span><strong>{{ $ev->title }}</strong><br>
+                                                class="badge bg-primary">{{ $i + 1 }}</span><strong>{{ $ev->{'title_'.$locale} }}</strong><br>
                                             <small>@lang('home.date'): <span
                                                     class="text-primary">{{ ' ' . $formatted }}</span></small><br>
                                             <small>@lang('home.location'): <span
-                                                    class="text-primary"><?php echo ' ' . $ev->{'location_' . $locale}; ?></span></small>
+                                                    class="text-primary"> @php echo ' ' . $ev->{'location_'.$locale}; @endphp </span></small>
                                         </div>
                                         <a id="leave-span" href="{{ url('leave-event', $ev->id) }}"><span
                                                 class="badge"

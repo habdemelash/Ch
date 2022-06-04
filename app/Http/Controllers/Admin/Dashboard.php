@@ -129,7 +129,7 @@ class Dashboard extends Controller
     {
         $locale = app()->getLocale();
         $validated = $request->validate([
-            "status"=>["required","string","max:255"],
+           
             "title_am" => [
                 "required_without_all:title_or,title_en",
                 "sometimes:string",
@@ -254,7 +254,8 @@ class Dashboard extends Controller
     }
 
     public function updateEvent(Request $request, $id)
-    {
+    { 
+        // dd($request);
         $event = Event::find($id);
         $locale = app()->getLocale();
         $validated = $request->validate([

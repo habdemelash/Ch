@@ -85,6 +85,7 @@
 
                                     <div class="row">
                                         <div class="chat-about col-6">
+                                        @if($me->id !== $talking->id)
 
                                             @if ($talking->profile_photo_path == null)
                                                 <img class="img-thumbnail rounded-circle" height="50" width="50"
@@ -96,6 +97,10 @@
                                             @endif
 
                                             <span class="m-b-2 text-sucess">{{ $talking->name }}</span>
+                                            @else
+                                            <span class="m-b-2 text-sucess">@lang('home.cvsms')</span>
+
+                                            @endif
 
                                         </div>
                                         <div class="col-6 text-right">

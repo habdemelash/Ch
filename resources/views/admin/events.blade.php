@@ -34,6 +34,7 @@
                 <tr>
                     <th>{{ __('home.title') }}</th>
                     <th class=" d-xl-table-cell text-center"> {{ __('home.date') }}</th>
+                    <th class=" d-xl-table-cell text-center"> {{ __('home.location') }}</th>
                     <th class=" d-xl-table-cell"> {{ __('home.start_time') }}</th>
                     <th class=" d-xl-table-cell">{{ __('home.end_time') }}</th>
                     <th class=" d-xl-table-cell"> {{ __('home.short_desc') }}</th>
@@ -48,10 +49,13 @@
                 @forelse($events as $event)
                     <tr id="eid{{ $event->id }}">
                         <?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>
-                        <td class="text-success fw-bold" style="font-style: initial; white-space: nowrap;">
+                        <td class="text-success fw-bold" style="font-style: initial;">
                             <?php echo $event->{'title_' . app()->getLocale()}; ?></td>
                         <td class="text-primary" style="white-space: nowrap">
                             {{ App\Http\Controllers\TimeFormatter::eventDateLocal($event->due_date) }}</td>
+                        <td>
+                       @php echo $event->{'location_'.app()->getLocale()}; @endphp
+                        </td>
                         <td class=" d-xl-table-cell text-primary">
                             {{ App\Http\Controllers\TimeFormatter::timeLocal($event->start_time) }}</td>
                         <td class="text-primary">{{ App\Http\Controllers\TimeFormatter::timeLocal($event->end_time) }}
