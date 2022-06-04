@@ -42,16 +42,19 @@
             display: none;
         }
 
-        @if (app()->getLocale() == 'am')body,
-        header,
-        main,
-        section {
-            font-family: 'Abyssinica SIL', sans-serif;
-        }
-
-        @endif
+        
 
     </style>
+    @if (app()->getLocale() == 'am')body,
+    <style>
+    header,
+    main,
+    section {
+        font-family: 'Abyssinica SIL', sans-serif;
+    }
+    </style>
+
+    @endif
     @livewireStyles
 </head>
 
