@@ -72,7 +72,6 @@ return array(
     'App\\Models\\Message' => $baseDir . '/app/Models/Message.php',
     'App\\Models\\News' => $baseDir . '/app/Models/News.php',
     'App\\Models\\Role' => $baseDir . '/app/Models/Role.php',
-    'App\\Models\\Subscription' => $baseDir . '/app/Models/Subscription.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

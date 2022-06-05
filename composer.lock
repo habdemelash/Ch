@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9dd61bf2fd381e1540ae1603a4f6ada0",
+    "content-hash": "2f0b986114d573569d94aeea5492509e",
     "packages": [
         {
             "name": "andegna/calender",
@@ -7900,16 +7900,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.13.10",
+            "version": "v1.14.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "cbf55e1a392724313f7726c38578b5e008df6a0f"
+                "reference": "04b425968c6a76940bddd2cfa40bf9e9ce78eee8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/cbf55e1a392724313f7726c38578b5e008df6a0f",
-                "reference": "cbf55e1a392724313f7726c38578b5e008df6a0f",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/04b425968c6a76940bddd2cfa40bf9e9ce78eee8",
+                "reference": "04b425968c6a76940bddd2cfa40bf9e9ce78eee8",
                 "shasum": ""
             },
             "require": {
@@ -7956,7 +7956,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2022-04-14T18:29:22+00:00"
+            "time": "2022-05-31T14:48:21+00:00"
         },
         {
             "name": "maximebf/debugbar",
