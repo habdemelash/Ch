@@ -45,7 +45,7 @@
         
 
     </style>
-    @if (app()->getLocale() == 'am')body,
+    @if (app()->getLocale() == 'am')
     <style>
     header,
     main,
