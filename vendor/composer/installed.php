@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b2d456fcb350f93d4c8025ce2c156a54af118a4b',
+        'reference' => '94709d2bc52878c50d951cece59cd454b6d91641',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -27,15 +27,6 @@
             'provided' => array(
                 0 => 'v1.2.0',
             ),
-        ),
-        'astrotomic/laravel-translatable' => array(
-            'pretty_version' => 'v11.10.0',
-            'version' => '11.10.0.0',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../astrotomic/laravel-translatable',
-            'aliases' => array(),
-            'reference' => '6f2e3855836d46ab7ad3dabd269a400404f8b42c',
-            'dev_requirement' => false,
         ),
         'bacon/bacon-qr-code' => array(
             'pretty_version' => '2.0.7',
@@ -532,7 +523,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b2d456fcb350f93d4c8025ce2c156a54af118a4b',
+            'reference' => '94709d2bc52878c50d951cece59cd454b6d91641',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

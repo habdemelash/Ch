@@ -26,7 +26,6 @@ class HelpmeController extends Controller
                 ],
                 "document" => ["required"],
                 "document.*" => ["image"],
-                "email" => ["sometimes", "email", "max:500"],
                 "phone" => ["required", "max:20"],
             ]);
             $helpme->{"name_" . $locale} = $request->{"name_" . $locale};

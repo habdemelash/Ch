@@ -117,7 +117,6 @@ return array(
     'Brian2694\\Toastr\\' => array($vendorDir . '/brian2694/laravel-toastr/src'),
     'Barryvdh\\Debugbar\\' => array($vendorDir . '/barryvdh/laravel-debugbar/src'),
     'BaconQrCode\\' => array($vendorDir . '/bacon/bacon-qr-code/src'),
-    'Astrotomic\\Translatable\\' => array($vendorDir . '/astrotomic/laravel-translatable/src/Translatable'),
     'App\\' => array($baseDir . '/app'),
     'Andegna\\PHPUnit\\' => array($vendorDir . '/andegna/calender/tests'),
     'Andegna\\' => array($vendorDir . '/andegna/calender/src'),

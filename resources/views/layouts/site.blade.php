@@ -61,7 +61,7 @@
 <body>
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center justify-content-between">
-            <span class="logo "><a class="brand text-warning" href="/"><img
+            <span class="logo "><a class="brand text-danger" href="/"><img
                         src="{{ asset('site/assets/img/3dheart.png') }}" class="mx-3">@lang('home.cvsms')</a>
             </span>
             <?php $address = Request::url();
@@ -134,8 +134,7 @@
                                         class="bx bxs-hand"></i></a></li>
                             <li><a class="nav-link scrollto" href="{{ route('site.staff') }}">@lang('home.our_staff')<i
                                         class="bi-people-fill"></i></a></li>
-                            <li><a class="nav-link scrollto" href="{{ route('contact.form') }}">@lang('home.contact_us')<i
-                                        class="bi-send-fill"></i></a></li>
+                           
                             <li><a href="#about">@lang('home.about')<i class="bx bxs-info-square"></i></a></li>
                         </ul>
                     </li>

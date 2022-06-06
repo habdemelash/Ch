@@ -160,7 +160,7 @@ $newMessages = App\Models\Message::where('seen', 0)
                                 </div>
                                 <div class="list-group">
                                     @forelse ($newMessages as $message)
-                                        <a href="#" class="list-group-item">
+                                        <a href="{{ url('dash/mails/open', $message->sender) }}" class="list-group-item">
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-2">
                                                     {{-- <img src="{{ asset('admin/img/avatars/avatar-5.jpg') }}" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker"> --}}
