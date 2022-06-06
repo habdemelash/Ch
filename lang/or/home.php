@@ -12,7 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-    'cvsms'=>"CVSMS",
+    'cvsms'=>"Waan qabnu",
     'email'=>"Imeelli",
     'password'=>"jecha darbii",
     'password_confirm'=>"Jecha darbii mirkanessii",

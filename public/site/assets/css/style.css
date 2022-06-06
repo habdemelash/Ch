@@ -95,6 +95,11 @@ h6 {
     letter-spacing: 0.5px;
 }
 
+.brand {
+    font-size: 15px;
+    white-space: nowrap;
+}
+
 #header .logo a {
     color: #5f687b;
 }
