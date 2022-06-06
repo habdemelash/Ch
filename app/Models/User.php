@@ -47,7 +47,18 @@ class User extends Authenticatable
     {
         return $this->hasMany(Helpme::class,'approved_by','id');
     }
-
+    public function subscriptionToEvents()
+    {
+        return $this->hasOne(Subscription_to_Events::class);
+    }
+    public function subscriptionToHelpmes()
+    {
+        return $this->hasOne(Subscription_to_Helpme::class);
+    }
+    public function accepts()
+    {
+        return $this->hasMany(Helpme::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -35,7 +35,7 @@ return new class extends Migration
             $table->bigInteger('accepted_by')->unsigned()->nullable();
             $table->foreign('sender')->references('id')->on('users')->onDelete('cascade');
             
-            $table->foreign('accepted_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('accepted_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

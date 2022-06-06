@@ -19,12 +19,9 @@ class Helpme extends Model
     {
     	return $this->belongsTo(User::class,'sender','id');
     }
-    public function approvedby()
+    public function acceptedBy()
     {
-        return $this->belongsTo(User::class,'approved_by','id');
-    }
-
-
-    
+        return $this->belongsTo(User::class);
+    }  
 
 }

@@ -783,6 +783,8 @@ class ComposerStaticInit3f6fccebc9439dd39093becabdbf74b5
         'App\\Models\\Message' => __DIR__ . '/../..' . '/app/Models/Message.php',
         'App\\Models\\News' => __DIR__ . '/../..' . '/app/Models/News.php',
         'App\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
+        'App\\Models\\Subscription_to_Events' => __DIR__ . '/../..' . '/app/Models/Subscription_to_Events.php',
+        'App\\Models\\Subscription_to_Helpme' => __DIR__ . '/../..' . '/app/Models/Subscription_to_Helpme.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
