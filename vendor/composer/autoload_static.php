@@ -144,7 +144,6 @@ class ComposerStaticInit3f6fccebc9439dd39093becabdbf74b5
             'Laravel\\Tinker\\' => 15,
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Sanctum\\' => 16,
-            'Laravel\\Sail\\' => 13,
             'Laravel\\Jetstream\\' => 18,
             'Laravel\\Fortify\\' => 16,
         ),
@@ -501,10 +500,6 @@ class ComposerStaticInit3f6fccebc9439dd39093becabdbf74b5
         'Laravel\\Sanctum\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/sanctum/src',
-        ),
-        'Laravel\\Sail\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/laravel/sail/src',
         ),
         'Laravel\\Jetstream\\' => 
         array (
@@ -3330,9 +3325,6 @@ class ComposerStaticInit3f6fccebc9439dd39093becabdbf74b5
         'Laravel\\Jetstream\\Rules\\Role' => __DIR__ . '/..' . '/laravel/jetstream/src/Rules/Role.php',
         'Laravel\\Jetstream\\Team' => __DIR__ . '/..' . '/laravel/jetstream/src/Team.php',
         'Laravel\\Jetstream\\TeamInvitation' => __DIR__ . '/..' . '/laravel/jetstream/src/TeamInvitation.php',
-        'Laravel\\Sail\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/InstallCommand.php',
-        'Laravel\\Sail\\Console\\PublishCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/PublishCommand.php',
-        'Laravel\\Sail\\SailServiceProvider' => __DIR__ . '/..' . '/laravel/sail/src/SailServiceProvider.php',
         'Laravel\\Sanctum\\Console\\Commands\\PruneExpired' => __DIR__ . '/..' . '/laravel/sanctum/src/Console/Commands/PruneExpired.php',
         'Laravel\\Sanctum\\Contracts\\HasAbilities' => __DIR__ . '/..' . '/laravel/sanctum/src/Contracts/HasAbilities.php',
         'Laravel\\Sanctum\\Contracts\\HasApiTokens' => __DIR__ . '/..' . '/laravel/sanctum/src/Contracts/HasApiTokens.php',
