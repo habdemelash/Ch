@@ -42,18 +42,16 @@
             display: none;
         }
 
-        
-
     </style>
     @if (app()->getLocale() == 'am')
-    <style>
-    header,
-    main,
-    section {
-        font-family: 'Abyssinica SIL', sans-serif;
-    }
-    </style>
+        <style>
+            header,
+            main,
+            section {
+                font-family: 'Abyssinica SIL', sans-serif;
+            }
 
+        </style>
     @endif
     @livewireStyles
 </head>
@@ -134,7 +132,7 @@
                                         class="bx bxs-hand"></i></a></li>
                             <li><a class="nav-link scrollto" href="{{ route('site.staff') }}">@lang('home.our_staff')<i
                                         class="bi-people-fill"></i></a></li>
-                           
+
                             <li><a href="#about">@lang('home.about')<i class="bx bxs-info-square"></i></a></li>
                         </ul>
                     </li>

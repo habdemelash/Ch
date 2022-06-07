@@ -22,32 +22,32 @@
                     @endphp
                     @forelse($messages as $message)
                         @php
-                        $senderID = $message->sender;
+                            $senderID = $message->sender;
                         $sender = App\Models\User::find($message->sender); @endphp
                         <li class="clearfix" style="list-style-type: none">
-                            @if($senderID !== Auth::user()->id)
-                            @if ($sender->profile_photo_path == null)
-                                <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                    src="{{ asset('site/assets/img/user.png') }}">
-                                @if ($message->sender == $message->receiver)
-                                    <span>@lang('home.cvsms')</span>
+                            @if ($senderID !== Auth::user()->id)
+                                @if ($sender->profile_photo_path == null)
+                                    <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                        src="{{ asset('site/assets/img/user.png') }}">
+                                    @if ($message->sender == $message->receiver)
+                                        <span>@lang('home.cvsms')</span>
+                                    @else
+                                        <span>{{ $sender->name }}</span>
+                                    @endif
                                 @else
-                                    <span>{{ $sender->name }}</span>
+                                    <img class="img-thumbnail rounded-circle" height="50" width="50"
+                                        src="{{ asset('uploads/profile-photos') }}/{{ $sender->profile_photo_path }}"
+                                        alt="">
+                                    @if ($message->sender == $message->receiver)
+                                        <span>@lang('home.cvsms')</span>
+                                    @else
+                                        <span>{{ $sender->name }}</span>
+                                    @endif
                                 @endif
                             @else
                                 <img class="img-thumbnail rounded-circle" height="50" width="50"
-                                    src="{{ asset('uploads/profile-photos') }}/{{ $sender->profile_photo_path }}"
-                                    alt="">
-                                @if ($message->sender == $message->receiver)
-                                    <span>@lang('home.cvsms')</span>
-                                @else
-                                    <span>{{ $sender->name }}</span>
-                                @endif
-                            @endif
-                            @else
-                            <img class="img-thumbnail rounded-circle" height="50" width="50"
                                     src="{{ asset('site/assets/img/3dheart.png') }}">
-                                    <span> @lang('home.cvsms') </span>
+                                <span> @lang('home.cvsms') </span>
                             @endif
                             <span class="text-dark ">
                                 <div class="about">

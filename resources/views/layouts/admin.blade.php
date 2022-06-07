@@ -160,7 +160,8 @@ $newMessages = App\Models\Message::where('seen', 0)
                                 </div>
                                 <div class="list-group">
                                     @forelse ($newMessages as $message)
-                                        <a href="{{ url('dash/mails/open', $message->sender) }}" class="list-group-item">
+                                        <a href="{{ url('dash/mails/open', $message->sender) }}"
+                                            class="list-group-item">
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-2">
                                                     {{-- <img src="{{ asset('admin/img/avatars/avatar-5.jpg') }}" class="avatar img-fluid rounded-circle" alt="Vanessa Tucker"> --}}
@@ -175,9 +176,14 @@ $newMessages = App\Models\Message::where('seen', 0)
                                                         <div class="text-dark">@lang('home.cvsms')</div>
                                                     @endif
                                                     <div class="text-muted small mt-1">
-                                                       <p class="fw-bold"> {{ mb_substr($message->content, 0, 15, 'UTF-8') }} ... </p></div>
+                                                        <p class="fw-bold">
+                                                            {{ mb_substr($message->content, 0, 15, 'UTF-8') }} ...
+                                                        </p>
+                                                    </div>
                                                     <div class="text-muted small mt-1">
-                                                      <span class="text-info">  {{ App\Http\Controllers\TimeFormatter::fullDateTime($message->created_at) }} </span>
+                                                        <span class="text-info">
+                                                            {{ App\Http\Controllers\TimeFormatter::fullDateTime($message->created_at) }}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -206,93 +212,93 @@ $newMessages = App\Models\Message::where('seen', 0)
                                         alt="">
                                     @endif <span class="text-dark ">
                                         @auth
-                                            {{ Auth::user()->name }}@endauth
-                                        </span>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item text-primary" href="{{ route('profile') }}"><i
-                                            class="align-middle me-1" data-feather="user"></i>
-                                        {{ __('home.profile') }}</a>
-                                    <a class="dropdown-item text-primary" href="{{ route('site.home') }}"><i
-                                            class="bx bxs-home-heart"></i> {{ __('home.site') }}</a>
-                                    <a class="dropdown-item text-danger" href="{{ route('logout') }}"><i
-                                            class="bx bx-lock"></i>{{ __('home.logout') }}</a>
-                                </div>
-                            </li>
-                            {{-- User icon dropdown ends here --}}
-                            {{-- Language Toggler dropdown --}}
-                            <li class="nav-item dropdown">
-                                <a class="nav-icon dropdown-toggle" href="#" id="lang" data-bs-toggle="dropdown"
-                                    style="text-decoration: none">
-                                    <span class="text-success fw-bold"
-                                        style="font-size: 13px">{{ config('app.languages')[app()->getLocale()] }}</span>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end py-0 " aria-labelledby="lang"
-                                    style="width: 150px;">
-                                    <div class="list-group">
-                                        @if (count(config('app.languages')) > 1)
-                                            @foreach (config('app.languages') as $langLocale => $langName)
-                                                <div class="row g-0 align-items-center">
-                                                    <div class="col-10">
-                                                        <div class="text-dark"><a
-                                                                class="nav-link dropdown-item fw-bold"
-                                                                href="{{ url()->current() }}?change_language={{ $langLocale }}">
-                                                                {{ $langName }}</a></div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
-                                    </div>
-                                </div>
-                            </li>
-
-                        </ul>
-                    </div>
-                </nav>
-                <main class="content">
-                    <div class="container-fluid p-0">
-                        @yield('content')
-                    </div>
-                </main>
-
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <div class="row text-muted">
-                            <div class="col-6 text-end">
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <a class="text-primary"
-                                            href="{{ route('site.home') }}">{{ __('home.site') }}</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="text-primary"
-                                            href="{{ route('profile') }}">{{ __('home.profile') }}</a>
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a class="text-primary" href="{{ route('logout') }}"
-                                            target="_blank">{{ __('home.logout') }}</a>
-                                    </li>
-                                </ul>
+                                        {{ Auth::user()->name }} @endauth
+                                    </span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-primary" href="{{ route('profile') }}"><i
+                                        class="align-middle me-1" data-feather="user"></i>
+                                    {{ __('home.profile') }}</a>
+                                <a class="dropdown-item text-primary" href="{{ route('site.home') }}"><i
+                                        class="bx bxs-home-heart"></i> {{ __('home.site') }}</a>
+                                <a class="dropdown-item text-danger" href="{{ route('logout') }}"><i
+                                        class="bx bx-lock"></i>{{ __('home.logout') }}</a>
                             </div>
+                        </li>
+                        {{-- User icon dropdown ends here --}}
+                        {{-- Language Toggler dropdown --}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-icon dropdown-toggle" href="#" id="lang" data-bs-toggle="dropdown"
+                                style="text-decoration: none">
+                                <span class="text-success fw-bold"
+                                    style="font-size: 13px">{{ config('app.languages')[app()->getLocale()] }}</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end py-0 " aria-labelledby="lang"
+                                style="width: 150px;">
+                                <div class="list-group">
+                                    @if (count(config('app.languages')) > 1)
+                                        @foreach (config('app.languages') as $langLocale => $langName)
+                                            <div class="row g-0 align-items-center">
+                                                <div class="col-10">
+                                                    <div class="text-dark"><a
+                                                            class="nav-link dropdown-item fw-bold"
+                                                            href="{{ url()->current() }}?change_language={{ $langLocale }}">
+                                                            {{ $langName }}</a></div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+            <main class="content">
+                <div class="container-fluid p-0">
+                    @yield('content')
+                </div>
+            </main>
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-muted">
+                        <div class="col-6 text-end">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a class="text-primary"
+                                        href="{{ route('site.home') }}">{{ __('home.site') }}</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-primary"
+                                        href="{{ route('profile') }}">{{ __('home.profile') }}</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a class="text-primary" href="{{ route('logout') }}"
+                                        target="_blank">{{ __('home.logout') }}</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                </footer>
-            </div>
+                </div>
+            </footer>
         </div>
-        <script src="{{ asset('admin/js/app.js') }}"></script>
-        {{-- <script type="text/javascript" src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"> --}}</script>
-        <script type="text/javascript" src="{{ asset('admin/other/popper.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('admin/other/toastr.min.js') }}"></script>
-        <script>
-            document.addEventListener("DOMContentLoaded", function(event) {
-                var scrollpos = localStorage.getItem('scrollpos');
-                if (scrollpos) window.scrollTo(0, scrollpos);
-            });
+    </div>
+    <script src="{{ asset('admin/js/app.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"> --}}</script>
+    <script type="text/javascript" src="{{ asset('admin/other/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('admin/other/toastr.min.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+            var scrollpos = localStorage.getItem('scrollpos');
+            if (scrollpos) window.scrollTo(0, scrollpos);
+        });
 
-            window.onbeforeunload = function(e) {
-                localStorage.setItem('scrollpos', window.scrollY);
-            };
-        </script>
-    </body>
+        window.onbeforeunload = function(e) {
+            localStorage.setItem('scrollpos', window.scrollY);
+        };
+    </script>
+</body>
 
-    </html>
+</html>
