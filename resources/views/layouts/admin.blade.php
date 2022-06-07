@@ -299,6 +299,7 @@ $newMessages = App\Models\Message::where('seen', 0)
             localStorage.setItem('scrollpos', window.scrollY);
         };
     </script>
+
 </body>
 
 </html>

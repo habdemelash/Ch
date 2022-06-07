@@ -4,9 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>CVSMS Site- {{ Request::is('/') ? 'Home' : '' }}{{ Request::is('events') ? 'Events' : '' }}
-        {{ Request::is('all-my-events') ? 'All my events' : '' }}
-        {{ Request::is('register') ? 'Join us' : '' }}{{ Request::is('login') ? 'Login' : '' }}</title>
+    <title>@lang('home.cvsms') - @lang('home.site')-
+        {{ Request::is('/') ? __('home.home_nav') : '' }}{{ Request::is('events') ? __('home.events_nav') : '' }}
+        {{ Request::is('all-my-events') ? __('home.my_events_nav') : '' }}
+        {{ Request::is('join-us') ? __('home.join_btn') : '' }}{{ Request::is('login') ? __('home.login') : '' }}
+    </title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <?php $address = Request::url(); ?>
@@ -29,6 +31,7 @@
     <link href="{{ asset('site/assets/css/abyssinica-sil.css') }}" rel="stylesheet">
 
 
+
     <style>
         .more {
             display: none;
@@ -41,6 +44,11 @@
         .service-item.open .dots {
             display: none;
         }
+@media screen and (min-width: 768px){
+        .drmsg:hover .dr-menu {
+    display: block;
+    margin-top: 0; // remove the gap so it doesn't close
+ }}
 
     </style>
     @if (app()->getLocale() == 'am')
@@ -188,6 +196,8 @@
                     </li>
 
                     @auth
+
+
                         @php
                             
                             $messages = App\Models\Message::select('id', 'created_at', 'content', 'sender', 'receiver')
@@ -197,16 +207,18 @@
                                 ->paginate(6);
                             $me = Auth::user();
                         @endphp
-                        {{-- <li class="dropdown my-1">
-                            <a href="#" style="font-size: 13px"><span><i class="bx bxs-message mt-3"
-                                        style="font-size: 25px"><span class="badge bg-danger"
-                                            style="font-size: 8px; margin-bottom:10px; margin-left:-5px">{{ $messages->count() }}</span></i></span>
-                                <i class="bi bi-chevron-down"></i></a>
+                        <div class="dropdown drmsg" style="margin-left: 10px">
+                            <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-expanded="false">
+                                <i class="bx bxs-message mt-3" style="font-size: 25px; color:rgb(41, 41, 236)"><span class="badge bg-danger"
+                                        style="font-size: 8px; margin-bottom:10px; margin-left:-5px">{{ $messages->count() }}</span></i></span>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            </a>
+
+                            <div class="dropdown-menu dr-menu" aria-labelledby="dropdownMenuLink">
+
                                 @if ($messages->count() > 0)
-                                @foreach ($messages as $message)
-                                    
+                                    @foreach ($messages as $message)
                                         @php
                                             $sender = App\Models\User::find($message->sender)->name;
                                             if (Auth::user()->id == $message->sender) {
@@ -214,65 +226,24 @@
                                             }
                                             
                                         @endphp
-                                        <li><a class="nav-link scrollto">
-                                                {{ $sender }}</a>
-                                                <small class="text-dark">{{mb_substr($message->content,0,10,'UTF-8')}}...</small>
-                                        </li>
-                                    
-                                    @endforeach
-                           
-                            @endif
-                        </ul>
-                        </li> --}}
-                        <li class="dropdown" >
-                            <a class="nav nav-link  {{ Request::is('all-my-events') ? 'active' : '' }}"
-                                href="{{ route('all.my.events') }}"><span><i class="bx bxs-message"></i>
-                                        <span class="badge bg-primary">{{ $messages->count() }}</span>
-                                   
-                                </span></a>
-                               
-                            <ul >
-                                
-                                <?php $arr = array_reverse($myEventsList); ?>
-                                @for ($i = 0; $i < count($myEventsList) and $i < 3; $i++)
-                                    <?php $ev = App\Http\Controllers\Site\Home::fetchMyEvents($arr[$i]); ?>
-                                    <li class="dropdown dropdown-menu-end" style="">
-                                        <a href="#" style="pointer-events: none">
+                                        <a href="{{url('dash/mails/open',$message->sender)}}" class="dropdown-item">
                                             <div>
-                                                <?php
-                                                $formatted = (new Carbon\Carbon(new DateTime($ev->due_date)))->toFormattedDateString();
-                                                
-                                                if (app()->getLocale() == 'am') {
-                                                    $formatted = (new Andegna\DateTime(new DateTime($ev->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART);
-                                                } elseif (app()->getLocale() == 'or') {
-                                                    $formatted = App\Http\Controllers\Admin\Dashboard::oromicDate((new Andegna\DateTime(new DateTime($ev->due_date)))->format(\Andegna\Constants::DATE_ETHIOPIAN_PART));
-                                                }
-                                                
-                                                ?>
-                                                <span
-                                                    class="badge bg-primary">{{ $i + 1 }}</span><strong>{{ $ev->{'title_' . $locale} }}</strong><br>
-                                                <small>@lang('home.date'): <span
-                                                        class="text-primary">{{ ' ' . $formatted }}</span></small><br>
-                                                <small>@lang('home.location'): <span class="text-primary"> @php echo ' ' . $ev->{'location_'.$locale}; @endphp
-                                                    </span></small>
+
+                                                {{ $sender }} <br></small>
+                                                <small class="text-primary"
+                                                    style="font-size: 10px">{{ mb_substr($message->content, 0, 10, 'UTF-8') }}...</small>
+
                                             </div>
-                                            <a id="leave-span" href="{{ url('leave-event', $ev->id) }}"><span
-                                                    class="badge"
-                                                    style="background: rgb(255, 0, 0);">@lang('home.leave_it')<i
-                                                        class="bi-x-circle"></i></span></a>
-                                            <hr class="text-success">
                                         </a>
-                                    </li>
-                                @endfor
-                                @if ($myevents > 3)
-                                    <a href="{{ route('all.my.events') }}" style="text-decoration: none;"
-                                        class="text-primary">@lang('home.see_all')</a>
+                                    @endforeach
+                                    <hr>
+                                    <a href="{{route('user.mails')}}" class="text-primary" style="font-size: 12px;">@lang('home.see_all')</a>
                                 @endif
-                             </ul>
+                            </div>
+                        </div>
                         </li>
 
                     @endauth
-
 
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -346,6 +317,9 @@
             localStorage.setItem('scrollpos', window.scrollY);
         };
     </script>
+    <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('admin/other/bootstrap.bundle.min.js') }}"></script>
+
     @livewireScripts
 </body>
 
