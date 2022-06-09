@@ -11,6 +11,7 @@
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset('profile/css/simplebar.css') }}">
     <link href="{{ asset('admin/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{asset('site/assets/img/3dheart.png')}}">
     <!-- Fonts CSS -->
     <link
         href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap"
@@ -23,6 +24,7 @@
     <!-- App CSS -->
     <link rel="stylesheet" href="{{ asset('profile/css/app-light.css') }}" id="lightTheme">
     <link rel="stylesheet" href="{{ asset('profile/css/app-dark.css') }}" id="darkTheme" disabled>
+   
 </head>
 
 <body class="vertical  light rtl ">
@@ -128,7 +130,7 @@
                                     <div class="form-group col-md-6">
                                         <label for="inputAddress5">@lang('home.location')</label>
                                         <input type="text" name="address" class="form-control" id="inputAddress5"
-                                            value="{{ $my->address }}">
+                                            value="{{ $my->address }}" style="padding-bottom: 15px; border-style:solid">
                                     </div>
 
                                 </div>
@@ -136,15 +138,15 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputCompany5">@lang('home.photo')</label>
-                                        <label class="col-md-2 btn" for="pic"
-                                            style="border: solid; border-width: 0.5px; border-color: gray;padding: 3px; border-radius: 5px;">{{ __('home.click_here') }}</label>
-                                        <label for="pic" id="file-name"
-                                            onchange="preview_image(event)">{{ __('home.no_file_choosen') }}</label>
-                                        <input type="file" id="pic" name="profile_photo_path"
+                                        
+                                        
+                                        <input type="file" id="input02" name="profile_photo_path"
                                             class="form-control-lg col-md-10" accept="image/*"
                                             onchange="preview_image(event)" style="display: none;">
+                                            
 
                                     </div>
+                                    
                                     <div class="form-group col-md-4">
                                         <label for="inputState5">@lang('home.new_photo')</label>
                                         <img src="{{ asset('uploads/profile-photos') }}/{{ $my->profile_photo_path }}"
@@ -229,6 +231,12 @@
     <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('admin/other/popper.min.js') }}"></script>
     <script src="{{ asset('admin/other/bootstrap.bundle.min.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{asset('filestyle/src/bootstrap-filestyle.js')}}"></script> --}}
+    <script type="text/javascript" src="{{asset('filestyle/src/bootstrap-filestyle.min.js')}}"></script>
+    <script>$('#input02').filestyle({
+        buttonText: '<i class="bi-file-image" style="color:green; font-size:20px;"></i>'
+    });
+    </script>
     <script type='text/javascript'>
         function preview_image(event) {
             var reader = new FileReader();
@@ -264,7 +272,9 @@
                 labelElement.innerHTML = 'Bla bla'
             }
         }
+        
     </script>
+    
 </body>
 
 </html>

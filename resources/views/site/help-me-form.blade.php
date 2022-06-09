@@ -81,12 +81,14 @@
                                     required placeholder="@lang('home.location')*">
                             </div>
                         @endif
+
                         <a class="btn btn-success col-2" type="button">@lang('home.add')</a>
                         <div class="form-group mt-3 realprocode increment">
                             <label for="document"><i class="bx bxs-file-pdf mx-1 text-danger"></i><i
                                     class="bx bxs-image mx-1 text-danger"></i>@lang('home.your_legal_docs')</label>
                             <p><small class="text-primary">@lang('home.document_exp')</small></p>
-                            <input type="file" class="inner" onchange="fetch()" class="  form-control-lg"
+                            
+                            <input type="file" class="form-control-lg inner" onchange="fetch()" class="  form-control-lg"
                                 name="document[]" id="document" placeholder="@lang('home.your_legal_docs')*">
                             <span class="namer"> </span>
                         </div>

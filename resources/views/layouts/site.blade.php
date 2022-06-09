@@ -14,7 +14,6 @@
     <?php $address = Request::url(); ?>
     <!-- Favicons -->
     <link href="{{ asset('site/assets/img/3dheart.png') }}" rel="icon">
-    <link href="{{ asset('site/assets/img/3dheart.png') }}" rel="apple-touch-icon">
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
@@ -44,11 +43,13 @@
         .service-item.open .dots {
             display: none;
         }
-@media screen and (min-width: 768px){
-        .drmsg:hover .dr-menu {
-    display: block;
-    margin-top: 0; // remove the gap so it doesn't close
- }}
+
+        @media screen and (min-width: 768px) {
+            .drmsg:hover .dr-menu {
+                display: block;
+                margin-top: 0; // remove the gap so it doesn't close
+            }
+        }
 
     </style>
     @if (app()->getLocale() == 'am')
@@ -210,7 +211,8 @@
                         <div class="dropdown drmsg" style="margin-left: 10px">
                             <a class="btn btn-white dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                                 data-toggle="dropdown" aria-expanded="false">
-                                <i class="bx bxs-message mt-3" style="font-size: 25px; color:rgb(41, 41, 236)"><span class="badge bg-danger"
+                                <i class="bx bxs-message mt-3" style="font-size: 25px; color:rgb(41, 41, 236)"><span
+                                        class="badge bg-danger"
                                         style="font-size: 8px; margin-bottom:10px; margin-left:-5px">{{ $messages->count() }}</span></i></span>
 
                             </a>
@@ -226,7 +228,7 @@
                                             }
                                             
                                         @endphp
-                                        <a href="{{url('dash/mails/open',$message->sender)}}" class="dropdown-item">
+                                        <a href="{{ url('dash/mails/open', $message->sender) }}" class="dropdown-item">
                                             <div>
 
                                                 {{ $sender }} <br></small>
@@ -237,7 +239,8 @@
                                         </a>
                                     @endforeach
                                     <hr>
-                                    <a href="{{route('user.mails')}}" class="text-primary" style="font-size: 12px;">@lang('home.see_all')</a>
+                                    <a href="{{ route('user.mails') }}" class="text-primary"
+                                        style="font-size: 12px;">@lang('home.see_all')</a>
                                 @endif
                             </div>
                         </div>
@@ -301,7 +304,6 @@
     <script src="{{ asset('site/assets/vendor/purecounter/purecounter.js') }}"></script>
     <script src="{{ asset('site/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('site/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
-    <script src="{{ asset('site/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('site/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('site/assets/js/main.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -312,7 +314,6 @@
             var scrollpos = localStorage.getItem('scrollpos');
             if (scrollpos) window.scrollTo(0, scrollpos);
         });
-
         window.onbeforeunload = function(e) {
             localStorage.setItem('scrollpos', window.scrollY);
         };
