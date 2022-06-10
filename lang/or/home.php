@@ -52,6 +52,7 @@ return [
     'please'=>"maaloo as tuqaa!",
     'developed_by'=>"Kan ijaarame ...............tiin.",
     'kind_hearts'=>"Onneewwan arjaa",
+    'volunteering_is' =>'“Gaarummaan sansalata warqee hawaasa tokko walitti hidhudha.”',
     'copyright'=>"Mirga kooppiraayitti",
     'all_rights_reserved'=>"Mirgii isaa kan seeraan eegame.",
     'subscribe'=>"Oddeffannoo adda addaaf nu hordoffaa ",
