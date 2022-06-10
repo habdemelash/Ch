@@ -40,7 +40,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
             $limiter ? 'throttle:'.$limiter : null,
         ]));
 
-    
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+        ->name('logout');
+
     // Password Reset...
     if (Features::enabled(Features::resetPasswords())) {
         if ($enableViews) {
@@ -93,9 +95,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
 
     // Profile Information...
     if (Features::enabled(Features::updateProfileInformation())) {
-        // Route::put('/user/profile-information', [ProfileInformationController::class, 'update'])
-        //     ->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')])
-        //     ->name('user-profile-information.update');
+        Route::put('/user/profile-information', [ProfileInformationController::class, 'update'])
+            ->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')])
+            ->name('user-profile-information.update');
     }
 
     // Passwords...

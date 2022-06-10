@@ -1,19 +1,19 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use Carbon\Carbon;
-use App\Http\Livewire\LetsHelp;
-
-use App\Models\Message;
 use App\Models\Role;
-use App\Http\Controllers\Site\Home;
+use App\Models\Message;
+use Illuminate\Http\Request;
+
 use App\Http\Controllers\Signout;
 use App\Http\Controllers\Messages;
+use App\Http\Controllers\Site\Home;
+
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Dashboard;
-use App\Http\Controllers\admin\EventControllerAdmin;
-use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Site\HelpmeController;
+use App\Http\Controllers\admin\EventControllerAdmin;
 // use Twilio\Rest\Client;
 
 Route::get('login', [Home::class, 'loginView'])->name('login');
@@ -88,25 +88,7 @@ Route::middleware([
 });
 
 Route::get('try', function () {
-    dd(Message::all());
-
-    // $email = DB::table('users')->where('id', Auth::user()->id)->value('locale');
-    // dd($email,\Request::route());
-
-    // $receiver = '+251920763031';
-    // $message = 'Hi Habte';
-    // try{
-    //     $account_sid = getenv('TWILIO_SID');
-    //     $auth_token = getenv('TWILIO_TOKEN');
-    //     $tw_no = getenv('TWILIO_FROM');
-    //     $client = new Client($account_sid, $auth_token);
-    //     $client->messages->create($receiver,['from'=>$tw_no,
-    // 'body'=>$message]);
-    //     dd('Sent!');
-
-    // } catch (Exception $e){
-    //     dd('Error: ', $e->getMessage());
-    // }	
+  
 });
 
 

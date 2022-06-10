@@ -3,7 +3,7 @@
         <div class="d-flex justify-content-between flex-fill d-sm-none">
             <ul class="pagination">
                 {{-- Previous Page Link --}}
-                @if ($paginator->onFirstPage()) 
+                @if ($paginator->onFirstPage())
                     <li class="page-item disabled" aria-disabled="true">
                         <span class="page-link">@lang('pagination.previous')</span>
                     </li>
@@ -28,14 +28,14 @@
 
         <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
             <div>
-                <p class="small text-info">
-                    @lang('pagination.showing')
+                <p class="small text-muted">
+                    {!! __('Showing') !!}
                     <span class="font-medium">{{ $paginator->firstItem() }}</span>
-                    {!! __('pagination.to') !!}
+                    {!! __('to') !!}
                     <span class="font-medium">{{ $paginator->lastItem() }}</span>
-                    {!! __('pagination.of') !!}
+                    {!! __('of') !!}
                     <span class="font-medium">{{ $paginator->total() }}</span>
-                    {!! __('pagination.results') !!}
+                    {!! __('results') !!}
                 </p>
             </div>
 

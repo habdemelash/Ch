@@ -16,9 +16,11 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('heading_en')->nullable();
+            $table->string('heading_tg')->nullable();
             $table->string('heading_am')->nullable();
             $table->string('heading_or')->nullable();
             $table->text('body_en')->nullable();
+            $table->text('body_tg')->nullable();
             $table->text('body_am')->nullable();
             $table->text('body_or')->nullable();
             $table->string('picture');

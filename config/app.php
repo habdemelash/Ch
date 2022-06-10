@@ -85,7 +85,7 @@ return [
      'locale'=>'am',
     
    
-    'available_locales' => ['am', 'or', 'en'],
+    'available_locales' => ['am','tg', 'or', 'en'],
 
     /*
     |--------------------------------------------------------------------------
@@ -204,6 +204,7 @@ return [
 
     'languages' => [
         'am' => 'አማርኛ',
+        'tg'=>'ትግርኛ',
         'or' => 'Afaan Oromoo',
         'en' => 'English',
         
