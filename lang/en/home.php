@@ -224,5 +224,7 @@ return [
     'your_message'=>"Your message...",
     'no_mails_yet'=>"No mails yet",
     'we_have_taken'=>"We have taken the remaining information from your profile information about your. Please complete only the sections of the form below.",
-
+     'this_month'=>'This month',
+     'this_week'=>'This week',
+     'todays'=>"Today's",
 ];

@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\UsersChart::class,
             \App\Charts\HelpmesChart::class,
             \App\Charts\SiteChart::class,
+            \App\Charts\NewsChart::class,
         ]);
     }
 }

@@ -14,6 +14,9 @@
         <div class="col-md-4" id="users" style="height: 300px;">
             <strong class="text-center text-primary">@lang('home.users')</strong>
         </div>
+        <div class="col-md-4" id="news" style="height: 300px;">
+            <strong class="text-center text-primary">@lang('home.users')</strong>
+        </div>
     </div>
 
 
@@ -31,6 +34,11 @@
         const chart2 = new Chartisan({
             el: '#users',
             url: "@chart('users_chart')",
+            hooks: new ChartisanHooks().colors().datasets(['bar'])
+        });
+        const chart2 = new Chartisan({
+            el: '#news',
+            url: "@chart('news_chart')",
             hooks: new ChartisanHooks().colors().datasets(['bar'])
         });
     </script>

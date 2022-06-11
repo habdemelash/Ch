@@ -225,6 +225,8 @@ return [
     'adminrole_taken'=>"Gaheen Bulchaa fayyadamaa irraa fudhatameera.",
     'do_u_delete_profile'=>"Profaayilii kee haquu barbaaddu mirkaneeffatteettaa?",
     'we_have_taken'=>"Odeeffannoo hafe odeeffannoo dhuunfaa keessan waa'ee herrega seensaa keessanii irraa fudhanneerra. Mee kutaalee unkaa armaan gadii qofa guutaa.",
-    
+    'this_month'=>"Ji'a kana",
+      'this_week'=>'Torban kana',
+      'todays'=>"Kan har'aa",
     
 ];
