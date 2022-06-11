@@ -34,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\SiteChart::class,
             \App\Charts\NewsChart::class,
         ]);
+        \Carbon\Carbon::setLocale('en');
     }
 }

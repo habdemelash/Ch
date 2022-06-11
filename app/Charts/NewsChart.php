@@ -21,9 +21,9 @@ class NewsChart extends BaseChart
     {
        $this_month = News::whereMonth('created_at', date('m'))
        ->whereYear('created_at', date('Y'))
-       ->get(['name','created_at']);
-       $this_week = News::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
-    $todays = News::whereDate('created_at', Carbon::today())->get(['name','created_at']);
+       ->count();
+       $this_week = News::whereBetween('created_at', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->count();
+        $todays = News::whereDate('created_at', Carbon::today())->count();
         
         return Chartisan::build()
             ->labels([__('home.this_month'), __('home.this_week'), __('home.todays')])

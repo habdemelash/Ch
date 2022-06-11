@@ -228,5 +228,8 @@ return [
     'this_month'=>'በዚህ ወር',
      'this_week'=>'በዚህ ሳምንት',
      'todays'=>"የዛሬ",
+     'active_users'=>"በመስመር ላይ ያሉ",
+     'online'=>'በመስመር ላይ',
+     'offline'=>'ከመስመር ውጭ',
     
 ];

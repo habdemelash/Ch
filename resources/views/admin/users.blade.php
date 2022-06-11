@@ -38,7 +38,16 @@
                 @foreach ($users as $user)
                     <tr id="uid{{ $user->id }}">
                         <?php $roleList = App\Http\Controllers\Admin\Dashboard::userRoles($user->id); ?>
-                        <td class="text-dark" style="font-style: initial;">{{ $user->name }}</td>
+                        <td class="text-dark" style="font-style: initial;">
+                            
+                           <strong> {{ $user->name }}</strong><br>
+                            @if(Cache::has('user-is-online-' . $user->id))
+                            <span class="badge bg-success">@lang('home.online')</span>
+                        @else
+                            <span class="badge bg-danger">@lang('home.offline')</span>
+                        @endif
+                          
+                        </td>
                         <td class=" d-xl-table-cell text-info">{{ $user->phone }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->address }}

@@ -4,11 +4,12 @@ declare(strict_types = 1);
 
 namespace App\Charts;
 
-use Chartisan\PHP\Chartisan;
-use ConsoleTVs\Charts\BaseChart;
-use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
+use Chartisan\PHP\Chartisan;
+use Illuminate\Http\Request;
+use ConsoleTVs\Charts\BaseChart;
+use Illuminate\Support\Facades\Cache;
 
 class UsersChart extends BaseChart
 {
@@ -22,13 +23,19 @@ class UsersChart extends BaseChart
         $volunteers = Role::find(1)->users->count();
         $staff = Role::find(2)->users->count();
         $admins = Role::find(3)->users->count();
-        
-        
-        
+        $count = 0;
+        $active = User::whereNotNull('last_seen')
+                        ->orderBy('last_seen', 'DESC')
+                        ->get();
+        foreach($active as $user){
+            if(Cache::has('user-is-online-'.$user->id)){
+                $count++;
+            }
+        }
         
         return Chartisan::build()
-            ->labels([__('home.volunteer'), __('home.staff'), __('home.admin')])
-            ->dataset('Users', [$volunteers, $staff, $admins]);
+            ->labels([__('home.volunteer'), __('home.staff'), __('home.admin'),__('home.active_users')])
+            ->dataset('Users', [$volunteers, $staff, $admins,$count]);
             
     }
 }

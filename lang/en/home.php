@@ -227,4 +227,7 @@ return [
      'this_month'=>'This month',
      'this_week'=>'This week',
      'todays'=>"Today's",
+     'active_users'=>"Active users",
+     'online'=>'Online',
+     'offline'=>'Offline',
 ];

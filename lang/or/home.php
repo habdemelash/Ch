@@ -228,5 +228,8 @@ return [
     'this_month'=>"Ji'a kana",
       'this_week'=>'Torban kana',
       'todays'=>"Kan har'aa",
+      'active_users'=>"toora intarneetiirraan",
+      'online'=>'toora intarneetiirraan',
+     'offline'=>'sarara ala ta’uu isaati',
     
 ];

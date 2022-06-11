@@ -12,8 +12,6 @@ use App\Models\Event;
 use App\Models\News;
 use App\Models\User;
 use App\Models\Helpme;
-use App\Models\Docs;
-use App\Models\Message;
 
 //and even more
 
@@ -103,11 +101,28 @@ class Dashboard extends Controller
             return $time;
         }
     }
-
+// Dashboard
     public function index()
     {
-        return view("admin.dashboard");
+        $record = User::select(DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(created_at) as day_name"), DB::raw("DAY(created_at) as day"))
+    ->where('created_at', '>', Carbon::today()->subDay(6))
+    ->groupBy('day_name','day')
+    ->orderBy('day')
+    ->get();
+  
+     $data = [];
+ 
+     foreach($record as $row) {
+        $data['label'][] = $row->day_name;
+        $data['data'][] = (int) $row->count;
+      }
+ 
+    $data['chart_data'] = json_encode($data);
+    
+        return view("admin.dashboard",$data);
     }
+
+    // News
     public function news()
     {
         $news = News::orderBy("created_at", "DESC")->paginate(10);
