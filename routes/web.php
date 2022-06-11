@@ -88,10 +88,8 @@ Route::middleware([
 });
 
 Route::get('try', function () {
-    $active = App\Models\User::whereNotNull('last_seen')
-    ->orderBy('last_seen', 'DESC')
-    ->get();
-    dd($active);
+    $admins = Role::find(3)->users->count();
+    dd($admins);
 });
 
 

@@ -1,17 +1,18 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-use Carbon\Carbon;
 use DateTime;
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use App\Models\News;
+use App\Models\Role;
+use App\Models\User;
+use App\Models\Event;
+use App\Models\Helpme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use App\Models\Event;
-use App\Models\News;
-use App\Models\User;
-use App\Models\Helpme;
 
 //and even more
 
@@ -104,22 +105,11 @@ class Dashboard extends Controller
 // Dashboard
     public function index()
     {
-        $record = User::select(DB::raw("COUNT(*) as count"), DB::raw("DAYNAME(created_at) as day_name"), DB::raw("DAY(created_at) as day"))
-    ->where('created_at', '>', Carbon::today()->subDay(6))
-    ->groupBy('day_name','day')
-    ->orderBy('day')
-    ->get();
-  
-     $data = [];
- 
-     foreach($record as $row) {
-        $data['label'][] = $row->day_name;
-        $data['data'][] = (int) $row->count;
-      }
- 
-    $data['chart_data'] = json_encode($data);
+        $volunteers = Role::find(1)->users->count();
+        $staff = Role::find(2)->users->count();
+        $admins = Role::find(3)->users->count();
     
-        return view("admin.dashboard",$data);
+        return view("admin.dashboard",['volunteers'=>$volunteers,'staff'=>$staff,'admins'=>$admins]);
     }
 
     // News

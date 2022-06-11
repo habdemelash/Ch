@@ -230,4 +230,6 @@ return [
      'active_users'=>"Active users",
      'online'=>'Online',
      'offline'=>'Offline',
+     'number'=>'Number',
+     'unseen'=>'Unseen',
 ];

@@ -231,5 +231,7 @@ return [
       'active_users'=>"toora intarneetiirraan",
       'online'=>'toora intarneetiirraan',
      'offline'=>'sarara ala ta’uu isaati',
+     'number' => 'lakkoofsa',
+      'unseen' => "Hin mul'atu",
     
 ];

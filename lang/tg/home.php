@@ -234,4 +234,6 @@ return [
       'active_users' => "ኣብ መስመር",
       'online'=>'ኣብ መስመር',
       'offline'=>'ካብ መስመር ወጻኢ',
+      'number' => 'መጠን',
+      'unseen' => 'ዘይተራእየ',
 ];

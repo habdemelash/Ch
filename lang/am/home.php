@@ -231,5 +231,7 @@ return [
      'active_users'=>"በመስመር ላይ ያሉ",
      'online'=>'በመስመር ላይ',
      'offline'=>'ከመስመር ውጭ',
+     'number'=>'ብዛት',
+     'unseen'=>'ያልታየ',
     
 ];
