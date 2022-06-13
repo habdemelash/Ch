@@ -45,10 +45,11 @@
                     <th>{{ __('home.actions') }}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="eventsTBody">
                 @forelse($events as $event)
                     <tr id="eid{{ $event->id }}">
-                        <?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); ?>
+                        <?php $members = App\Http\Controllers\Site\Home::howManyJoined($event->id); 
+                        $locale = app()->getLocale();?>
                         <td class="text-success fw-bold" style="font-style: initial;">
                             <?php echo $event->{'title_' . app()->getLocale()}; ?></td>
                         <td class="text-primary" style="white-space: nowrap">
@@ -60,8 +61,8 @@
                             {{ App\Http\Controllers\TimeFormatter::timeLocal($event->start_time) }}</td>
                         <td class="text-primary">{{ App\Http\Controllers\TimeFormatter::timeLocal($event->end_time) }}
                         </td>
-                        <td class=" d-md-table-cell text-dark">{{ $event->short_desc }}</td>
-                        <td class="">
+                        <td class=" d-md-table-cell text-dark">{{ $event->{'short_desc_'.$locale} }}</td>
+                        <td >
                             @if ($event->status == 'Upcoming')
                                 <span class="badge bg-primary">{{ __('home.upcoming') }}</span>
                             @elseif($event->status == 'Cancelled')
@@ -99,6 +100,7 @@
                             </button>
                         </td>
                     </tr>
+                    <tr><td></td></tr>
                 @empty
                     <tr>
                         <h4 class="text-center">@lang('home.no_events_yet')</h4>
@@ -157,5 +159,40 @@
         <script>
             toastr.success("{!! Session::get('message') !!}");
         </script>
+        
     @endif
+    <script>
+        $('body').on('keyup','#searchEvent',function(){
+            var searched = $(this).val();
+            $.ajax({
+                method: 'POST',
+                url: '{{route("admin.events.search")}}',
+                dataType: 'json',
+                data: {
+                    '_token': '{{csrf_token()}}',
+                    searched: searched
+                },
+                success : function(response){
+                    var row = '';
+                    $('#eventsTBody').html('');
+                    $.each(response, function(index, value){
+                        var locale = '{{app()->getLOcale()}}';
+                        var conc = {};
+                        var date = 
+                        row = '<tr id="eid'+value.id+'" ><td class="text-success fw-bold" style="font-style: initial;">'+value['title_'+locale]+'</td>\
+                            <td class="text-primary" style="white-space: nowrap">\
+                           '+value.due_date+')</td>  \
+                           <td>'+value['location_'+locale]+'</td>\
+                           <td class=" d-xl-table-cell text-primary">'+value.start_time+' </td>\
+                           <td class=" d-xl-table-cell text-primary">'+value.end_time+' </td>\
+                           <td class=" d-md-table-cell text-dark">'+value['short_desc_'+locale]+'</td>\
+                            </tr>';
+                        console.log(value['title_'+locale]);
+                        $('#eventsTBody').append(row);
+                       
+                    });
+                }
+            });
+        });
+    </script>
 @endsection
