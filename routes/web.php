@@ -45,6 +45,7 @@ Route::middleware([
     'verified'
 ])->group(function () { 
     Route::group(['middleware' => ['isAdmin']],  function () {
+        Route::get('dash', [Dashboard::class, 'index'])->name('admin.dashboard');
         Route::get('dash/users', [Dashboard::class, 'users'])->name('admin.users');
         Route::get('dash/users/staffup/{id}', [Dashboard::class, 'staffup'])->name('admin.users.staffup');
         Route::get('dash/users/staffdown/{id}', [Dashboard::class, 'staffdown'])->name('admin.users.staffdown');
@@ -54,7 +55,6 @@ Route::middleware([
         
     });
     Route::group(['middleware' => ['isStaff']],  function () {
-        Route::get('dash', [Dashboard::class, 'index'])->name('admin.dashboard');
         Route::get('dash/news/updateform/{id}', [Dashboard::class, 'updateNewsForm'])->name('admin.news.updateform');
         Route::post('dash/news/update/{id}', [Dashboard::class, 'updateNews'])->name('admin.news.update');
         Route::get('dash/events', [Dashboard::class, 'events'])->name('admin.events');
