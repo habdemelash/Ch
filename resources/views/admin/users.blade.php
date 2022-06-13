@@ -2,8 +2,9 @@
 @section('search')
     <li class="d-flex flex-column flex-md-row">
         <div class="container-fluid" id="searchForm">
-            <form class="d-flex">
-                <input class="form-control" placeholder="@lang('home.search_place')" aria-label="Search">
+            <form class="d-flex" action="{{route('admin.users.search')}}" method="GET">
+                @csrf
+                <input class="form-control" type="text" name="keyword" value="{{old('keyword')}}" placeholder="@lang('home.search_place')" aria-label="Search">
                 <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
             </form>
         </div>

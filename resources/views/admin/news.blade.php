@@ -2,8 +2,10 @@
 @section('search')
     <li class="d-flex flex-column flex-md-row">
         <div class="container-fluid">
-            <form class="d-flex">
-                <input class="form-control" type="search" placeholder="@lang('home.search_place')" aria-label="Search">
+            <form class="d-flex" action="{{route('admin.news.search')}}" method="GET">
+                @csrf
+
+                <input class="form-control" id="searchNews" name="keyword" type="text" placeholder="@lang('home.search_place')" aria-label="Search">
                 <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i></button>
             </form>
         </div>
@@ -33,7 +35,7 @@
                     <th class=" d-md-table-cell text-center">{{ __('home.actions') }}</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="newsTBody">
                 @foreach ($news as $article)
                     <tr>
                         <td class="text-info fw-bold" style="font-family: Times New Roman;">
@@ -114,4 +116,5 @@
             toastr.success("{!! Session::get('message') !!}");
         </script>
     @endif
+    
 @endsection

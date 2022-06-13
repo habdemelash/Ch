@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use App\Http\Controllers\TimeFormatter;
 
 //and even more
 
@@ -338,16 +339,61 @@ class Dashboard extends Controller
             ->back()
             ->with("message",__('home.event_deleted'));
     }
-    public function searchEvent(Request $request)
-    {
-        $output = '';
-        $locale = app()->getLocale();
-        $events = Event::where('title_'.$locale,'LIKE','%'.$request->searchEvent.'%')
-                ->orWhere('short_desc_'.$locale,'LIKE','%'.$request->searchEvent.'%')
-                ->get();
+    function searchEvent(Request $request)
+    { $locale = app()->getLocale();
+        $key = $request->input('keyword');
+        $events = Event::
+        where("title_" . $locale, "LIKE", "%" . $key . "%")
+        ->orWhere("short_desc_" . $locale, "LIKE", "%" . $key . "%")
+        ->orWhere("id", "LIKE", "%" . $key . "%")
+        ->paginate(5);
+        
         return view('admin.events',['events'=>$events]);
+    }
+    //search news
+    function searchNews(Request $request)
+    { $locale = app()->getLocale();
+        $key = $request->input('keyword');
+        $news = News::
+        where("heading_" . $locale, "LIKE", "%" . $key . "%")
+        ->orWhere("body_" . $locale, "LIKE", "%" . $key . "%")
+        ->orWhere("id" , "LIKE", "%" . $key . "%")
+        ->paginate(5);
+        
+        return view('admin.news',['news'=>$news]);
         
     }
+    //search users
+    function searchUsers(Request $request)
+    { $locale = app()->getLocale();
+        $key = $request->input('keyword');
+        $users = User::
+        where("name", "LIKE", "%" . $key . "%")
+        ->where('id','<>',Auth::user()->id)
+        ->orWhere("address", "LIKE", "%" . $key . "%")
+        ->orWhere("phone", "LIKE", "%" . $key . "%")
+        ->orWhere("email", "LIKE", "%" . $key . "%")
+        ->orWhere("id" , "LIKE", "%" . $key . "%")
+        ->paginate(5);
+        
+        return view('admin.users',['users'=>$users]);
+        
+    }
+    function searchHelpmes(Request $request)
+    { $locale = app()->getLocale();
+        $key = $request->input('keyword');
+        $helpmes = Helpme::
+        where("name", "LIKE", "%" . $key . "%")
+        ->orWhere("address", "LIKE", "%" . $key . "%")
+        ->orWhere("phone", "LIKE", "%" . $key . "%")
+        ->orWhere("email", "LIKE", "%" . $key . "%")
+        ->orWhere("id" , "LIKE", "%" . $key . "%")
+        ->paginate(5);
+        
+        return view('admin.helpmes',['helpmes'=>$helpmes]);
+        
+    }
+    // return members of specific event
     public function viewMembers($id)
     {
         return view("admin.view-joined-volunteers", ["event" => $id]);

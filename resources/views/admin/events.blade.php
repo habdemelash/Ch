@@ -1,12 +1,13 @@
 @extends('layouts.admin')
-@section('search')
+@section('content')
     <script src="{{ asset('admin/other/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('site/assets/js/ec.js') }}"></script>
     <script src="{{ asset('admin/other/toastr.min.js') }}"></script>
     <li class="d-flex flex-column flex-md-row">
         <span id="option-container" style="visibility: hidden; position:absolute;"></span>
         <div class="container-fluid">
-            <form action="{{ url('dash/events/search') }}" method="POST" class="d-flex">
+            <form action="{{ url('dash/events/search') }}" method="GET" class="d-flex">
+                @csrf
                 <input class="form-control" id="searchEvent" type="text" name="keyword"
                     placeholder="{{ __('home.search_place') }}" aria-label="Search">
                 <button class="btn btn-success text-nowrap" type="submit"><i class="bi bi-search"></i> </button>
@@ -14,8 +15,7 @@
 
         </div>
     </li>
-@endsection
-@section('content')
+
     @include('admin.styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/other/toastr.min.css') }}">
     <h1 class="h3 mb-3"><strong>{{ __('home.events_nav') }}</strong> {{ __('home.administration') }}</h1>
@@ -161,38 +161,5 @@
         </script>
         
     @endif
-    <script>
-        $('body').on('keyup','#searchEvent',function(){
-            var searched = $(this).val();
-            $.ajax({
-                method: 'POST',
-                url: '{{route("admin.events.search")}}',
-                dataType: 'json',
-                data: {
-                    '_token': '{{csrf_token()}}',
-                    searched: searched
-                },
-                success : function(response){
-                    var row = '';
-                    $('#eventsTBody').html('');
-                    $.each(response, function(index, value){
-                        var locale = '{{app()->getLOcale()}}';
-                        var conc = {};
-                        var date = 
-                        row = '<tr id="eid'+value.id+'" ><td class="text-success fw-bold" style="font-style: initial;">'+value['title_'+locale]+'</td>\
-                            <td class="text-primary" style="white-space: nowrap">\
-                           '+value.due_date+')</td>  \
-                           <td>'+value['location_'+locale]+'</td>\
-                           <td class=" d-xl-table-cell text-primary">'+value.start_time+' </td>\
-                           <td class=" d-xl-table-cell text-primary">'+value.end_time+' </td>\
-                           <td class=" d-md-table-cell text-dark">'+value['short_desc_'+locale]+'</td>\
-                            </tr>';
-                        console.log(value['title_'+locale]);
-                        $('#eventsTBody').append(row);
-                       
-                    });
-                }
-            });
-        });
-    </script>
+    
 @endsection

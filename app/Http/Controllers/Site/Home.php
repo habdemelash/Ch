@@ -272,6 +272,7 @@ class Home extends Controller
             ->paginate(6);
 
         $others = Helpme::where("id", "!=", $id)
+            ->where('status','Accepted')
             ->orderBy("id", "DESC")
             ->paginate(5);
         return view("site.view-help-me", [

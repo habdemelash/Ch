@@ -70,7 +70,10 @@ Route::middleware([
         Route::post('dash/event/update/{id}', [Dashboard::class, 'updateEvent'])->name('admin.event.update');
         Route::post('/events/delete', [Dashboard::class, 'deleteEvent'])->name('admin.event.delete');
         Route::get('dash/event/viewmembers/{id}', [Dashboard::class, 'viewMembers'])->name('admin.event.viewmembers');
-        Route::post('dash/events/search',[EventControllerAdmin::class,'searchEvent'])->name('admin.events.search');
+        Route::get('dash/events/search',[Dashboard::class,'searchEvent'])->name('admin.events.search');
+        Route::get('dash/news/search',[Dashboard::class,'searchNews'])->name('admin.news.search');
+        Route::get('dash/users/search',[Dashboard::class,'searchUsers'])->name('admin.users.search');
+        Route::get('dash/helpmes/search',[Dashboard::class,'searchHelpmes'])->name('admin.helpmes.search');
 
         Route::get('dash/helpmes/view/{id}', [Dashboard::class, 'viewHelpme'])->name('admin.helpmes.view');
         Route::get('dash/helpmes/accept/{id}', [Dashboard::class, 'acceptHelpme'])->name('admin.helpmes.accept');
